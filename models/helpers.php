@@ -125,7 +125,7 @@
 	
 	// obtener por grupo_id
 	function selecttogrupoId($conexion, $tabla, $id){
-		$sql = "SELECT * FROM $tabla WHERE grupo_id = $id";
+		$sql = "SELECT * FROM $tabla WHERE grupo_id = $id ORDER by fase_id ASC";
 
 		$datos = mysqli_query($conexion, $sql);
 		if($datos && mysqli_num_rows($datos) >=1){
@@ -157,7 +157,7 @@
 		return $resultado;
 	}
 
-	// OBTENER CURSOS POR FASE
+	// OBTENER CURSOS ACTIVOS POR FASE
 	function selectactivefasestocursos($conexion, $tabla, $tabla2, $id){
 		$sql = "SELECT *, cursos.nombre as 'nombrecurso',cursos.id as 'idcursos' FROM $tabla INNER JOIN $tabla2
 		on $tabla.id = $tabla2.fase_id
@@ -183,7 +183,7 @@
 		return $resultado;
 	}
 	
-	// OBTENER CLASES POR FASE
+	// OBTENER CLASES activas POR FASE
 	function selectactivefasestoclases($conexion, $tabla, $tabla2, $id){
 		$sql = "SELECT *, clases.nombre as 'nombreclase' FROM $tabla INNER JOIN $tabla2
 		on $tabla.id = $tabla2.fase_id
@@ -197,6 +197,7 @@
 		return $resultado;
 	}
 	
+	// OBTENER CLASES POR FASE
 	function selectfasestoclases($conexion, $tabla, $tabla2, $id){
 		$sql = "SELECT *, clases.nombre as 'nombreclase' FROM $tabla INNER JOIN $tabla2
 		on $tabla.id = $tabla2.fase_id
@@ -276,39 +277,123 @@
 		}
 		return $resultado;
 	}
-
-
 	
+	//OBTENER todos los Cursos por grupo y fase
+	function obtenerallcursosporgrupoyfase($conexion, $tabla, $tabla2, $fase_id, $grupo_id){
+		$sql = "SELECT * FROM $tabla gf 
+	INNER JOIN $tabla2 c on gf.fase_id = c.fase_id	
+	WHERE gf.fase_id = $fase_id and c.fase_id = $fase_id and grupo_id = $grupo_id";
 
+		$datos = mysqli_query($conexion, $sql);
+		if($datos && mysqli_num_rows($datos) >=1){
+			$resultado = $datos;
+		}
+		return $resultado;
+	}
+	
+	//OBTENER todos los Cursos de fase por grupo 
+	function consultarcursosporgrupoyfase($conexion, $tabla, $tabla2, $curso_id, $grupo_id){
+		$sql = "SELECT * FROM $tabla gd
+		INNER join $tabla2 gdc
+		on gd.id = gdc.grupoDetalle_id
+		WHERE gdc.curso_id = $curso_id and gdc.grupoDetalle_id = $grupo_id";
 
-	/* ==========================
-	//  
-	============================*/	
-	function busquedaprovedores($conexion, $id){
-		$sql = "SELECT * FROM compras_provedores where id = $id";
-		//$sql = "select * from compras_provedores where razonsocial LIKE '%busqueda%'";
-		//$sql .= " ORDER BY razonsocial ASC";
+		$datos = mysqli_query($conexion, $sql);
+		if($datos && mysqli_num_rows($datos) >=1){
+			$resultado = $datos;
+		}
+		return $resultado;
+	}
+	
+	//LISTAR todos los Cursos de fase por grupo
+	function listarcursosxfasedeporgrupo($conexion, $tabla, $tabla2, $grupofase_id){
+	 	$sql = "SELECT *, gc.id as myid FROM $tabla gc
+		 INNER JOIN $tabla2 c 
+		 on gc.curso_id = c.id
+		 WHERE gc.grupofase_id = $grupofase_id";
 
-		$provedor = mysqli_query($conexion, $sql);
+		$datos = mysqli_query($conexion, $sql);
+		if($datos && mysqli_num_rows($datos) >=1){
+			$resultado = $datos;
+		}
+		return $resultado;
+	}
+	
+	//LISTAR todos los usuarios y Cursos por grupo
+	function listarallusuariosycursosporgrupo($conexion, $grupo_id){
+		$sql = "SELECT gu.grupo_id, gu.usuario_id, gd.grupo_id, gd.fase_id, gdc.curso_id FROM grupos_usuarios gu 
+		 INNER JOIN grupos_detalle gd
+		 on gu.grupo_id = gd.grupo_id
+		 INNER JOIN grupos_detalle_cursos gdc
+		 on gd.id = gdc.grupoDetalle_id
+		 WHERE gu.grupo_id = $grupo_id ORDER BY gu.usuario_id ASC";
 
-		$resultado = array();
-		if($provedor && mysqli_num_rows($provedor) >=1){
-			$resultado = $provedor;
+		$datos = mysqli_query($conexion, $sql);
+		if($datos && mysqli_num_rows($datos) >=1){
+			$resultado = $datos;
 		}
 		return $resultado;
 	}
 
-	// ULTIMO ARTICULOS
-	function ultimoArticulo($conexion){
-		$sql = "select * from articulos where estado = 1 ORDER BY id desc limit 1";
-		
-		$tipoarticulos = mysqli_query($conexion, $sql);
-		
-		$resultado = array();
-		if($tipoarticulos && mysqli_num_rows($tipoarticulos) >=1){
-			$resultado = $tipoarticulos;
+	//LISTAR todos los usuarios y Cursos por grupo
+	function listarallusuariosycursosporgrupoyfase($conexion, $grupo_id, $fase_id){
+		$sql = "SELECT gu.grupo_id, gu.usuario_id, u.nombre, u.ape_paterno, gd.grupo_id, gd.fase_id, gdc.id as 'grupodtcurso_id', gdc.curso_id, gdc.grupoDetalle_id, c.nombre as 'curso' FROM grupos_usuarios gu 
+		INNER JOIN grupos_detalle gd
+		on gu.grupo_id = gd.grupo_id
+		INNER JOIN usuarios u
+		on gu.usuario_id = u.id
+		INNER JOIN grupos_detalle_cursos gdc
+		on gd.id = gdc.grupoDetalle_id
+		INNER JOIN cursos c 
+		on gdc.curso_id = c.id
+		WHERE gu.grupo_id = $grupo_id and gd.fase_id = $fase_id
+		ORDER BY gu.usuario_id ASC;";
+
+		$datos = mysqli_query($conexion, $sql);
+		if($datos && mysqli_num_rows($datos) >=1){
+			$resultado = $datos;
 		}
 		return $resultado;
-	}	
+	}
+
+	// OBTENER DATOS por usuario_id
+	function obtenerdatosusuarios($conexion, $tabla, $id){
+		$sql = "SELECT * FROM $tabla where usuario_id = $id";
+
+		$datos = mysqli_query($conexion, $sql);
+		if($datos && mysqli_num_rows($datos) >=1){
+			$resultado = $datos;
+		}
+		return $resultado;
+	}
+
+	// OBTENER los cursos no escogidos por fase
+	function listarcursosnoescogidos($conexion, $tabla, $tabla2, $fase_id){
+		$sql = "SELECT * from $tabla c
+		left JOIN $tabla2 guc
+		on c.id = guc.curso_id
+		WHERE guc.curso_id is null and c.fase_id = $fase_id";
+
+		$datos = mysqli_query($conexion, $sql);
+		if($datos && mysqli_num_rows($datos) >=1){
+			$resultado = $datos;
+		}
+		return $resultado;
+	}
+
+	// OBTENER los cursos escogidos por fase
+	function listarcursosescogidos($conexion, $tabla, $tabla2, $usuario_id, $fase_id){
+		$sql = "SELECT * FROM $tabla gc
+		INNER JOIN $tabla2 c
+		on gc.curso_id = c.id
+		WHERE usuario_id = $usuario_id and c.fase_id = $fase_id";
+
+		$datos = mysqli_query($conexion, $sql);
+		if($datos && mysqli_num_rows($datos) >=1){
+			$resultado = $datos;
+		}
+		return $resultado;
+	}
+
 
  ?>

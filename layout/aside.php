@@ -1,14 +1,19 @@
 <div class="sidebar">
-    <div class="logo-details">
-      <a href="dashboard.php" class="active">
+    <div class="logo-details">      
         <img src="../assets/img/logo.png" class="img-logo" alt="Logo ">
         <p class="logo_name">AD</p>
-      </a>
+      
     </div>
       <ul class="nav-links">
         <li>
+          <a href="dashboard.php" title="Perfil">            
+            <i class="fas fa-route"></i>
+            <span class="links_name">HOJA DE RUTA</span>
+          </a>
+        </li>
+        <li>
           <a href="perfil.php" title="Perfil">            
-            <i class="fas fa-id-badge"></i>
+            <i class="fas fa-user"></i>
             <span class="links_name">PERFIL</span>
           </a>
         </li>
@@ -19,8 +24,8 @@
           </a>
         </li>
         <li>
-          <a href="clases-maestras.php" title="Clases Maestras">
-            <i class="fas fa-list-alt"></i>
+          <a href="clases-maestras.php" title="Clases Maestras">            
+            <i class="fas fa-chalkboard-teacher"></i>
             <span class="links_name">CLASES MAESTRAS</span>
           </a>
         </li>               
@@ -31,7 +36,7 @@
           </a>
         </li>        
         <li>
-          <a href="live.php" title="Live">
+          <a href="live.php" title="En Vivos">
             <i class="fas fa-video"></i>        
             <span class="links_name">EVENTOS EN VIVO</span>
           </a>
@@ -45,8 +50,8 @@
             </a>
           </li>          
           <li>
-            <a href="admin-cursos-maestras.php" title="Admin Charlas">
-              <i class="fas fa-chalkboard-teacher"></i>
+            <a href="admin-cursos-maestras.php" title="Admin Clases">
+              <i class="fas fa-list-alt"></i>
               <span class="links_name">AD. CLASES MAESTRAS</span>
             </a>
           </li>          
@@ -58,7 +63,7 @@
             </a>
           </li> 
           <li>
-            <a href="admin-instituciones.php" title="Admin Institucions">
+            <a href="admin-instituciones.php" title="Admin Instituciones">
               <i class="fas fa-hotel"></i>
               <span class="links_name">ADMIN INSTITUCIONES</span>
             </a>

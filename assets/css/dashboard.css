@@ -20,6 +20,7 @@
   height: 80px;
   display: flex;
   align-items: center;
+  justify-content: center; margin-top: 4px;
 }
 .sidebar .logo-details img{
   height: 80px;

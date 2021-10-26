@@ -9,12 +9,11 @@
     $fecinicio = isset($_POST['fecinicio']) ? $_POST['fecinicio'] : false;	
     $fecfin = isset($_POST['fecfin']) ? $_POST['fecfin'] : false;	
     $acceso = isset($_POST['acceso']) ? $_POST['acceso'] : false;	
-    //$texto = isset($_POST['texto']) ? $_POST['texto'] : false;	
-    //$descripcion = isset($_POST['descripcion']) ? $_POST['descripcion'] : false;
+    $descripcion = isset($_POST['descripcion']) ? $_POST['descripcion'] : false;
     
     $usuario = $_SESSION['sesion_aprenDigital']['nombre'] .' '.$_SESSION['sesion_aprenDigital']['ape_paterno'];
    
-    $sql="INSERT INTO grupos_detalle (grupo_id, fase_id, fec_inicio, fec_fin, acceso_id, fechacreacion, usuario, estado_id) VALUES ($grupo, $fase,'$fecinicio', '$fecfin',$acceso, CURDATE(), '$usuario',1);";
+    $sql="INSERT INTO grupos_fases (grupo_id, fase_id, fec_inicio, fec_fin, descripcion, acceso_id, fechacreacion, usuario, estado_id) VALUES ($grupo, $fase, '$fecinicio', '$fecfin','$descripcion', $acceso, CURDATE(), '$usuario',1);";
     
     $resultado = mysqli_query($db,$sql);
           

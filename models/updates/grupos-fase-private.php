@@ -9,7 +9,7 @@
   
     $id = $_GET['id'];
     
-    $sql = "UPDATE grupos_detalle set acceso_id = 4 WHERE id = $id";
+    $sql = "UPDATE grupos_fases set acceso_id = 4 WHERE id = $id";
     $resultado = mysqli_query($db, $sql);
   
     if($resultado){

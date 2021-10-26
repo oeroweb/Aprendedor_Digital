@@ -38,7 +38,9 @@ function modalDelete(e){
 
 const accordion = document.querySelectorAll(".content-accordion"), 
  icon = document.querySelectorAll(".btn-accordion i"),
- btnAccordion = document.querySelectorAll(".btn-accordion");
+ btnAccordion = document.querySelectorAll(".btn-accordion"),
+ accordionClases = document.querySelectorAll(".content-accordion-clases");
+
 
 btnAccordion.forEach((item, i)  => {
   btnAccordion[i].addEventListener('click', () => {
@@ -49,6 +51,12 @@ btnAccordion.forEach((item, i)  => {
     })
     accordion[i].classList.add('active');
   })
-})
+});
 
-
+for (let index = 0; index < accordionClases.length; index++) {
+  accordionClases[index].addEventListener('click', function(){
+    console.log("click");
+    this.classList.toggle('active');
+  }) ;
+  
+}

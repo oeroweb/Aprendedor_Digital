@@ -47,7 +47,7 @@
         $pais  = (($item12 !== false) ? $item12 : '');
         $usuario  = (($items13 !== false) ? $items13 : '');
 
-        $valores = '('.$perfil.','.$institucion.',"'.$nombre.'","'.$apepaterno.'","'.$apematerno.'","'.$docidentidad.'","'.$email.'","'.$password.'","'.$sexo.'","'.$fecnac.'","'.$celular.'","'.$pais.'",NOW(),"'.$usuario.'", 1),';	
+        $valores = '('.$perfil.','.$institucion.',"'.$nombre.'","'.$apepaterno.'","'.$apematerno.'","'.$docidentidad.'","'.strtolower($email).'","'.$password.'","'.$sexo.'","'.$fecnac.'","'.$celular.'","'.$pais.'",NOW(),"'.$usuario.'", 1),';	
 
         $valores_final = substr($valores, 0, -1);
   

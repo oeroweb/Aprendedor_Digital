@@ -12,10 +12,11 @@
     $fecinicio = isset($_POST['fecinicio']) ? $_POST['fecinicio'] : false;	
     $fecfin = isset($_POST['fecfin']) ? $_POST['fecfin'] : false;	
     $acceso = isset($_POST['acceso']) ? $_POST['acceso'] : false;
+		$descripcion = isset($_POST['descripcion']) ? $_POST['descripcion'] : false;
 				
 		$usuario = $_SESSION['sesion_aprenDigital']['nombre'].$_SESSION['sesion_aprenDigital']['ape_paterno'];
 
-		$sql= "UPDATE grupos_detalle SET fase_id = '$fase', fec_inicio='$fecinicio', fec_fin='$fecfin', acceso_id='$acceso', fechamodificacion = NOW(), usuario = '$usuario' where id = $id";	
+		$sql= "UPDATE grupos_fases SET fase_id = '$fase', fec_inicio='$fecinicio', fec_fin='$fecfin', descripcion='$descripcion', acceso_id='$acceso', fechamodificacion = NOW(), usuario = '$usuario' where id = $id";	
 		
 		$resultado = mysqli_query($db,$sql);	
 

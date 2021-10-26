@@ -7,7 +7,7 @@ if(!isset($_SESSION)){
 
 $id = $_GET['id'];
 
-$sql = "DELETE FROM grupos_detalle WHERE id = $id";
+$sql = "DELETE FROM grupos_fases WHERE id = $id";
 $resultado = mysqli_query($db, $sql);
 
 if($resultado){
