@@ -30,10 +30,12 @@
 				<div class="admin-cursos-content container-wrap w100">												
 					<div class="container-wrap w100">								
 						<div class="w10 al-ct ">Items</div>
-						<div class="w20 al-ct ">Nombre de Grupo</div>							
-						<div class="w20 al-ct">Descripción</div>							
+						<div class="w20 al-ct ">Nombre de Grupo</div>						
+											
+						<div class="w10 al-ct ">Op. Grupo</div>							
+						<div class="w20 al-ct ">Op. Usuarios</div>							
 						<div class="w20 al-ct ">Estado</div>							
-						<div class="w30 al-ct ">Opciones</div>							
+						<div class="w20 al-ct ">Opciones</div>							
 					</div>	
 						<?php 
 							$contador = 0;
@@ -47,10 +49,18 @@
 								<div class="btn-accordion"><i class="fas fa-chevron-up"></i></div>
 								<div class="box-label">
 									<div class="w10 al-ct"><?=$contador?></div>
-									<div class="w20 al-ct"><?php echo $dato['nombre']?></div>
-									<div class="w20 al-ct"><?php echo $dato['descripcion']?></div>							
+									<div class="w20 al-ct"><?php echo $dato['nombre']?></div>															
+									<div class="w10 al-ct">
+										<a href="grupos-content.php?id=<?=$dato['id']?>" class="btn-2 btn-azul" title="Ver grupo"><i class="far fa-eye"></i></a>
+										<a href="grupos-fases-add.php?id=<?=$dato['id']?>" class="btn-2 btn-azul" title="Añadir Fases"><i class="fas fa-plus"></i></a>
+									</div>
+									<div class="w20 al-ct">
+										<a href="grupos-content-usuarios.php?id=<?=$dato['id']?>" class="btn-2 btn-azul" title="Ver usuarios del grupo"><i class="fas fa-users"></i></a>
+										<a href="grupos-usuarios-add.php?id=<?=$dato['id']?>" class="btn-2 btn-azul" title="Añadir Usuarios al grupo"> <i class="fas fa-user-plus"></i></a>
+										
+									</div>
 									<div class="w20 al-ct">								
-									<?php if($dato['estado_id'] == 2) :?>
+										<?php if($dato['estado_id'] == 2) :?>
 											<a href="models/updates/grupos-public.php?id=<?=$dato['id']?>" class="btn-3" title="No publicado">							
 											<img src="assets/fonts/toggle-of.svg" alt="Inactivo">		
 											Inactivo</a>												
@@ -60,10 +70,7 @@
 											Activo</a>												
 										<?php endif; ?>	
 									</div>							
-									<div class="w30 al-ct">										
-										<a href="grupos-content.php?id=<?=$dato['id']?>" class="btn-2 btn-azul" title="Ver alumnos"><i class="far fa-eye"></i></a>
-										<a href="grupos-usuarios-add.php?id=<?=$dato['id']?>" class="btn-2 btn-azul" title="Añadir Usuarios"><i class="fas fa-users"></i></a>
-										<a href="grupos-fases-add.php?id=<?=$dato['id']?>" class="btn-2 btn-azul" title="Añadir Fase"><i class="fas fa-plus"></i></a>
+									<div class="w20 al-ct">										
 										<a href="grupos-edit.php?id=<?=$dato['id']?>" class="btn-2 btn-azul" title="Editar"><i class="fas fa-pen"></i></a>
 										<a href="models/deletes/grupo-delete.php?id=<?=$dato['id']?>" class=" btn-2" title="Borrar" onclick="return confirmDelete()"> <i class="fas fa-trash-alt"></i></a>
 									</div>
@@ -99,7 +106,7 @@
 											<?php endif; ?>	
 										</div>
 										<div class="w20 al-ct">
-											<a href="grupos-content-fase.php?id=<?=$grupo['id']?>" class="btn-2 btn-azul" title="Ver cursos de la fase"><i class="far fa-eye"></i></a>		
+											<a href="grupos-content-fase.php?id=<?=$grupo['id']?>" class="btn-2 btn-azul" title="Ver cursos y clases de la fase"><i class="far fa-eye"></i></a>		
 											<a href="grupos-cursos-add.php?id=<?=$grupo['id']?>" class="btn-2 btn-azul" title="Añadir Cursos y Clases"><i class="fas fa-plus"></i></a>			
 											<a href="grupos-fase-edit.php?id=<?=$grupo['id']?>" class="btn-2 btn-azul" title="Editar"><i class="fas fa-pen"></i></a>
 											<a href="models/deletes/grupo-fase-delete.php?id=<?=$grupo['id']?>" class=" btn-2" title="Borrar" onclick="return confirmDelete()"> <i class="fas fa-trash-alt"></i></a>

@@ -50,7 +50,7 @@
             </a>
           </li>          
           <li>
-            <a href="admin-cursos-maestras.php" title="Admin Clases">
+            <a href="admin-clases-maestras.php" title="Admin Clases">
               <i class="fas fa-list-alt"></i>
               <span class="links_name">AD. CLASES MAESTRAS</span>
             </a>

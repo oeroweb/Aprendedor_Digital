@@ -17,7 +17,7 @@
 				</div>
 				<div class="box-botones">						
 					<a href="curso-add.php" class="btn" title="Añadir Curso"><i class="fas fa-plus"></i> Añadir Nuevo Curso</a>						 
-					<a href="admin-cursos-maestras.php" class="btn" title="Clases Maestras"><i class="far fa-eye"></i> Administrar Clases Maestras</a>						 
+					<a href="admin-clases-maestras.php" class="btn" title="Clases Maestras"><i class="far fa-eye"></i> Administrar Clases Maestras</a>						 
 				</div>	
 				<?php if(isset($_SESSION['completado'])): ?>
 					<div class="alerta-exito">

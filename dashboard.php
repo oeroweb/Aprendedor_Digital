@@ -68,13 +68,13 @@
                 if(!empty($clases) && mysqli_num_rows($clases) >= 1):
                   while($clase = mysqli_fetch_assoc($clases)):  
               ?>                 
-                <a href="#" class="item-clases">
+                <a href="clases-maestras.php" class="item-clases">
                   <h2 class="title">Clase Maestra : <?php echo $clase['nombre'] ?> </h2>
-                  <?php if($clase['video'] != null) :?>
-											<video class="w100" src="assets/videos/clases/<?php echo $clase['video']?>" controls muted preload="auto"></video>									
-										<?php else : ?>
-											<?php echo $clase['url'] ?>
-										<?php endif; ?>
+                  <?php  if($clase['imagen'] != ""): ?>
+                    <img src="assets/clases/<?php echo $clase['carpeta'].'/'.$clase['imagen'] ?>">
+                  <?php  else: ?>
+                    <img src="assets/img/clases/curso.PNG" alt="">
+                  <?php  endif; ?>
                 </a>               
               <?php endwhile;
                 endif; ?>		               
