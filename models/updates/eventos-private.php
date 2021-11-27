@@ -9,15 +9,15 @@
   
     $id = $_GET['id'];
     
-    $sql = "UPDATE clases set estado_id = 2 WHERE id = $id";
+    $sql = "UPDATE eventos set estado_id = 2 WHERE id = $id";
     $resultado = mysqli_query($db, $sql);
   
     if($resultado){
       $_SESSION['completado'] = "Inactivado forma exitosa";	
-      header("Location: ../../admin-clases-maestras.php");
+      header("Location: ../../setting.php");
     } else{
       $_SESSION['fallo'] = "Error al inactivar; por favor volver a intentar";
-      header("Location: ../../admin-clases-maestras.php");
+      header("Location: ../../setting.php");
     }
   }
 ?>

@@ -70,7 +70,7 @@
 									</select>									
 								</div>
 								<div class="box-input">
-									<label for="">Cambiar Foto:</label>
+									<label for="">Cambiar Imagen:</label>
 									<input class="w100" type="hidden" name="documento" value="<?php echo $dato['imagen']; ?>">
 									<img src="assets/img/cursos/<?php echo $dato['imagen'] ?>" alt=""><hr class="w100 mg-bt10">									
 									<input class="w100" type="file" name="foto" >

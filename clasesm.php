@@ -1,12 +1,12 @@
 <?php
 	include 'layout/header.php';
-	if($_GET['cu'] == "" or $_GET['t'] == ""){
-		$textoerror = '<h2 class="title">El curso que buscas no exite, oh no se encontro. </h2>';
+	if($_GET['cl'] == "" or $_GET['t'] == ""){
+		$textoerror = '<h2 class="title">La Clase que buscas no exite, oh no se encontro.</h2>';
 		header("Refresh:3; url=cursos.php");
 	}
 	
-	$curso_id = isset($_GET['cu']) ? $_GET['cu'] : '';
-	//$clase_id = isset($_GET['cl']) ? $_GET['cl'] : '';
+	//$curso_id = isset($_GET['cu']) ? $_GET['cu'] : '';
+	$clase_id = isset($_GET['cl']) ? $_GET['cl'] : '';
 	$token = trim($_GET['t']);
 	$curso_contenido = (isset($_GET['cc']) ? $_GET['cc'] : '');
 	$usuario_id = $_SESSION['sesion_aprenDigital']['id'];
@@ -22,13 +22,13 @@
 		<div class="portal-clases">			
 			<div class="box-titles">
 				<?php
-					$cursos = mostarcursosytoken($db, 'grupos_usuarios_cursos','cursos', $curso_id, $usuario_id, $token);
+					$cursos = mostarclasescompletasytoken($db, 'grupos_usuarios_clases','clases', $clase_id, $usuario_id, $token);
 					if (!empty($cursos) && mysqli_num_rows($cursos) >= 1) :
 						$cant = mysqli_num_rows($cursos);
 						//echo $cant;
 						while ($curso = mysqli_fetch_assoc($cursos)) :
 				?>
-					<h2 class="title">Curso : <?= $curso['nombrecurso'] ?> </h2>
+					<h2 class="title">Clase Maestra : <?= $curso['nombre'] ?> </h2>
 				<?php endwhile; else:				
 					echo $textoerror;					
 				endif; ?>				
@@ -45,104 +45,28 @@
 				</div>
 			<?php endif; ?>
 
-			<div class="inner-portal-clases">
-				<div class="list-cursos">
-					<div class="accordion">
-						<?php
-						$contenidos = obtenerContenidoCurso($db, 'cursos_contenido', $curso_id);
-						if (!empty($contenidos) && mysqli_num_rows($contenidos) >= 1) :
-							$cant_capitulos = mysqli_num_rows($contenidos); 
-							//echo $cant_capitulos;
-							while ($contenido = mysqli_fetch_assoc($contenidos)) :
-								$contenidoid =	$contenido['id']
-						?>
-						<div class="content-accordion-clases">
-							<div class="box-label" data-label=<?= $contenido['id'] ?>>
-								<h2 class="title"><i class="far fa-folder-open"></i> <?= $contenido['orden'].'. '.$contenido['nombre'] ?></h2>
-							</div>
-							<?php
-							$detalles = obtenerdetalleContenido($db, 'cursos_contenido_detalle', $contenidoid);
-							if (!empty($detalles) && mysqli_num_rows($detalles) >= 1) :
-								$cant_videos = mysqli_num_rows($detalles); 
-								//echo $cant_videos;
-								while ($detalle = mysqli_fetch_assoc($detalles)) :
-							?>
-								<div class="inner-content-accordion" data-video="<?=$detalle['id']?>">
-									<a href="clases.php?cu=<?=$curso_id?>&t=<?=$token?>&cc=<?=$detalle['id']?>">	
-										<input type="checkbox" name="" value="<?=$detalle['id']?>">					
-										<span class=""><?=$detalle['nombre']?> </span>				
-									</a>
-								</div>
-							<?php endwhile;
-							endif; ?>
-						</div>						
-							<?php endwhile;	 endif; ?>
-					</div>		
-				</div>
+			<div class="inner-portal-clases-maestras">				
 
-				<div class="content-media">	
-					<?php if($curso_contenido) : ?>			
-						<?php
-							$detalles = obtenerdatos($db, 'cursos_contenido_detalle', $curso_contenido);
-							if (!empty($detalles) && mysqli_num_rows($detalles) >= 1) :
-								$cant_videos = mysqli_num_rows($detalles); 
-								//echo $cant_videos;
-								while ($detalle = mysqli_fetch_assoc($detalles)) :
-						?>
+				<div class="content-media">								
+					<?php
+						$cursos = mostarclasescompletasytoken($db, 'grupos_usuarios_clases','clases', $clase_id, $usuario_id, $token);
+						if (!empty($cursos) && mysqli_num_rows($cursos) >= 1) :
+							$cant = mysqli_num_rows($cursos);
+							//echo $cant;
+							while ($curso = mysqli_fetch_assoc($cursos)) :
+					?>
+								
 						<div class="box-video" id="player"> 
-							<?=$detalle['url_video'];?>
-							<p class=""><?= $detalle['nombre'] ?> </p>
-									
-							<?//php if($detalle['video']) :?>												
-								<!-- <video class="w100" src="assets/cursos/<?//=$detalle['carpeta']."/".$detalle['video']?>" controls muted preload="auto"></video> -->
-							<?//php else: ?>							
-								<?//=$detalle['url_video'];?>
-							<?//php endif; ?>
-							<!-- <div id="player"></div> -->
+							<?=$curso['url'];?>												
 						</div>
 
-						<?php endwhile;
-								endif; ?>
-					<?php else : ?>
-						<p class="al-ct">Bienvenido al curso</p>
-						<?php
-							$cursos = mostarcursosytoken($db, 'grupos_usuarios_cursos','cursos', $curso_id, $usuario_id, $token);
-							if (!empty($cursos) && mysqli_num_rows($cursos) >= 1) :
-								$cant = mysqli_num_rows($cursos);
-								//echo $cant;
-								while ($curso = mysqli_fetch_assoc($cursos)) :
-							?>
-								<?php  if($curso['imagencurso'] != ""): ?>
-                        <img src="assets/img/cursos/<?php echo $curso['imagencurso'] ?>" alt="">
-                      <?php  else: ?>
-                        <img src="assets/img/example-curso.jpg" alt="">
-                      <?php  endif; ?>
-							<?php endwhile; 											
-							endif; ?>			
-					<?php endif; ?>
-				</div>
-
-
-				<div class="files-media">
-					<p>Recursos y descargables</p>
-					<?php
-						$detalles = obtenerdatos($db, 'cursos_contenido_detalle', $curso_contenido);
-						if (!empty($detalles) && mysqli_num_rows($detalles) >= 1) :
-							$cant_videos = mysqli_num_rows($detalles); 
-							//echo $cant_videos;
-							while ($detalle = mysqli_fetch_assoc($detalles)) :
-					?>
-					<div class="mg-tp20">
-						<?php if($detalle['archivos']) :
-							$misarchivos = $detalle['archivos'];																			
-							$array_misarchivos = explode(', ', $misarchivos); 
-							foreach( $array_misarchivos as $archivo) : ?>															
-								<a href="assets/cursos/<?=$detalle['carpeta']."/".$archivo?>" class="btn-file" title="descargar <?=$archivo?>" download><i class="fas fa-download"></i> <?=$archivo?></a>
-						<?php endforeach;	 endif; ?>									
-					</div>
 					<?php endwhile;
 							endif; ?>
+				
 				</div>
+
+
+				
 			</div>
 
 			<?php borrarErrores(); ?>

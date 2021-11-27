@@ -92,7 +92,11 @@
 									<td class="">
 										<h3 class="title al-ct"><?=$curso['nombreclase']?> </h3>
 										<div class="text">
-											<?=substr($curso['descripcion'],0,180)."..."?>
+											<?php if(strlen($curso['descripcion']) > 50) : ?>
+												<?=substr($curso['descripcion'],0,180)."..."?>
+											<?php else : ?>
+												<?=$curso['descripcion']?>
+												<?php endif ?>
 										</div>
 									</td>															
 									<td class="al-ct">								

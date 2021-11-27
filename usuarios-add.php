@@ -29,7 +29,7 @@
 				<?php endif; ?> 
 
 				<div class="container-wrap w100">		
-					<form action="models/add/usuarios-add.php" class="" id="" method="post">
+					<form action="models/add/usuarios-add.php" class="box-formulario" id="" method="post">
 						<?php for($i = 1; $i <= $number; $i++): ?>	
 							<div class="box-formulario-register mg-bt10" >
 								<div class="box-input w25">
@@ -143,11 +143,5 @@
 </main>
 
 <script>
-	// const inputnombre = document.querySelectorAll(".nombre"),
-  // counterNombre = document.querySelectorAll(".counterNombre"),
-  // maxLength = inputnombre.getAttribute("maxlength");
-
-  // inputnombre.onkeyup = () => {
-  //   counterNombre.innerText = maxLength - inputnombre.value.length;
-  // }
+	
 </script>

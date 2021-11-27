@@ -9,16 +9,16 @@
   
     $id = $_GET['id'];
     
-    $sql = "UPDATE clases set estado_id = 1 WHERE id = $id";
+    $sql = "UPDATE eventos set estado_id = 1 WHERE id = $id";
     $resultado = mysqli_query($db, $sql);
   
     //var_dump($sql); die();
     if($resultado){
       $_SESSION['completado'] = "Activado forma exitosa";	
-      header("Location: ../../admin-clases-maestras.php");
+      header("Location: ../../setting.php");
     } else{
       $_SESSION['fallo'] = "Error al activar; por favor volver a intentar";
-      header("Location: ../../admin-clases-maestras.php");
+      header("Location: ../../setting.php");
     }
   }
 ?>

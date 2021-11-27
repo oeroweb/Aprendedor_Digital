@@ -1,5 +1,17 @@
 <?php 
   include 'layout/header.php'; 
+	
+	if($_SESSION['sesion_aprenDigital']['perfil_id'] == 4){
+
+    $cursos = obtenerdatosusuarios($db, 'grupos_usuarios_cursos', $_SESSION['sesion_aprenDigital']['id']);        
+      if(!empty($cursos) && mysqli_num_rows($cursos) >= 1){
+        $cantidad_cursos = mysqli_num_rows($cursos); 
+        //echo $cantidad;
+        //$cantidad_programa = round((($cantidad_cursos * 100)/12),2);									
+        $cantidad_programa = 0;									
+      }
+  }
+								
 ?>
 
 <body>
@@ -62,50 +74,19 @@
 						<div class="inner-content-cursos">	
 								<div class="item-cursos">
 									<h2 class="title">Porcentaje del Programa</h2>
-									<?php 
-										$cursos = obtenerdatosusuarios($db, 'grupos_usuarios_cursos', $_SESSION['sesion_aprenDigital']['id']);        
-											if(!empty($cursos) && mysqli_num_rows($cursos) >= 1):
-												$cantidad = mysqli_num_rows($cursos);
-												while($curso = mysqli_fetch_assoc($cursos)):  
-									?>
-										<div class="box-porcentaje">
-											<div class="porcentaje" >
-												<svg>
-													<circle cx="70" cy="70" r="70"></circle>
-													<circle cx="70" cy="70" r="70" id="porcentaje"></circle>
-												</svg>
-												<div class="numero" >
-													<h2 id="numeroporcentaje"> </h2>
-													<span>%</span>
-												</div>
-											</div>											
-											<h2 class="text">Progreso</h2>
-										</div>
-									<?php endwhile;
-										else: ?>
-										<div class="box-porcentaje">
-											<div class="porcentaje" >
-												<svg>
-													<circle cx="70" cy="70" r="70"></circle>
-													<circle cx="70" cy="70" r="70" id="porcentaje"></circle>
-												</svg>
-												<div class="numero" >
-													<h2 id="numeroporcentaje"></h2>
-													<span>%</span>
-												</div>
-											</div>											
-											<h2 class="text">Progreso</h2>
-										</div>
+									<?php if(isset($cantidad_programa)) : ?>
+										<input type="text" value="<?=$cantidad_programa?>" class="porcentaje_programa">
+									<?php else: ?>
+										<input type="text" value="0" class="porcentaje_programa">
 									<?php endif; ?>
 								</div>
 								<div class="item-cursos">
-									<h2 class="title">Porcentaje 0% de avance de Cursos</h2>
+									<h2 class="title">Porcentaje <?=$cantidad_programa?>% de avance de Cursos</h2>
 									<?php 
 										$cursos = obtenerdatosusuarios($db, 'grupos_usuarios_cursos', $_SESSION['sesion_aprenDigital']['id']);										
-											if(!empty($cursos) && mysqli_num_rows($cursos) >= 1):
-												while($curso = mysqli_fetch_assoc($cursos)):  
+											if(!empty($cursos) && mysqli_num_rows($cursos) >= 1):												  
 									?> 
-									<ul>
+									<ul class="list-avance">
 										<li>
 											<h3 class="title">Cursos Completados</h3>
 										</li>
@@ -116,7 +97,7 @@
 											<h3 class="title">Foros</h3>
 										</li>
 									</ul>
-									<?php endwhile;
+									<?php 
 										else: ?>
 												<div class="inner-content mg-bt20">
 												<h2 class="title">No tienes cursos registrados aún. </h2>
@@ -127,6 +108,7 @@
 					</div>
 					<?php endif; ?>
 
+					<!-- DATOS -->
 					<div class="inner-content w100">
 						<?php 
 							$perfiles = obtenerdatos($db, 'usuarios', $_SESSION['sesion_aprenDigital']['id']);        
@@ -148,7 +130,7 @@
 								</div>
 								<div class="box-text">
 									<label for="">Información Biográfica: </label> 
-									<p class="parrafo"><?php echo $perfil['descripcion'];?></p>
+									<p class="parrafo"><i class="fas fa-address-card"></i> <?php echo $perfil['descripcion'];?></p>
 								</div>
 								<div class="box-text">
 									<label for="">Intereses: </label>										
@@ -164,7 +146,7 @@
 								</div>								
 								<div class="box-text">
 									<label for="">Nicho: </label>										
-									<p class="parrafo"><i class="far fa-id-badge"></i> <?php echo $perfil['nicho_mercado']; ?></p>
+									<p class="parrafo"><i class="fas fa-search-dollar"></i> <?php echo $perfil['nicho_mercado']; ?></p>
 								</div>
 								<div class="box-text">
 									<label for="">Proposito: </label>										
@@ -172,7 +154,7 @@
 								</div>
 								<div class="box-text">
 									<label for="">Nacionalidad: </label>										
-									<p class="parrafo"><i class="far fa-id-badge"></i> <?php echo $perfil['nacionalidad']; ?></p>
+									<p class="parrafo"><i class="fas fa-globe-americas"></i> <?php echo $perfil['nacionalidad']; ?></p>
 								</div>
 								<div class="box-text">
 									<label for="">Localidad / Pais: </label>										
@@ -181,8 +163,8 @@
 								<?php if($perfil['archivo'] != null): ?>   
 									<div class="box-text">	
 										<label for="">Mi CV: </label>
-										<p class="parrafo">
-											<a href="assets/files/<?php echo $perfil['carpeta'].'/'.$perfil['archivo']; ?>" class="btn-file" target="_blank"><i class="far fa-file-pdf" ></i> <?php echo $perfil['archivo']; ?></a>
+										<p class="parrafo"><i class="far fa-file-pdf" ></i>
+											<a href="assets/files/<?php echo $perfil['carpeta'].'/'.$perfil['archivo']; ?>" class="btn-file" target="_blank"> <?php echo $perfil['archivo']; ?> <i class="fas fa-download"></i></a>
 										</p>								
 									</div>
 								<?php endif ?>
@@ -190,7 +172,8 @@
 						<?php endwhile;
 						endif; ?>			
 					</div>
-
+					
+					<!-- CERTIFICADOS -->
 					<div class="inner-content w100 hidden">
 						<h2 class="title">CERTIFICADOS</h2>
 						<?php 
@@ -216,6 +199,22 @@
 </main>
 
 <script>
+		$(document).ready(function() {
+			//$(".dial").knob();
+			$('.porcentaje_programa').knob({
+				'min':0,
+				'max':100,
+				'width':220,
+				'height':220,
+				'displayInput':true,
+				'fgColor':"#1c75bc",
+				'bgColor':"#a6a6a6",
+				'release':function(v) {$(".p").text(v);},
+				'readOnly':true
+			});
+		});
+</script>
+<script>
 
 	const progress = document.getElementById("porcentaje");
 	let numberprogress = document.getElementById("numeroporcentaje");
@@ -223,16 +222,16 @@
 	let cantidad1 = 0;
 	let cantidad2 = 440;
 
-	let tiempo = setInterval(() => {
-		cantidad1 += 1;
-		let value = Math.ceil(cantidad2 -=4.5);
-		numberprogress.textContent = cantidad1;
-		progress.style.strokeDashoffset=`${value}`;
+	// let tiempo = setInterval(() => {
+	// 	cantidad1 += 1;
+	// 	let value = Math.ceil(cantidad2 -=4.5);
+	// 	numberprogress.textContent = cantidad1;
+	// 	progress.style.strokeDashoffset=`${value}`;
 
-		if(cantidad1 === 100){
-			clearInterval(tiempo)
-		}
+	// 	if(cantidad1 === 100){
+	// 		clearInterval(tiempo)
+	// 	}
 
 
-	}, 80);
+	// }, 80);
 </script>

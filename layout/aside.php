@@ -1,8 +1,7 @@
 <div class="sidebar">
     <div class="logo-details">      
-        <img src="../assets/img/logo.png" class="img-logo" alt="Logo ">
-        <p class="logo_name">AD</p>
-      
+      <img src="../assets/img/logo.png" class="img-logo" alt="Logo ">
+      <p class="logo_name">AD</p>      
     </div>
       <ul class="nav-links">
         <li>
@@ -36,7 +35,7 @@
           </a>
         </li>        
         <li>
-          <a href="live.php" title="En Vivos">
+          <a href="eventos.php" title="En Vivos">
             <i class="fas fa-video"></i>        
             <span class="links_name">EVENTOS EN VIVO</span>
           </a>

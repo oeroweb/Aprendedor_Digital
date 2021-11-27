@@ -1,13 +1,11 @@
 <?php
 	include 'layout/header.php';
-	if($_GET['cu'] == "" or $_GET['t'] == ""){
+	if($_GET['cu'] == ""){
 		$textoerror = '<h2 class="title">El curso que buscas no exite, oh no se encontro. </h2>';
 		header("Refresh:3; url=cursos.php");
 	}
 	
-	$curso_id = isset($_GET['cu']) ? $_GET['cu'] : '';
-	//$clase_id = isset($_GET['cl']) ? $_GET['cl'] : '';
-	$token = trim($_GET['t']);
+	$curso_id = isset($_GET['cu']) ? $_GET['cu'] : '';	
 	$curso_contenido = (isset($_GET['cc']) ? $_GET['cc'] : '');
 	$usuario_id = $_SESSION['sesion_aprenDigital']['id'];
 	//echo $curso_id .' '. $token .' '.$usuario_id;
@@ -22,13 +20,13 @@
 		<div class="portal-clases">			
 			<div class="box-titles">
 				<?php
-					$cursos = mostarcursosytoken($db, 'grupos_usuarios_cursos','cursos', $curso_id, $usuario_id, $token);
+					$cursos = obtenerdatos($db, 'cursos', $curso_id);
 					if (!empty($cursos) && mysqli_num_rows($cursos) >= 1) :
 						$cant = mysqli_num_rows($cursos);
 						//echo $cant;
 						while ($curso = mysqli_fetch_assoc($cursos)) :
 				?>
-					<h2 class="title">Curso : <?= $curso['nombrecurso'] ?> </h2>
+					<h2 class="title">Curso : <?= $curso['nombre'] ?> </h2>
 				<?php endwhile; else:				
 					echo $textoerror;					
 				endif; ?>				
@@ -68,7 +66,7 @@
 								while ($detalle = mysqli_fetch_assoc($detalles)) :
 							?>
 								<div class="inner-content-accordion" data-video="<?=$detalle['id']?>">
-									<a href="clases.php?cu=<?=$curso_id?>&t=<?=$token?>&cc=<?=$detalle['id']?>">	
+									<a href="clasesad.php?cu=<?=$curso_id?>&cc=<?=$detalle['id']?>">	
 										<input type="checkbox" name="" value="<?=$detalle['id']?>">					
 										<span class=""><?=$detalle['nombre']?> </span>				
 									</a>
@@ -106,19 +104,19 @@
 					<?php else : ?>
 						<p class="al-ct">Bienvenido al curso</p>
 						<?php
-							$cursos = mostarcursosytoken($db, 'grupos_usuarios_cursos','cursos', $curso_id, $usuario_id, $token);
+							$cursos = obtenerdatos($db, 'cursos', $curso_id);
 							if (!empty($cursos) && mysqli_num_rows($cursos) >= 1) :
 								$cant = mysqli_num_rows($cursos);
 								//echo $cant;
 								while ($curso = mysqli_fetch_assoc($cursos)) :
 							?>
-								<?php  if($curso['imagencurso'] != ""): ?>
-                        <img src="assets/img/cursos/<?php echo $curso['imagencurso'] ?>" alt="">
-                      <?php  else: ?>
-                        <img src="assets/img/example-curso.jpg" alt="">
-                      <?php  endif; ?>
+								<?php  if($curso['imagen'] != ""): ?>
+										<img src="assets/img/cursos/<?php echo $curso['imagen'] ?>" alt="">
+									<?php  else: ?>
+										<img src="assets/img/example-curso.jpg" alt="">
+									<?php  endif; ?>
 							<?php endwhile; 											
-							endif; ?>			
+							endif; ?>
 					<?php endif; ?>
 				</div>
 

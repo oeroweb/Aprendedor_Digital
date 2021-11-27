@@ -1,7 +1,7 @@
 
   <nav>
     <div class="sidebar-button">
-      <i class='bx bx-menu sidebarBtn'></i>
+      <i class="fas fa-bars sidebarBtn"></i>
       <span class="dashboard"></span>
     </div>
     <!-- <div class="search-box">
@@ -23,7 +23,7 @@
         <a href="perfil.php" class="admin_name">
           <?php echo $perfil['nombre'] .' ' .$perfil['ape_paterno']; ?>
         </a>
-      </div>
+      
       <?php 
           endwhile;
         endif;

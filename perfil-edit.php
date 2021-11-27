@@ -173,7 +173,6 @@
 										<label for="direccion">Dirección: </label>		
 										<input class="w100" type="text" name="direccion" value="<?php echo $perfil['direccion']; ?>">
 									</div>
-
 								</div>
 								<div class="w50">
 									<div class="box-input ">
@@ -205,10 +204,9 @@
 										<input class="w100" type="text" name="proposito" value="<?php echo $perfil['proposito']; ?>">
 									</div>
 									<div class="box-input">
-										<label for="interes">Intereses (Separado por comas): </label>				
+										<label for="interes">Intereses (Separado por comas): </label>			
 										<input class="w100" type="text" name="interes" value="<?php echo $perfil['interes']; ?>">
-									</div>
-									
+									</div>									
 								</div>
 								<div class="box-input">	
 									<div class="w50">

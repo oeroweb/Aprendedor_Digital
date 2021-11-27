@@ -82,7 +82,7 @@
 			}
 
 			if($multiArchivos){
-				$ingresar_archivo = $multiArchivos;
+				$ingresar_archivo = substr($multiArchivos,0,-2);
 			}else{
 				$ingresar_archivo = $archivo_existente;
 			}

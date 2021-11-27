@@ -134,11 +134,11 @@ $id = $_GET['id'];
 										<td><?=substr($dato['descripcion'],0,80)?></td>
 										<td>
 											<?php if($dato['acceso_id'] == 4) :?>
-												<a href="models/updates/grupos-curso-public.php?id=<?=$dato['myid']?>" class="btn-3" title="No publicado">
+												<a href="models/updates/grupos-clases-public.php?id=<?=$dato['myid']?>" class="btn-3" title="No publicado">
 												<img src="assets/fonts/toggle-of.svg" alt="Inactivo">		
 											Bloqueado</a>													
 											<?php else : ?>
-												<a href="models/updates/grupos-curso-private.php?id=<?=$dato['myid']?>" class="btn-3" title="Activo">			
+												<a href="models/updates/grupos-clases-private.php?id=<?=$dato['myid']?>" class="btn-3" title="Activo">			
 												<img src="assets/fonts/toggle-on.svg" alt="activo">	
 											Activo</a>																				
 											<?php endif; ?>	

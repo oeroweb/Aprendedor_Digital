@@ -42,7 +42,7 @@
 		if($nombre_video or $nombre_imagen){
 
 			$carpeta = $fase;
-			//$ruta = $_SERVER['DOCUMENT_ROOT'] . '/escuela/assets/cursos/';
+			//$ruta = $_SERVER['DOCUMENT_ROOT'] . '/escuela/assets/clases/';
 			$ruta = $_SERVER['DOCUMENT_ROOT'] . '/PAGaprendedor/escuela/assets/clases/';
 
 			if(!is_dir($carpeta)){
@@ -57,7 +57,7 @@
 			}
 
 			if($nombre_imagen){				
-				//$carpeta_destino = $_SERVER['DOCUMENT_ROOT'] . '/escuela/assets/cursos/'.$carpeta.'/';	
+				//$carpeta_destino = $_SERVER['DOCUMENT_ROOT'] . '/escuela/assets/clases/'.$carpeta.'/';	
 				$carpeta_destino = $_SERVER['DOCUMENT_ROOT'] . '/PAGaprendedor/escuela/assets/clases/'.$carpeta.'/';
 				move_uploaded_file($_FILES['imagen']['tmp_name'], $carpeta_destino.$nombre_imagen);
 			}
@@ -72,7 +72,7 @@
 				}else{
 					$_SESSION['fallo'] = "<i class='far fa-times-circle'></i> No se completo la carga; por favor volver a intentar";
 				}
-				header("Location: ../../admin-cursos-maestras.php");	
+				header("Location: ../../admin-clases-maestras.php");	
 		}else {
 			$sql="UPDATE clases SET fase_id='$fase', nombre='$nombre', descripcion='$descripcion', url='$url',orden='$orden', fechamodificacion=NOW(), usuario='$usuario' WHERE id = $id;";
 
@@ -81,10 +81,10 @@
 			$_SESSION['completado'] = "<i class='far fa-check-circle'></i> El registro se modifico de forma exitosa"; 
 		}	
 		
-		header("Location: ../../admin-cursos-maestras.php");		
+		header("Location: ../../admin-clases-maestras.php");		
 			 		
  	}else{
  		$_SESSION['errores_usuario'] = $errores;
- 		header("Location: ../../admin-cursos-maestras.php");
+ 		header("Location: ../../admin-clases-maestras.php");
   }
 ?>

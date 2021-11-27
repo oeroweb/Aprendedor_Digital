@@ -38,7 +38,7 @@
 							<label for="number">Subir Excel:</label>
 							<input type="file" class="" name="excel" accept="application/vnd.ms-excel" required>							
 						</div>
-						<input type="submit" class="btn" value="Añadir Usuarios">
+						<input type="submit" class="btn" value="Añadir Usuarios por Archivos">
 					</form>
 					
 					<hr class="w100">
@@ -85,61 +85,93 @@
 <div class="modal" id="modal1">
 	<div class="body-modal">
 		<form action="" method="post" name="frm_actualizar" id="frm_actualizar" onsubmit="event.preventDefault(); ">			
-			<h2 class="mg-bt10">Modificar datos</h2>
-			<div class="w100 container mg-bt20">
-				<label class="w35" for="nombre">ID<span class="obligatorio">*</span></label>
-				<input class="w65" type="hidden" name="id" id="id">				
-				<input class="w65" type="text" name="id" id="id2" disabled>		
-			</div>					
-			<div class="w100 container mg-bt20">
-				<label class="w35" for="nombre">Nombres Completos<span class="obligatorio">*</span></label>	
-				<input class="w65" type="text" name="nombre" id="nombre" required>	
-			</div>
-			<div class="w100 container mg-bt20">
-				<label class="w35" for="">Apellido Paterno<span class="obligatorio">*</span></label>		
-				<input class="w65" type="text" name="apepaterno" id="apepaterno" required>	
-			</div>
-			<div class="w100 container mg-bt20">
-				<label class="w35 al-rg" for="">Apellido Materno:</label><br>
-				<input class="w65" type="text" name="apematerno" id="apematerno" required>		
-			</div>			
-			<div class="w100 container mg-bt20">
-				<label class="w35 al-rg" for="email">Correo:</label>
-				<input class="w65" type="email" name="email" id="email" required>		
-			</div>			
-			<div class="w100 container mg-bt20">
-				<label class="w35 al-rg" for="password">Contraseña:</label>
-				<input class="w65" type="password" name="password" id="password" placeholder="Ingrese nueva contraseña">	
-			</div>					
-			<div class="w100 container mg-bt20">
-				<label class="w35" for="">Cambiar de Perfil<span class="obligatorio">*</span></label>
-				<select class="w65" name="rol" id="perfil" required>					
-					<option value="0" disabled selected>Seleccion Perfil</option>
-					<option value="admin">Administrador</option>					
-					<option value="editor">Editor</option>					
-					<option value="soporte">Soporte</option>	
-					<option value="user">Usuario</option>
-					<option value="tesoreria">Tesoreria</option>					
-					<option value="demo">Visitante</option>
-				</select>	
-			</div>				
-			<!-- <div class="w100 container mg-bt20">
-				<label class="w35" for="">Cambiar de Perfil<span class="obligatorio">*</span></label>
-				<select class="w65" name="tipoalmacen" id="tipoalmacen" required>
-					<option value="">Seleccionar perfil</option>
+			<h2 class="title mg-bt10">Modificar datos Principales</h2><hr>
+			<div class="container-wrap">		
+				<input class="" type="hidden" name="id" id="id" readonly>				
+				<!-- <input class="" type="text" name="id" id="id2" disabled>		 -->									
+				<div class="w50 box-input mg-bt20">
+					<label class="" for="nombre">Nombres</label>	
+					<input class="" type="text" name="nombre" id="nombre" required>	
+				</div>
+				<div class="w50 box-input mg-bt20">
+					<label class="" for="">Apellido Paterno</label>		
+					<input class="" type="text" name="apepaterno" id="apepaterno" required>	
+				</div>
+				<div class="w50 box-input mg-bt20">
+					<label class=" " for="">Apellido Materno:</label>
+					<input class="" type="text" name="apematerno" id="apematerno" required>		
+				</div>			
+				<div class="w50 box-input mg-bt20">
+					<label class=" " for="">Documento Identidad:</label>
+					<input class="" type="text" name="docidentidad" id="docidentidad" required>		
+				</div>				
+				<div class="w50 box-input mg-bt20">
+					<label for="">Sexo: </label>
+					<select class="w70" name="sexo" id="sexo">
 					<?php 
-						// $almacentipo = tipoAlmacen($db);
-						// if(!empty($almacentipo) && mysqli_num_rows($almacentipo) >= 1):
-						// 	while($dato = mysqli_fetch_assoc($almacentipo)):
-					?>
-					<option value="<?//=$dato['id']?>"><?//=$dato['nombre']?></option>
+						$sexos = selectalldatos($db, 'sexo');
+						if(!empty($sexos) && mysqli_num_rows($sexos) >= 1):
+							while($sexo = mysqli_fetch_assoc($sexos)):
+					?>											
+						<option value="<?=$sexo['id']?>" <?=($sexo['id']) == $perfil['sexo_id'] ? 'selected="selected"': '' ?>>
+							<?=$sexo['nombre']?>
+						</option>										
+					<?php endwhile; endif; ?>																
+					</select>									
+				</div>		
+				<div class="w50 box-input mg-bt20">
+					<label class="" for="email">Correo:</label>
+					<input class="" type="email" name="email" id="email" readonly>		
+				</div>											
+				<div class="w50 box-input">
+					<label for="">Institución: </label>
+					<select class="w70" name="institucion" id="institucion">
 					<?php 
-					// 	endwhile;
-					// endif;
+						$datos = selectalldatos($db, 'instituciones');
+						if(!empty($datos) && mysqli_num_rows($datos) >= 1):
+							while($dato = mysqli_fetch_assoc($datos)):
 					?>
-				</select>	
-			</div>	-->
-			<input type="submit" class="btn" value="Modificar">
+						<option value="<?=$dato['id']?>" <?=($dato['id']) == $perfil['institucion_id'] ? 'selected="selected"': '' ?>>
+							<?=$dato['nombre']?>								
+						</option>
+					<?php 
+						endwhile;
+					endif;
+					?>																
+					</select>									
+				</div>	
+				<div class="w50 box-input mg-bt20">
+					<label class="" for="">Cambiar de Perfil</label>
+					<select class="" name="perfil" id="perfil" required>
+						<option value="" disabled >Seleccionar perfil</option>
+						<?php 
+							$perfiles = selectalldatos($db, 'perfil');
+							if(!empty($perfiles) && mysqli_num_rows($perfiles) >= 1):
+								while($dato = mysqli_fetch_assoc($perfiles)):
+						?>
+							<?php if($dato['id'] <= '1' ): ?>
+								<option value="<?=$dato['id']?>" disabled><?=$dato['nombre']?></option>
+							<?php elseif($dato['id'] == '4' ): ?>
+								<option value="<?=$dato['id']?>" <?=($dato['id']) == $perfil['perfil_id'] ? 'selected="selected"': '' ?>><?=$dato['nombre']?></option>				
+							<?php else: ?>
+									<option value="<?=$dato['id']?>"><?=$dato['nombre']?></option>
+							<?php endif; ?>										
+						<?php endwhile; endif; ?>
+					</select>	
+				</div>
+				<div class="box-input w50 mg-bt20">
+					<label for='clave' >Clave Nueva</label>
+					<input type='hidden' name="clave-actual" id="clave-actual">
+					<input type='text' placeholder="Clave nueva" name="clave" id="clave"><br><br>
+					<a class="btn" onclick="getPassword();">Generar Clave</a>
+				</div>
+				<div class="box-input w50 mg-bt20">
+					<label for='clave' >Celular</label>					
+					<input type='text' name="celular" id="celular"><br><br>				
+				</div>
+			</div>
+			<hr>
+			<input type="submit" class="btn" value="Actualizar Datos">
 			<a href="#" class="btn" onclick="cerrarmodal()"> Cancelar</a>
 		</form>
 	</div>
@@ -152,10 +184,10 @@
 <div class="modal" id="modal2">
 	<div class="body-modal">
 		<form action="" method="post" name="form_eliminar" id="form_eliminar" onsubmit="event.preventDefault();">			
-			<h2>¿Estas de Seguro de Eliminar?</h2><hr>
+			<h2 class="title">¿Estas de Seguro de Eliminar?</h2><hr>
 			<div class="container3">					
-				<span class="w100">¡No podrás revertir esto!</span>	
-				<input type="hidden" name="id" id="id" >
+				<p class="mensaje">¡No podrás revertir esto!</p>	
+				<input type="hidden" name="id" id="id" >				
 				<div class="box-nombre w100" id="box-nombre"></div>
 			</div>
 			<input type="submit" class="btn" value="Borrar">
@@ -183,22 +215,22 @@
     setTimeout(function () {
 			location.reload();
 			listar();
-    }, 500);
+    }, 3000);
 	}
 
 	// ZONA AJAX
 	var actualizar = function(){
-		$("#frm_actualizar").on("submit", function(e){		
-		e.preventDefault();
-		var frm = $(this).serialize();
+		$("#frm_actualizar").on("submit", function(){		
+			//e.preventDefault();
+			var frm = $(this).serialize();
 			//console.log(frm);
 			$.ajax({
 				method: "POST",
-				url: "usu_updates/upusuarios.php",
+				url: "models/updates/upusuario.php",
 				dataType: 'json',
 				data: frm
-			}).done( function (resultado ){			
-					console.log(resultado);															
+			}).done(function(resultado){			
+					console.log(resultado);																		
 					if(!resultado.error){						
 						$("#info").html("<div class='alerta-exito'><i class='ico icon ion-android-done'></i>Se actualizarón los datos con exito!</div>");		
 						$("#info").fadeOut(5000, function(){
@@ -206,7 +238,7 @@
 							$(this).fadeIn(3000);
 						});						
 						cerrarmodal();
-							refresh();						
+						refresh();										
 					}else{
 					$("#info").html("<div class='alerta-error'><i class='ico icon ion-alert'></i>Hubo un error en el proceso por favor volver a probar!!</div>");
 					$("#info").fadeOut(5000, function(){
@@ -223,26 +255,28 @@
 		$("#form_eliminar").on("submit", function(){		
 		$.ajax({
 			method:"POST",
-			url: "usu_deletes/deleteusuarios.php",
+			url: "models/deletes/usuario-delete.php",
 			dataType:"json",
 			data: $(this).serialize()
 		}).done(function(resultado){
-			console.log(resultado);
-			refresh();
+			console.log(resultado);			
+			//listar();
 			if(!resultado.error){						
 				$("#info").html("<div class='alerta-exito'><i class='ico icon ion-android-done'></i> Se elimino con exito!</div>");	
 				$("#info").fadeOut(5000, function(){
 					$(this).html("");
 					$(this).fadeIn(3000);
 				});						
-				cerrarmodal();				
+				cerrarmodal();
+				refresh();				
 			}else{
-			$("#info").html("<div class='alerta-error'><i class='ico icon ion-alert'></i>Hubo un error en el proceso por favor volver a intentar!!</div>");
-				$("#info").fadeOut(5000, function(){
-					$(this).html("");
-					$(this).fadeIn(3000);
+				$("#info").html("<div class='alerta-error'><i class='ico icon ion-alert'></i>Hubo un error en el proceso por favor volver a intentar!!</div>");
+					$("#info").fadeOut(5000, function(){
+						$(this).html("");
+						$(this).fadeIn(3000);
 					});
-				}
+					cerrarmodal();
+			}
 			});
 		});
 	}
@@ -282,13 +316,17 @@
 			$("#modal1").fadeIn();
 			$("#frm_actualizar #nombre").focus();				
 			console.log(data);
-			 var id= $("#frm_actualizar #id").val(data.id); 
-			  id2= $("#frm_actualizar #id2").val(data.id); 
+			 var id= $("#frm_actualizar #id").val(data.id); 			  
 					nombre = $("#frm_actualizar #nombre").val(data.nombre);
-					apepaterno = $("#frm_actualizar #apepaterno").val(data.apepaterno);
-					apematerno = $("#frm_actualizar #apematerno").val(data.apematerno);
+					apepaterno = $("#frm_actualizar #apepaterno").val(data.ape_paterno);
+					apematerno = $("#frm_actualizar #apematerno").val(data.ape_materno);
+					docidentidad = $("#frm_actualizar #docidentidad").val(data.doc_identidad);
+					celular = $("#frm_actualizar #celular").val(data.celular);
 					correo = $("#frm_actualizar #email").val(data.email);			
-					perfil = $("#frm_actualizar #perfil").val(data.rol)		
+					institucion = $("#frm_actualizar #institucion").val(data.institucion_id);			
+					perfil = $("#frm_actualizar #perfil").val(data.perfil_id)		
+					sexo = $("#frm_actualizar #sexo").val(data.sexo_id)		
+					claveActual = $("#frm_actualizar #clave-actual").val(data.clave)		
 		});
 	}
 
@@ -298,7 +336,7 @@
 			$("#modal2").fadeIn();
 			console.log(data);
 			 var id = $("#form_eliminar #id").val(data.id);
-			 	nombre = $("#form_eliminar #box-nombre").html(data.nombre + ' ' + data.apepaterno + ' ' + data.apematerno);
+			 	nombre = $("#form_eliminar #box-nombre").html('Borrar al usuario : ' +data.nombre + ' ' + data.ape_paterno + ' ' + data.ape_materno);
 		});
 	}
 

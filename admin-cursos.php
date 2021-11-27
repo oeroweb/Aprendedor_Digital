@@ -56,11 +56,11 @@
 						</div>
 					</div>										
 					<div class="container-wrap w100">								
-						<div class="w20 pd10">Imagen</div>
-						<div class="w20 pd10">Titulo del Curso</div>							
-						<div class="w20 pd10">Orden a Mostrar</div>							
-						<div class="w20 pd10">Estado</div>							
-						<div class="w20 pd10">Opciones</div>							
+						<div class="w10 al-ct pd10">Orden a Mostrar</div>							
+						<div class="w20 al-ct pd10">Imagen</div>
+						<div class="w30 al-ct pd10">Titulo del Curso</div>							
+						<div class="w20 al-ct pd10">Estado</div>							
+						<div class="w20 al-ct pd10">Opciones</div>							
 					</div>	
 						<?php 
 						$cursos = selectfasestocursos($db, 'fases', 'cursos', $fase['id']);        
@@ -71,6 +71,7 @@
 							<div class="content-accordion">
 								<div class="btn-accordion"><i class="fas fa-chevron-up"></i></div>
 								<div class="box-label">
+									<div class="w10 al-ct"><?php echo $curso['orden']?></div>	
 									<div class="w20 al-ct">
 										<?php if($curso['imagen'] != null) :?>
 											<img src="assets/img/cursos/<?php echo $curso['imagen'] ?>" alt="">
@@ -78,8 +79,8 @@
 											<img src="assets/img/cursos/example.PNG" alt="">
 										<?php endif; ?>			
 									</div>
-									<div class="w20 al-ct"><?php echo $curso['nombrecurso'] . '<br>'. $curso['descripcion'] ?></div>							
-									<div class="w20 al-ct"><?php echo $curso['orden']?></div>							
+									<div class="w30 al-ct"><?php echo $curso['nombrecurso'] . '<br>'. $curso['descripcion'] ?></div>							
+															
 									<div class="w20 al-ct">								
 										<?php if($curso['estado_id'] == 2) :?>
 											<a href="models/updates/cursos-public.php?id=<?=$curso['id']?>" class="btn-3" title="No publicado">							

@@ -29,8 +29,8 @@
 		if( $video_nombre or $archivo_nombre ){
 
 			$carpeta = $contenido_id;
-			//$ruta = $_SERVER['DOCUMENT_ROOT'] . '/escuela/assets/cursos/';
-			$ruta = $_SERVER['DOCUMENT_ROOT'] . '/PAGaprendedor/escuela/assets/cursos/';
+			$ruta = $_SERVER['DOCUMENT_ROOT'] . '/escuela/assets/cursos/';
+			//$ruta = $_SERVER['DOCUMENT_ROOT'] . '/PAGaprendedor/escuela/assets/cursos/';
 
 			if(!is_dir($carpeta)){
 				mkdir($ruta.$carpeta, 0777);
@@ -38,8 +38,8 @@
 
 			if($video_nombre){
 				
-				//$carpeta_destino = $_SERVER['DOCUMENT_ROOT'] . '/escuela/assets/cursos/'.$carpeta.'/';	
-				$carpeta_destino = $_SERVER['DOCUMENT_ROOT'] . '/PAGaprendedor/escuela/assets/cursos/'.$carpeta.'/';
+				$carpeta_destino = $_SERVER['DOCUMENT_ROOT'] . '/escuela/assets/cursos/'.$carpeta.'/';	
+				//$carpeta_destino = $_SERVER['DOCUMENT_ROOT'] . '/PAGaprendedor/escuela/assets/cursos/'.$carpeta.'/';
 				move_uploaded_file($_FILES['video']['tmp_name'], $carpeta_destino.$video_nombre);
 			}
 
@@ -51,8 +51,8 @@
 						$filename = $_FILES['archivo']['name'][$key];
 						$temporal = $_FILES['archivo']['tmp_name'][$key];						
 
-						//$carpeta_destino = $_SERVER['DOCUMENT_ROOT'] . '/escuela/assets/cursos/'.$carpeta.'/';	
-						$carpeta_destino = $_SERVER['DOCUMENT_ROOT'] . '/PAGaprendedor/escuela/assets/cursos/'.$carpeta.'/';
+						$carpeta_destino = $_SERVER['DOCUMENT_ROOT'] . '/escuela/assets/cursos/'.$carpeta.'/';	
+						//$carpeta_destino = $_SERVER['DOCUMENT_ROOT'] . '/PAGaprendedor/escuela/assets/cursos/'.$carpeta.'/';
 						
 						move_uploaded_file($temporal, $carpeta_destino.$filename);					
 					}
@@ -74,7 +74,7 @@
 				
 			}
 
-      $sql="INSERT INTO cursos_contenido_detalle (cursoContenido_id, nombre, descripcion, video, url_video, archivos, descripcion_archivo, url_articulo, nombre_articulo, descripcion_articulo, etiquetas, orden, carpeta, fechacreacion, usuario, estado_id) VALUES ($contenido_id, '$nombre', '$descripcion', '$video_nombre', '$url_video', '$multiArchivos','$descripcion_archivo', '$url_articulo', '$nombre_articulo', '$descripcion_articulo', '$etiquetas','$orden', '$carpeta', CURDATE(), '$usuario', 1);";
+      $sql="INSERT INTO cursos_contenido_detalle (cursoContenido_id, nombre, descripcion, video, url_video, archivos, descripcion_archivo, url_articulo, nombre_articulo, descripcion_articulo, etiquetas, orden, carpeta, fechacreacion, usuario, estado_id) VALUES ($contenido_id, '$nombre', '$descripcion', '$video_nombre', '$url_video', '".substr($multiArchivos,0,-2)."','$descripcion_archivo', '$url_articulo', '$nombre_articulo', '$descripcion_articulo', '$etiquetas','$orden', '$carpeta', CURDATE(), '$usuario', 1);";
 			$resul = mysqli_query($db,$sql);
 					
 				if(mysqli_affected_rows($db)>0){
