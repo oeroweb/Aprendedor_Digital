@@ -402,6 +402,95 @@ hr { height: 2px; border: none; background: $crrojo; margin:10px 0;}
     }
   }
 
+  .foros-content-home{ 
+    .tabs-foros-home{ width: 100%; background-color: $crblanco; padding:30px 10px; border-radius: 10px;
+      .tabs-nav{ width: 180px; display: flex; flex-direction: column; position: relative; transition: $trst2; 
+        label{ display: block; height: 80px; width: 100%; transition: $trst2; text-align: center; cursor: pointer; position: relative; z-index: 1; color:$crazul; border: 1px solid $crazul; border-radius:4px; display: flex; justify-content: center; flex-direction: column;
+          .smalltext{font-size: 14px; padding-top: 6px;}
+        }              
+      }
+      #fase6:checked ~ .tabs-nav label.fase6{
+        color:$crblanco; transition: $trst3;
+        background-color: $crazul;
+      }    
+      input[type="radio"]{display: none;}
+      #fase1:checked ~ .tabs-nav label.fase1,
+      #fase2:checked ~ .tabs-nav label.fase2,
+      #fase3:checked ~ .tabs-nav label.fase3,
+      #fase4:checked ~ .tabs-nav label.fase4,
+      #fase5:checked ~ .tabs-nav label.fase5,
+      #fase6:checked ~ .tabs-nav label.fase6{
+        color:$crblanco; transition: $trst3;
+        background-color: $crazul;
+      }      
+     
+      section .content{ display: none; margin-top: 20px; }
+      #fase1:checked ~ section .content-1,
+      #fase2:checked ~ section .content-2,
+      #fase3:checked ~ section .content-3,
+      #fase4:checked ~ section .content-4, 
+      #fase5:checked ~ section .content-5, 
+      #fase6:checked ~ section .content-6{ 
+        display: block;}
+      section{width: calc(100% - 180px); }  
+      section .content {width: calc(100% - 30px); margin:0 15px; transition: $trst2; 
+      }
+      section .content .item-foros {width: calc(70% - 20px); margin:0 10px; padding: 20px; transition: $trst2; background-color: $crblanco; color: $crazul; border-radius: $radius; box-shadow: 0px 0px 5px rgba(0, 0, 0, .5);
+        &:last-child{width: calc(30% - 20px); margin:0 10px;}     
+        
+        .box-formulario{ padding: 10px; margin-bottom: 10px; box-shadow: none; position: relative;
+          textarea, input{padding: 10px 40px 10px 20px; outline: none; border-radius: 40px; width: 100%;
+            &:focus, &:hover{i{color:$crazul}}
+          }
+          textarea{border-radius: 10px; height: 50px; max-height: 240px; resize: none;}
+          textarea:is(:focus, :valid){ border-color: $crazul; i{color:$crazul} }
+          input:is(:focus, :valid){ border-color: $crazul; i{color:$crazul} }
+          textarea::-webkit-scrollbar{width: 0px;}
+          // textarea::-moz-scrollbar{width: 0px;}
+          input{height: 40px; border-radius: 40px; }
+          button{background: transparent; border:none; font-size: 18px; position: absolute; right: 22px; bottom: 16px; cursor: pointer;
+          }
+          .btn-submit{ bottom: 25px;}
+        }
+        .post-preguntas{ margin:16px 0;
+          ul li{list-style: none;}
+          .item-pregunta{ box-shadow: 0px 0px 5px rgba(0, 0, 0, .3); padding: 10px; padding-right: 20px; border-radius: $radius; margin: 20px 0;
+            .img-32{width: 40px; height: 40px; border-radius: 50%;}
+            .box-preguntas{ display: flex; width: 100%; padding-bottom: 20px; position: relative;
+              .config{position:absolute; right: 10px; top:8px; cursor: pointer; 
+                .config-publicacion{ position: absolute; background-color: $crazullight; border-radius: $radius; box-shadow: 0px 0px 3px rgba(0, 0, 0, .6); padding: 10px; display: none;
+                  li{&:first-child{ border-bottom: 0.5px dashed $crazul-2;}}
+                }
+              }
+              .preguntas{ margin-left: 5px;
+                .nombre{font-size: 18px;}
+                .fecha{font-weight: 400; color: $crnegro; font-size: 14px; }
+                .pregunta{font-size: 18px; text-align: justify; margin-top: 10px; }  
+              }
+            }
+            .respuestas{  width: 100%; border-top: 1px dashed #ccc; padding-top: 20px;        
+              .box-comentarios{ display: flex; width: 100%; margin-bottom: 10px;
+                .comentarios{ font-size: 16px; background-color: lightblue; padding: 12px; border-radius: $radius; margin-left: 5px;
+                  .nombre{font-weight: 800; }
+                  .comentario{color : $crnegro; font-weight: 400;}
+                }
+              }
+            }
+
+          }
+        }  
+      }
+    }
+
+    @media (max-width: 1000px){
+      .tabs-foros-home{
+        section .content .item-foros{ width: 100%; transition: $trst2; }
+      }
+    }
+    
+    
+  }
+
   .grupos-content-grupos{ 
     .tabs-content-grupos{ width: 100%; background-color: $crblanco; padding:25px 30px 30px; border-radius: 10px;
       .tabs-nav{ width: 100%; margin: auto; height: 50px; display: flex; align-items: center; justify-content: space-around; position: relative; border-radius:4px; 
@@ -440,8 +529,9 @@ hr { height: 2px; border: none; background: $crrojo; margin:10px 0;}
   .inner-content{margin: 20px 0;
     .inner-content-cursos{ display: flex; justify-content: center; background-color: $crblanco; border-radius: $radius; box-shadow: 0px 0px 5px rgba(0, 0, 0, .3); padding: 20px;
       .item-cursos{width: calc(50% - 30px); margin: 0 15px;
-        .title{color: $crazul;}
-        .text-porcentaje{font-size: 80px;}
+        .title{color: $crazul; margin-bottom: 20px;}
+        .porcentaje_programa{font-size: 30px;}
+        .list-avance{ li{ list-style: none;}}
       }
     }
     .datos-fases{ background-color: $crblanco; width: 250px; border-radius: 10px; box-shadow: 0px 0px 5px rgba(0, 0, 0, .3); padding: 10px 20px; margin: 10px 5px;
@@ -458,10 +548,11 @@ hr { height: 2px; border: none; background: $crrojo; margin:10px 0;}
       .box-text{ padding: 16px 20px; border-bottom: 1px solid rgba(0, 0, 0, .3); display: flex; align-items: center;
         label{font-weight: 900; margin-right: 20px; color: $crazul;}
         .parrafo{font-family: "Monserrat-Regular"; display: flex; align-items: center; text-align: justify;
-          i{font-size: 24px; font-weight: 900; margin-right: 20px; color: $crazul; display: none;}
+          i{font-size: 20px; font-weight: 900; margin-right:14px; color: $crazul; display: none;}
+          .fa-download{margin-left:10px;}
         }
         .btn-file{display: flex; align-items: center; padding:12px 20px; border-radius:$radius; background-color: $crazul; color: $crazullight; margin-bottom: 10px; 
-          i{font-size: 20px; margin-right: 5px;}}
+          i{font-size: 20px; margin-right: 5px; color: $crblanco;}}
         .etiqueta{ padding: 8px 12px; background-color: $crazul; color: $crblanco; margin-right: 5px; border-radius: $radius; -webkit-border-radius: $radius; -moz-border-radius: $radius; -ms-border-radius: $radius; -o-border-radius: $radius; }
         &:last-child {border-bottom:0;}
       }
@@ -473,6 +564,16 @@ hr { height: 2px; border: none; background: $crrojo; margin:10px 0;}
         .item-cursos{width: 100%; transition: $trst2;}
       }
     }    
+    
+    @media (max-width:600px){        
+      .datos-perfil{
+        .box-text{
+          label{display: none;}
+          .parrafo{ i{ display: block;} }
+        }
+      }
+      
+    }    
   }
   
   .clases-content{ width: calc(33% - 20px); margin: 10px; padding: 14px 10px;
@@ -480,6 +581,7 @@ hr { height: 2px; border: none; background: $crrojo; margin:10px 0;}
     p{font-size: 14px;}
     .box-image{ iframe{width: 100%;}}
   }
+
   .cursos-container{ display: grid; grid-template-columns: auto 4fr; gap: 10px;
     .fase-content{ padding: 14px 10px; border-radius: 20px 20px 0 0; background-color: $crblanco; box-shadow: 0 0 5px rgba(0, 0, 0, .7); border-radius: $radius;
       .title{ font-size: 18px;}   
@@ -494,6 +596,30 @@ hr { height: 2px; border: none; background: $crrojo; margin:10px 0;}
         }        
       }
     }
+
+  }
+
+  .eventos-content{ display: flex; flex-wrap: wrap; overflow: hidden;
+    .item-eventos-content{width: calc(60% - 10px); margin: 5px; padding:10px; background: $crblanco; border-radius: $radius; transition: $trst2;
+      .box-evento{box-shadow: 0px 0px 10px $crnegro; padding:30px 20px; margin: 10px;
+        .color{color: $crazul; margin-right: 10px; }
+        .title{color: $crazul; margin-bottom: 20px; text-align: center;}
+        img{border-radius: $radius; margin-bottom: 10px;}
+        .parrafo{margin-bottom: 20px;}
+        .link{text-decoration: underline;}
+      }
+    }
+
+    .aside-eventos-content{width: calc(40% - 10px); margin: 5px; padding:20px; background: $crblanco; border-radius: $radius; transition: $trst2;
+      .title{font-size: 20px; margin-bottom: 16px; color: $crazul; }
+      .box-evento-aside{box-shadow: 0px 0px 3px $crnegro;  padding:20px; margin: 10px 5px; 
+        .title{ margin-bottom: 16px; }
+      }
+    }
+
+    @media (max-width: 800px){
+      .item-eventos-content, .aside-eventos-content{ width: 100%; transition: $trst2; }
+    }
   }
 
   .admin-cursos-content{ background-color: $crblanco;  box-shadow: 0 0 5px rgba(0, 0, 0, .7); border-radius: $radius; padding: 10px 20px; margin-bottom: 30px;
@@ -501,7 +627,7 @@ hr { height: 2px; border: none; background: $crrojo; margin:10px 0;}
       .text{font-size: 15px;}
     }
     .box-tabla{
-      video, iframe{width: 100%;}
+      video, iframe{width: 100%; height: 180px; }
       .title{text-align: center; margin-bottom: 16px;}
       .text{text-align: justify;}
     }
@@ -599,7 +725,7 @@ hr { height: 2px; border: none; background: $crrojo; margin:10px 0;}
         .active .inner-content-accordion{ height: 50px; padding-left: 10px; transition: all .3s ease; }
       }
     }
-  
+      
     .content-media{ 
       video{width: 100%;}
       .box-video{width: 100%; text-align: center;
@@ -607,6 +733,13 @@ hr { height: 2px; border: none; background: $crrojo; margin:10px 0;}
       }
     }
     .files-media{ padding: 20px 16px; background-color: $crazul-2; color: $crblanco;
+    }
+  }
+
+  .inner-portal-clases-maestras{
+    display: flex; justify-content: center; align-items: center;
+    .content-media{width: 700px;  
+      .box-video{ iframe{width: 100%;} }
     }
   }
 }
@@ -638,41 +771,43 @@ table {  margin-bottom: 20px;
 ***          MODAL          ****
 ***************************************/
 .modal { 
-  position: fixed; width: 100%; height: 100vh; background: rgba(0, 0, 0, 0.25); display:none; top: 0; left: 0; padding: 8px 0; z-index: 10;
+  position: fixed; width: 100%; height: 100vh; background: rgba(0, 0, 0, 0.25); display:none; top: 0; left: 0; z-index: 10;
   // ============= estilo modal 1 =============	
-  .body-modal { width: 100%; display: flex; justify-content: center; align-items: center; margin-top: 100px;     
-      #form_eliminar, #frm_actualizar,
-      .frmbody {
-          width: 800px; max-height: 650px; background: white; padding: 16px 20px; border-radius: 6px;
-          text-align: center; overflow: auto;
-          box-shadow: -1px 1px 10px $crnegro;
-          .w100 {width:calc(100% - 20px); margin: 10px; }
-          .w50 {width: calc(50% - 20px); margin: 0 10px;}
-          .w30-mg{width: calc(33% - 20px);margin: 0 10px;}
-          .w25-mg {width: calc(25% - 10px);margin: 0 5px;}
-          hr {width: 100%; margin: 3px auto 10px;     height: 1px solid $crgris; }
-          label { text-align: left; }
-          @media (max-width:500px) {
-              .w50 {width :calc(100%);}                
-          }
-      }      
-     
-      #form_eliminar {
-          span {
-              font-weight: 500;
-              margin: 15px 0;
-          }
-          h2 {
-              margin-bottom: 5px;
-          }
+  .body-modal { width: 100%; display: flex; justify-content: center;  margin-top: 90px;    
+    #form_eliminar, #frm_actualizar,
+    .frmbody { width: 800px; max-height: 650px; background: white; padding: 16px 20px; border-radius: 6px; overflow: auto;
+      box-shadow: -1px 1px 10px $crnegro;
+      .title{text-align: center; color:$crazul-2}
+      .w100 {width:calc(100% - 20px); margin: 10px; }
+      .w50 {width: calc(50% - 20px); margin: 0 10px;}        
+      .w30-mg{width: calc(33% - 20px);margin: 0 10px;}
+      .w25-mg {width: calc(25% - 10px);margin: 0 5px;}
+      hr {width: 100%; margin: 3px auto 14px; height: 2px; background-color: $crazul-2; }
+      .box-input{position: relative; margin-bottom: 16px; 
+        input, select, textarea{padding:8px 36px 8px 16px; width:100%; height: 40px; outline: none; border-radius:$radius; border: 1px solid rgba(28, 117, 188, 0.5);   
+          &:hover, &:focus{border: 1px solid rgba(28, 117, 188, 0.9);   }
+        }
+        textarea{resize: none; height: 50px; max-height: 240px; padding: 10px; }
+        textarea::-webkit-scrollbar{width: 0px;}
+        // textarea::-moz-scrollbar{width: 0px;}
+        .counter{position: absolute; right: 10px; top: 50%; border-left: 1px solid rgba(28, 117, 188, 0.5); padding-left: 10px; width: 36px; font-weight: 400; color: $crgris;}
+        .counter-2{position: absolute; left: 245px; top: -3px; color:$crgris; font-weight: 400;}
+        
+        label{ font-size: 18px; line-height: 18px; color:$crgris; margin-bottom: 10px; display: block; color: $crazul; font-weight: 900;}
+        .btn-file{display: flex; align-items: center; padding:12px 20px; border-radius:$radius; background-color: $crazul; color: $crazullight; margin-bottom: 10px; 
+          i{font-size: 20px; margin-right: 5px;}}
       }
-      .box-nombre {
-          padding: 15px;
-          color: $crazul;
-          letter-spacing: 0.5px;
-          font-size: 18px;
-          font-weight: 600;
+      
+      @media (max-width:500px) {
+          .w50 {width :calc(100%);}                
       }
+    }     
+    #form_eliminar { text-align: center;
+      .mensaje{width: 100%;  font-weight: 400; margin: 15px 0; }
+      h2 { margin-bottom: 5px; }
+      .box-nombre { padding: 15px 0;  color: $crazul-2; letter-spacing: 0.5px; font-size: 20px; font-weight: 600;
+    }
+    }
   }
 }
 
