@@ -8,7 +8,22 @@
   }else{
     $busqueda = null;
   }
+  
+  if(isset($_GET['pubicacionId'])){
+    $publicacionId = $_GET['pubicacionId'];
+  }else{
+    $publicacionId = null;
+  }
+  
+  if(isset($_GET['notificacion'])){
+    
+    $idpublicacion =  $_GET['pubicacionId'];  //echo $idpublicacion;
+    $id = $_GET['notificacion'];  //echo $id;
+     
+    $sql = "UPDATE notificaciones set leido_id = 5 WHERE idnotificacion = $id";
+    $resultado = mysqli_query($db, $sql);
 
+  }
 ?>
 
 <body>
@@ -73,8 +88,9 @@
                         <hr>
                         <div class="post-preguntas" id="postPreguntas">
                           <ul>
-                            <?php 
-                              $publicaciones = mostarplublicacionesxfases($db, 'publicacion','usuarios', $i, $busqueda);
+                            <?php if(isset($_GET['pubicacionId'])): ?>
+                              <?php 
+                              $publicaciones = mostarplublicacionesxfasespublicacionid($db, 'publicacion','usuarios', $i, $publicacionId);
                               if(!empty($publicaciones) && mysqli_num_rows($publicaciones) >= 1):
                                 while($publicacion = mysqli_fetch_assoc($publicaciones)):
                                   $fecha = $publicacion['fechapublicacion'];                       
@@ -99,11 +115,14 @@
                                 </div>
                                 <div class="respuestas"> 
                                   <ul>
-                                    <?php 
+                                    <?php if(isset($_GET['todos'])):
                                       $comentarios = mostarcomentariosxpublicacione($db, 'comentarios','usuarios', $publicacion['idpublicacion']);
-                                      if(!empty($comentarios) && mysqli_num_rows($comentarios) >= 1):
+                                      $cantComentarios = mysqli_num_rows($comentarios);
+                                      //echo 'IF -> '. $cantComentarios;
+
+                                      if(!empty($comentarios) && $cantComentarios >= 1):
                                         while($comentario = mysqli_fetch_assoc($comentarios)): 
-                                    ?>	
+                                      ?>
                                       <li class="box-comentarios ">
                                         <?php if($comentario['imagen']) : ?>
                                           <img src="assets/files/<?=$comentario['carpeta_img'] .'/'.$comentario['imagen'] ?>" class="img-32" alt="">
@@ -116,12 +135,43 @@
                                           </div>
                                           <p class="comentario"><?=$comentario['comentario'] ?></p> 
                                         </div> 
-                                      </li>
-                                    <?php endwhile; endif; ?>
+                                      </li>                                      
+                                      <?php endwhile; endif; ?>
+                                    <?php else : ?>
+
+                                      <?php 
+                                        $comentarios = mostarcomentariosxpublicacionelimit($db, 'comentarios','usuarios', $publicacion['idpublicacion']);
+                                        $cantComentarios = mysqli_num_rows($comentarios);
+                                        //echo 'else -> '. $cantComentarios;
+
+                                        if(!empty($comentarios) && $cantComentarios >= 1):
+                                          while($comentario = mysqli_fetch_assoc($comentarios)): 
+                                      ?>                                      
+                                      <li class="box-comentarios ">
+                                        <?php if($comentario['imagen']) : ?>
+                                          <img src="assets/files/<?=$comentario['carpeta_img'] .'/'.$comentario['imagen'] ?>" class="img-32" alt="">
+                                        <?php else: ?>
+                                          <img src="assets/img/avatar/male.png" class="img-32" alt="avatar">
+                                        <?php endif; ?>
+                                        <div class="comentarios">
+                                          <div class="nombre">
+                                            <?=$comentario['nombre'] .' '. $comentario['ape_paterno']?>
+                                          </div>
+                                          <p class="comentario"><?=$comentario['comentario'] ?></p> 
+                                        </div> 
+                                      </li>                                      
+                                      <?php endwhile; ?>
+                                          <?php  if($cantComentarios >= 3) : ?>
+                                            <a href="foros.php?pubicacionId=<?=$publicacion['idpublicacion']?>&todos=all" class="btn-vermas">Ver todos los comentarios</a>
+                                          <?php endif; ?>  
+                                      <?php endif; ?>
+                                    <?php endif; ?>
                                   </ul>
 
                                   <form action="models/add/foros-comentarios-add.php" method="post" class="box-formulario">
                                     <input type="hidden" name="publicacion_id" value="<?=$publicacion['idpublicacion'] ?>">
+                                    <input type="hidden" name="publicacionusuario_id" value="<?=$publicacion['usuario_id'] ?>">
+                                    <input type="hidden" name="publicacionemail" value="<?=$publicacion['email'] ?>">
                                     <input type="hidden" name="usuario_id" value="<?=$_SESSION['sesion_aprenDigital']['id']?>" id="usuario_id">
                                     <textarea name="comentario" id="comentario" class="comentario" placeholder="Escribe una respuesta..." maxlength="400" required></textarea>
                                     <button type="submit" id="btnagregarComentario"  class="btn-submit btnagregarComentario"><i class="fas fa-paper-plane"></i> </button>
@@ -144,6 +194,116 @@
                                   
                                 </div>                              
                               </li>
+                            <?php endif; ?>  
+
+                            <?php else : ?>
+
+                              <?php 
+                                $publicaciones = mostarplublicacionesxfases($db, 'publicacion','usuarios', $i, $busqueda);
+                                if(!empty($publicaciones) && mysqli_num_rows($publicaciones) >= 1):
+                                  while($publicacion = mysqli_fetch_assoc($publicaciones)):
+                                    $fecha = $publicacion['fechapublicacion'];                       
+                                    $fechaedit = date("d", strtotime($fecha)).' de '. $mes[date("m", strtotime($fecha))-1] .' del '.date("Y", strtotime($fecha));
+                              ?>	
+                                <li class="item-pregunta">
+                                  <div class="box-preguntas">  
+                                    <?php if($publicacion['imagen']) : ?>
+                                      <img src="assets/files/<?=$publicacion['carpeta_img'] .'/'.$publicacion['imagen']?>" class="img-32" alt="">
+                                    <?php else: ?>
+                                      <img src="assets/img/avatar/male.png" class="img-32" alt="avatar">
+                                    <?php endif; ?>
+                                    <div class="preguntas">
+                                      <div>
+                                        <div class="nombre">
+                                          <?=$publicacion['nombre'].' '.$publicacion['ape_paterno']?>
+                                        </div>  
+                                        <div class="fecha"><?=$fechaedit?></div>  
+                                      </div>
+                                      <p class="pregunta"> <?=$publicacion['publicacion'] ?> </p> 
+                                    </div>
+                                  </div>
+                                  <div class="respuestas"> 
+                                    <ul>
+                                      <?php if(isset($_GET['todos'])):
+                                        $comentarios = mostarcomentariosxpublicacione($db, 'comentarios','usuarios', $publicacion['idpublicacion']);
+                                        $cantComentarios = mysqli_num_rows($comentarios);
+                                        //echo 'IF -> '. $cantComentarios;
+
+                                        if(!empty($comentarios) && $cantComentarios >= 1):
+                                          while($comentario = mysqli_fetch_assoc($comentarios)): 
+                                        ?>
+                                        <li class="box-comentarios ">
+                                          <?php if($comentario['imagen']) : ?>
+                                            <img src="assets/files/<?=$comentario['carpeta_img'] .'/'.$comentario['imagen'] ?>" class="img-32" alt="">
+                                          <?php else: ?>
+                                            <img src="assets/img/avatar/male.png" class="img-32" alt="avatar">
+                                          <?php endif; ?>
+                                          <div class="comentarios">
+                                            <div class="nombre">
+                                              <?=$comentario['nombre'] .' '. $comentario['ape_paterno']?>
+                                            </div>
+                                            <p class="comentario"><?=$comentario['comentario'] ?></p> 
+                                          </div> 
+                                        </li>                                      
+                                        <?php endwhile; endif; ?>
+                                      <?php else : ?>
+
+                                        <?php 
+                                          $comentarios = mostarcomentariosxpublicacionelimit($db, 'comentarios','usuarios', $publicacion['idpublicacion']);
+                                          $cantComentarios = mysqli_num_rows($comentarios);
+                                          //echo 'else -> '. $cantComentarios;
+
+                                          if(!empty($comentarios) && $cantComentarios >= 1):
+                                            while($comentario = mysqli_fetch_assoc($comentarios)): 
+                                        ?>                                      
+                                        <li class="box-comentarios ">
+                                          <?php if($comentario['imagen']) : ?>
+                                            <img src="assets/files/<?=$comentario['carpeta_img'] .'/'.$comentario['imagen'] ?>" class="img-32" alt="">
+                                          <?php else: ?>
+                                            <img src="assets/img/avatar/male.png" class="img-32" alt="avatar">
+                                          <?php endif; ?>
+                                          <div class="comentarios">
+                                            <div class="nombre">
+                                              <?=$comentario['nombre'] .' '. $comentario['ape_paterno']?>
+                                            </div>
+                                            <p class="comentario"><?=$comentario['comentario'] ?></p> 
+                                          </div> 
+                                        </li>                                      
+                                        <?php endwhile; ?>
+                                            <?php  if($cantComentarios >= 3) : ?>
+                                              <a href="foros.php?pubicacionId=<?=$publicacion['idpublicacion']?>&todos=all" class="btn-vermas">Ver todos los comentarios</a>
+                                            <?php endif; ?>  
+                                        <?php endif; ?>
+                                      <?php endif; ?>
+                                    </ul>
+
+                                    <form action="models/add/foros-comentarios-add.php" method="post" class="box-formulario">
+                                      <input type="hidden" name="publicacion_id" value="<?=$publicacion['idpublicacion'] ?>">
+                                      <input type="hidden" name="publicacionusuario_id" value="<?=$publicacion['usuario_id'] ?>">
+                                      <input type="hidden" name="publicacionemail" value="<?=$publicacion['email'] ?>">
+                                      <input type="hidden" name="usuario_id" value="<?=$_SESSION['sesion_aprenDigital']['id']?>" id="usuario_id">
+                                      <textarea name="comentario" id="comentario" class="comentario" placeholder="Escribe una respuesta..." maxlength="400" required></textarea>
+                                      <button type="submit" id="btnagregarComentario"  class="btn-submit btnagregarComentario"><i class="fas fa-paper-plane"></i> </button>
+                                    </form>
+                                    <div id="info3" class="info3"></div>                              
+                                  </div>
+                                </li>
+                              <?php endwhile; else: ?>
+                                <li class="item-pregunta">
+                                  <div class="box-preguntas">
+                                    <?php if($busqueda != null) : ?>
+                                      <div class="preguntas">                                  
+                                        <p class="pregunta"> No hay resultados de la búsqueda...</p> 
+                                      </div>
+                                    <?php else : ?>
+                                      <div class="preguntas">                                  
+                                        <p class="pregunta"> No hay preguntas en está fase...</p> 
+                                      </div>
+                                    <?php endif; ?>                           
+                                    
+                                  </div>                              
+                                </li>
+                              <?php endif; ?>                            
                             <?php endif; ?>                            
                           </ul>                          
                         </div>

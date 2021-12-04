@@ -60,3 +60,17 @@ for (let index = 0; index < accordionClases.length; index++) {
   }) ;
   
 }
+
+const adminNane = document.getElementById("adminNane"), 
+btnPerfil = document.getElementById("btnPerfil");
+
+adminNane.addEventListener('click', () => {
+  btnPerfil.classList.toggle('active');
+});
+
+const btnNotificacion = document.getElementById("btnNotificacion"), 
+boxNotificacion = document.getElementById("boxNotificacion");
+
+btnNotificacion.addEventListener('click', () => {
+  boxNotificacion.classList.toggle('active');
+});

@@ -26,29 +26,27 @@
 					</div>
 				<?php endif; ?> 
 				<div class="container-wrap w100">					
-					<form action="usuarios-add.php" class="box-formulario-container w100" method="post">
+					<form action="usuarios-add.php" class="box-formulario-container " method="post">
 						<div class="box-input-container">
 							<label for="number">Cantidad de usuarios:</label>
-							<input type="number" name="number" value="1" >
+							<input type="number" name="number" value="1" min="1">
 						</div>
 						<input type="submit" class="btn" value="Añadir Usuarios">
 					</form>
-					<form action="usuarios-file-add.php" class="box-formulario-container w100" method="post">
+					
+					<form action="" class="box-formulario-container" enctype="multipart/form-data" method="post" id="filesForm">
 						<div class="box-input-container">
 							<label for="number">Subir Excel:</label>
-							<input type="file" class="" name="excel" accept="application/vnd.ms-excel" required>							
-						</div>
-						<input type="submit" class="btn" value="Añadir Usuarios por Archivos">
+							<input type="file" name="filesUsuarios" id="filesUsuarios" accept="text/csv" required>
+							<button type="button" onclick="uploadUsuarios()" class="btn">Añadir Usuarios por Archivos</button>
+						</div>										
 					</form>
 					
 					<hr class="w100">
 					<div class="box-tabla mg-bt50 w100">
 						<div class="box-titles">
-							<h1 class="title">Lista de Usuarios</h1>
-							<!-- <div class="box-botones">						
-								<a href="#" class="btn-2 btn-azul " title="Editar Perfil"><i class="fas fa-pen"></i></a>						 
-							</div> -->
-						</div>									
+							<h1 class="title">Lista de Usuarios</h1>							
+						</div>		
 						<table id="dt_listaUsuarios" class="w100">
 							<thead>
 								<tr>						
@@ -216,6 +214,35 @@
 			location.reload();
 			listar();
     }, 3000);
+	}
+
+	function refresh2() {
+    setTimeout(function () {
+			location.reload();
+			listar();
+    }, 1000);
+	}
+
+	function uploadUsuarios(){
+		var filesUsuarios = $("#filesUsuarios").val();
+		var form = new FormData($('#filesForm')[0]);
+
+		if(filesUsuarios == '' || filesUsuarios == null){
+			$("#info").html("<div class='alerta-error'><i class='ico icon ion-alert'></i>No hay archivo..</div>");
+		}else{
+			$.ajax({
+				url: "models/add/usuarios-files-add.php",
+				type: "post",
+				data: form,
+				processData: false,
+				contentType: false,
+				success: function(data){
+					refresh2();
+				}
+			});
+
+		}
+		
 	}
 
 	// ZONA AJAX

@@ -162,6 +162,8 @@ nav .search-box .bx-search{
   height: 50px;
   min-width: 190px;
   padding: 0 15px 0 2px;
+  position: relative;
+  cursor: pointer;
 }
 nav .profile-details img{
   height: 40px;
@@ -169,18 +171,133 @@ nav .profile-details img{
   border-radius: 6px;
   object-fit: cover;
 }
-nav .profile-details .admin_name{
-  font-size: 15px;
+nav .profile-details .admin_name{  
   font-weight: 500;
   color: #333;
   text-align: center;
   margin: 0 10px;
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+}
+nav .profile-details .admin_name span{
+  margin-left: 6px;
 }
 nav .profile-details i{
-  font-size: 25px;
-  color: #333;
+  font-size: 20px;
+  color: #1c75bc;
+  margin-right: 8px;
 }
+
+nav .profile-details .box-perfil{
+  color: #333;
+  position: absolute;
+  top: 150%;
+  left: -30px;
+  width: 220px;  
+  min-width: 190px;
+  padding: 15px;
+  background-color: #d3e7f8;
+  box-shadow: 0px 0px 5px rgba(0,0,0,0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: all .3s linear;
+  border-radius: 4px;
+}
+nav .profile-details .box-perfil.active{
+  opacity: 1;
+  visibility: visible;
+  top: 130%;
+}
+nav .profile-details .box-perfil::before{
+  content: ''; 
+  position: absolute;
+  left: 44px;
+  top:-15px;
+  width: 0; 
+  height: 0; 
+  border-bottom: 16px solid #d3e7f8;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+}
+.box-perfil .btn-perfil{
+  display: flex;
+  padding: 10px 20px;
+  font-size: 15px;
+  transition: all 0.4s ease;
+}
+.box-perfil .btn-perfil:hover{
+  color: #1c75bc;
+  margin-left: 5px;
+}
+
+nav .profile-details .box-notificacion{  
+  position: absolute;
+  top: 0%;
+  left: -50px; 
+  padding: 10px;  
+  transition: all .3s linear;
+  font-size: 24px;
+}
+.box-notificacion .box-perfil2::before{
+  content: ''; 
+  position: absolute;
+  left: 60px;
+  top:-15px;
+  width: 0; 
+  height: 0; 
+  border-bottom: 16px solid #d3e7f8;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+}
+.box-notificacion .ico{ font-size: 24px; } 
+.box-notificacion .number{ 
+  position: absolute;
+  font-size: 15px;
+  text-align: center;
+  top: 2%;
+  left: 20px;
+  width: 24px;
+  height: 24px;  
+  background-color: #8a191d; 
+  color: #fff;  
+  transition: all .3s linear;
+  border-radius: 50%;
+}
+.box-notificacion .box-perfil2{ 
+  position: absolute;
+  font-size: 15px;
+  top: 150%;
+  left: -50px;
+  width: 300px;
+  padding: 10px 15px;
+  background-color: #d3e7f8;
+  box-shadow: 0px 0px 5px rgba(0,0,0,0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: all .3s linear;
+  border-radius: 4px;
+}
+.box-notificacion .box-perfil2.active{
+  opacity: 1;
+  visibility: visible;
+  top: 130%;
+}
+.box-perfil2 .notificacion{
+  display: flex;
+  padding: 10px;
+  margin: 4px 0;
+  font-size: 15px;
+  transition: all 0.4s ease;
+}
+
+.box-perfil2 .notificacion:hover{   
+  /* border-bottom: 1px dashed #1c75bc; */
+  border-radius: 4px;
+  background-color: rgba(255,255,255,0.6);
+}
+
+
 .home-section .home-content{
   position: relative;
   padding-top: 104px;
@@ -416,8 +533,8 @@ nav .profile-details i{
 }
 @media (max-width: 700px) {
   nav .sidebar-button .dashboard,
-  nav .profile-details .admin_name,
-  nav .profile-details i{
+  nav .profile-details .admin_name span
+  {
     display: none;
   }
   .home-section nav .profile-details{

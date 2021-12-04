@@ -1,5 +1,6 @@
 <?php 
-  include 'layout/header.php'; 
+  include 'layout/header.php';
+
 ?>
 
 <body>
@@ -13,7 +14,6 @@
 
   </section>
 
-  
   <?php include 'layout/footer.php'; ?>
   </body>
 </html>
