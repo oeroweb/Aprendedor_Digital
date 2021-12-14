@@ -143,7 +143,6 @@
                                         $comentarios = mostarcomentariosxpublicacionelimit($db, 'comentarios','usuarios', $publicacion['idpublicacion']);
                                         $cantComentarios = mysqli_num_rows($comentarios);
                                         //echo 'else -> '. $cantComentarios;
-
                                         if(!empty($comentarios) && $cantComentarios >= 1):
                                           while($comentario = mysqli_fetch_assoc($comentarios)): 
                                       ?>                                      
@@ -176,22 +175,21 @@
                                     <textarea name="comentario" id="comentario" class="comentario" placeholder="Escribe una respuesta..." maxlength="400" required></textarea>
                                     <button type="submit" id="btnagregarComentario"  class="btn-submit btnagregarComentario"><i class="fas fa-paper-plane"></i> </button>
                                   </form>
-                                  <div id="info3" class="info3"></div>                              
+                                  <div id="info3" class="info3"></div>
                                 </div>
                               </li>
                             <?php endwhile; else: ?>
                               <li class="item-pregunta">
                                 <div class="box-preguntas">
                                   <?php if($busqueda != null) : ?>
-                                    <div class="preguntas">                                  
+                                    <div class="preguntas">
                                       <p class="pregunta"> No hay resultados de la búsqueda...</p> 
                                     </div>
                                   <?php else : ?>
-                                    <div class="preguntas">                                  
+                                    <div class="preguntas">
                                       <p class="pregunta"> No hay preguntas en está fase...</p> 
                                     </div>
-                                  <?php endif; ?>                           
-                                  
+                                  <?php endif; ?>
                                 </div>                              
                               </li>
                             <?php endif; ?>  
@@ -348,7 +346,7 @@
                 if(!empty($datos) && mysqli_num_rows($datos) >= 1):
                   while($dato = mysqli_fetch_assoc($datos)):
               ?>
-                <option value="<?=$dato['id']?>" >
+                <option value="<?=$dato['id']?>">
                   <?=$dato['nombre']?>								
                 </option>
               <?php endwhile; endif; ?>																
@@ -356,7 +354,7 @@
           </div>
           <div class="box-input w100">
             <label for="publicacion">Escribe aquí tu pregunta : </label>
-            <textarea name="publicacion" class="publicacion" id="publicacion" maxlength="500" required></textarea>
+            <textarea name="publicacion" class="publicacion" id="publicacion" maxlength="500" required ></textarea>
             <span class="counter-2 counterpublicacion">500 caracteres</span>
           </div>
           <div id="info2"></div>				
@@ -447,6 +445,13 @@
     // }
 
     $(document).ready(function(){    
+
+      // setInterval(
+      //   function(){
+      //     $(".postPreguntas").load("foros.php");
+      //     console.log("recarga");
+      //   }, 5000
+      // );
 
       $('.nuevaPregunta').click(function(e){
         console.log("click");

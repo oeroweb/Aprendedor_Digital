@@ -16,10 +16,10 @@
     $respuesta = mysqli_query($db,$sql);
           
     if($respuesta){
-      $_SESSION['completado'] = "<i class='icon ion-android-done'></i> El registro se creo de forma exitosa";	
+      $_SESSION['completado'] = '<i class="fas fa-check"></i> El registro se creo de forma exitosa';	
       header("Location: ../../admin-grupos.php");
     } else{
-      $_SESSION['fallo'] = "<i class='icon ion-alert'></i> Error al registrar; por favor volver a intentar";		
+      $_SESSION['fallo'] = '<i class="far fa-times-circle"></i> Error al registrar; por favor volver a intentar';		
       header("Location: ../../admin-grupos.php");
     }
   }

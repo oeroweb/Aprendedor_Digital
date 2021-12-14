@@ -123,7 +123,7 @@
                         <?php  else: ?>
                           <img src="assets/img/cursos/example.PNG" alt="">
                         <?php  endif; ?>
-                        <a href="clases.php?cu=<?=$curso['curso_id']?>&t=<?=$curso['token']?>" class="btn">Ir al curso</a>
+                        <a href="clases.php?cu=<?=$curso['curso_id']?>&t=<?=$curso['token']?>" class="btn">Entrar al Curso</a>
                       </div>
                       <?php else : ?>
                       <div class="item-clases bloqueado">
@@ -136,7 +136,7 @@
                         <?php  else: ?>
                           <img src="assets/img/cursos/example.PNG" alt="">
                         <?php endif; ?>
-                        <a href="clases.php?cu=<?=$curso['curso_id']?>&t=<?=$curso['token']?>" class="btn btn-gris">Ir al curso</a>
+                        <a href="clases.php?cu=<?=$curso['curso_id']?>&t=<?=$curso['token']?>" class="btn btn-gris">Entrar al Cursoo</a>
                       </div>
                     <?php endif;             
                       endwhile; endif; 
@@ -158,7 +158,7 @@
                         <?php else : ?>
                           <img src="assets/img/example_clases.jpg" alt="Imagen de la Clase <?=$clase['nombre']?>">
                         <?php endif ?>	
-                        <a href="clasesm.php?cl=<?=$clase['clase_id']?>&t=<?=$clase['token']?>" class="btn">Ir a la clase</a>
+                        <a href="clasesm.php?cl=<?=$clase['clase_id']?>&t=<?=$clase['token']?>" class="btn">Entrar a la Clase</a>
                       </div>                    
                       <?php else : ?> 
                         <div class="item-clases bloqueado">
@@ -172,7 +172,7 @@
                           <?php else : ?>
                             <img src="assets/img/example_clases.jpg" alt="Imagen de la Clase <?=$clase['nombre']?>">
                           <?php endif ?>	
-                          <a href="clasesm.php?cl=<?=$clase['clase_id']?>&t=<?=$clase['token']?>" class="btn btn-gris">Ir a la clase</a>
+                          <a href="clasesm.php?cl=<?=$clase['clase_id']?>&t=<?=$clase['token']?>" class="btn btn-gris">Entrar a la Clase</a>
                         </div>           
                       <?php endif;
                       endwhile; endif; 
@@ -215,8 +215,8 @@
                   <?php  else: ?>
                     <img src="assets/img/cursos/example.PNG" alt="">
                   <?php  endif; ?>
-                  <a href="clasesad.php?cu=<?=$curso['idCurso']?>" class="btn">Ir al curso</a>
-                  <!-- <a href="clases.php?cu=<?//=$curso['idCurso']?>&t=<?//=$curso['token']?>" class="btn">Ir al curso</a> -->
+                  <a href="clasesad.php?cu=<?=$curso['idCurso']?>" class="btn">Entrar al Curso</a>
+                  <!-- <a href="clases.php?cu=<?//=$curso['idCurso']?>&t=<?//=$curso['token']?>" class="btn">Inicio</a> -->
                 </div>                            
               <?php endwhile;
                 endif; ?>		               
@@ -232,8 +232,8 @@
                   <?php else : ?>
                     <img src="assets/img/example_clases.jpg" alt="Imagen de la Clase <?=$clase['nombre']?>">
                   <?php endif ?>	
-                  <a href="clasesadm.php?cl=<?=$clase['idClase']?>" class="btn">Ir a la clase</a>
-                  <!-- <a href="clasesm.php?cl=<?//=$clase['idClase']?>&t=<?//=$clase['token']?>" class="btn">Ir a la clase</a> -->
+                  <a href="clasesadm.php?cl=<?=$clase['idClase']?>" class="btn">Entrar a la Clase</a>
+                  <!-- <a href="clasesm.php?cl=<?//=$clase['idClase']?>&t=<?//=$clase['token']?>" class="btn">Inicio</a> -->
                 </div>      
               <?php endwhile;
                 endif; ?>		               

@@ -74,3 +74,20 @@ boxNotificacion = document.getElementById("boxNotificacion");
 btnNotificacion.addEventListener('click', () => {
   boxNotificacion.classList.toggle('active');
 });
+
+if(window.location.href.indexOf('clases') > -1){
+
+  (function guardar_url(){
+    //console.log('ruta', location.href);
+    const ruta = location.href;
+    localStorage.setItem("url", ruta);
+
+  })();
+
+  (function obtener_url(){
+    if(localStorage.getItem("url")){
+      const url_guardada = localStorage.getItem("url");
+      console.log("url_guardada -> ", localStorage.getItem("url"));
+    }
+  })();
+}

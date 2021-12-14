@@ -37,7 +37,7 @@
 					if(mysqli_affected_rows($db)>0){
 						$_SESSION['completado'] = "<i class='far fa-check-circle'></i> La foto subio de forma exitosa"; 
 					}else{
-						$_SESSION['fallo'] = "<i class='icon ion-alert'></i> No se completo la carga; por favor volver a intentar";
+						$_SESSION['fallo'] = '<i class="far fa-times-circle"></i> No se completo la carga; por favor volver a intentar';
 					}
 					header("Location: ../../perfil-edit.php");	
 				}else {
@@ -45,7 +45,7 @@
 				}	
 				header("Location: ../../perfil-edit.php");	
 			} else {
-				$_SESSION['fallo'] = "<i class='icon ion-alert'></i> La foto es demasiado grande, el tamaño maximo permitdo es 1 MB; por favor vuelva a intentar.";
+				$_SESSION['fallo'] = '<i class="far fa-times-circle"></i> La foto es demasiado grande, el tamaño maximo permitdo es 1 MB; por favor vuelva a intentar.';
 			}	
 			header("Location: ../../perfil-edit.php");	
 			 		

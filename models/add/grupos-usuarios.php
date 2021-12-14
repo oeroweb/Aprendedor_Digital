@@ -14,9 +14,9 @@
     $respuesta = mysqli_query($db, $sql);
 
     if($respuesta){
-      $_SESSION['completado'] = "<i class='icon ion-android-done'></i> Se añadieron los usuarios correctamente";
+      $_SESSION['completado'] = '<i class="fas fa-check"></i> Se añadieron los usuarios correctamente';
     }else{
-      $_SESSION['fallo'] = "<i class='icon ion-alert'></i> Error! No se completo el registro";
+      $_SESSION['fallo'] = '<i class="far fa-times-circle"></i> Error! No se completo el registro';
     }
   } 
 

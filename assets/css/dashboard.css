@@ -12,6 +12,7 @@
   width: 240px;
   background: #0A2558;
   transition: all 0.5s ease;
+  min-height: 500px;  
 }
 .sidebar.active{
   width: 60px;
@@ -533,14 +534,26 @@ nav .profile-details .box-notificacion{
 }
 @media (max-width: 700px) {
   nav .sidebar-button .dashboard,
-  nav .profile-details .admin_name span
-  {
+  nav .profile-details .admin_name span{
     display: none;
   }
   .home-section nav .profile-details{
     height: 50px;
     min-width: 40px;
   }
+  nav .profile-details .box-perfil{
+    left: -136px; 
+  }
+  nav .profile-details .box-perfil::before{
+    left: 160px; 
+  }
+  .box-notificacion .box-perfil2{
+    left: -166px;    
+  }
+  .box-notificacion .box-perfil2::before{
+    left: 180px;
+  }
+
   .home-content .sales-boxes .sales-details{
     width: 560px;
   }

@@ -21,8 +21,7 @@
 
   <!---------------- estilos ---------------->
   <link rel="stylesheet" href="assets/css/dashboard.css">
-  <link rel="stylesheet" href="assets/css/eapdstyles.css">
-  
+  <link rel="stylesheet" href="assets/css/eapdstyles.css">  
   <link rel="stylesheet" href="assets/css/css/all.min.css">
   <link rel="stylesheet" type="text/css" href="assets/css/datatables.min.css"/>
 

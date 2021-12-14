@@ -37,6 +37,10 @@ $(document).ready(function(){
   //   counter.innerText = maxlength - input.value.length;
   // }
 
+  // CERRAR MODAL
+	$(".fa-times").click(function(){
+		$("#modalBienvenida").slideToggle(2000);
+	});
 
 });
   

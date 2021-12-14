@@ -47,6 +47,8 @@
 		$usuario = mysqli_query($conexion, $sql);
 		if($usuario && mysqli_num_rows($usuario) >=1){
 			$resultado = $usuario;
+		}else{
+			$resultado = '';
 		}
 		return $resultado;
 	}
@@ -58,6 +60,8 @@
 		$datos = mysqli_query($conexion, $sql);
 		if($datos && mysqli_num_rows($datos) >=1){
 			$resultado = $datos;
+		}else{
+			$resultado = '';
 		}
 		return $resultado;
 	}
@@ -69,6 +73,8 @@
 		$datos = mysqli_query($conexion, $sql);
 		if($datos && mysqli_num_rows($datos) >=1){
 			$resultado = $datos;
+		}else{
+			$resultado = '';
 		}
 		return $resultado;
 	}
@@ -80,6 +86,8 @@
 		$datos = mysqli_query($conexion, $sql);
 		if($datos && mysqli_num_rows($datos) >=1){
 			$resultado = $datos;
+		}else{
+			$resultado = '';
 		}
 		return $resultado;
 	}
@@ -91,9 +99,25 @@
 		$datos = mysqli_query($conexion, $sql);
 		if($datos && mysqli_num_rows($datos) >=1){
 			$resultado = $datos;
+		}else{
+			$resultado = '';
 		}
 		return $resultado;
 	}
+
+	// OBTENER Config Global por usuario_id / footer
+	function obtenerConfigGlobal($conexion, $tabla, $id){
+		$sql = "SELECT * FROM $tabla where usuario_id = $id";
+
+		$datos = mysqli_query($conexion, $sql);
+		if($datos && mysqli_num_rows($datos) >=1){
+			$resultado = $datos;
+		}else{
+			$resultado = '';
+		}
+		return $resultado;
+	}
+
 	
 	// obtener por grupo_id - grupos content
 	function selecttogrupoId($conexion, $tabla, $id){
@@ -102,6 +126,8 @@
 		$datos = mysqli_query($conexion, $sql);
 		if($datos && mysqli_num_rows($datos) >=1){
 			$resultado = $datos;
+		}else{
+			$resultado = '';
 		}
 		return $resultado;
 	}
@@ -112,6 +138,8 @@
 		$datos = mysqli_query($conexion, $sql);
 		if($datos && mysqli_num_rows($datos) >=1){
 			$resultado = $datos;
+		}else{
+			$resultado = '';
 		}
 		return $resultado;
 	}
@@ -123,6 +151,8 @@
 		$datos = mysqli_query($conexion, $sql);
 		if($datos && mysqli_num_rows($datos) >=1){
 			$resultado = $datos;
+		}else{
+			$resultado = '';
 		}
 		return $resultado;
 	}
@@ -137,6 +167,8 @@
 		$datos = mysqli_query($conexion, $sql);
 		if($datos && mysqli_num_rows($datos) >=1){
 			$resultado = $datos;
+		}else{
+			$resultado = '';
 		}
 		return $resultado;
 	}
@@ -150,6 +182,8 @@
 		$datos = mysqli_query($conexion, $sql);
 		if($datos && mysqli_num_rows($datos) >=1){
 			$resultado = $datos;
+		}else{
+			$resultado = '';
 		}
 		return $resultado;
 	}
@@ -165,6 +199,8 @@
 		$datos = mysqli_query($conexion, $sql);
 		if($datos && mysqli_num_rows($datos) >=1){
 			$resultado = $datos;
+		}else{
+			$resultado = '';
 		}
 		return $resultado;
 	}
@@ -179,6 +215,8 @@
 		$datos = mysqli_query($conexion, $sql);
 		if($datos && mysqli_num_rows($datos) >=1){
 			$resultado = $datos;
+		}else{
+			$resultado = '';
 		}
 		return $resultado;
 	}
@@ -192,6 +230,8 @@
 		$datos = mysqli_query($conexion, $sql);
 		if($datos && mysqli_num_rows($datos) >=1){
 			$resultado = $datos;
+		}else{
+			$resultado = '';
 		}
 		return $resultado;
 	}
@@ -210,6 +250,8 @@
 		$datos = mysqli_query($conexion, $sql);
 		if($datos && mysqli_num_rows($datos) >=1){
 			$resultado = $datos;
+		}else{
+			$resultado = '';
 		}
 		return $resultado;
 	}
@@ -221,6 +263,8 @@
 		$datos = mysqli_query($conexion, $sql);
 		if($datos && mysqli_num_rows($datos) >=1){
 			$resultado = $datos;
+		}else{
+			$resultado = '';
 		}
 		return $resultado;
 	}
@@ -232,6 +276,8 @@
 		$datos = mysqli_query($conexion, $sql);
 		if($datos && mysqli_num_rows($datos) >=1){
 			$resultado = $datos;
+		}else{
+			$resultado = '';
 		}
 		return $resultado;
 	}
@@ -245,6 +291,8 @@
 		$datos = mysqli_query($conexion, $sql);
 		if($datos && mysqli_num_rows($datos) >=1){
 			$resultado = $datos;
+		}else{
+			$resultado = '';
 		}
 		return $resultado;
 	}
@@ -259,6 +307,8 @@
 		$datos = mysqli_query($conexion, $sql);
 		if($datos && mysqli_num_rows($datos) >=1){
 			$resultado = $datos;
+		}else{
+			$resultado = '';
 		}
 		return $resultado;
 	}
@@ -273,6 +323,8 @@
 		$datos = mysqli_query($conexion, $sql);
 		if($datos && mysqli_num_rows($datos) >=1){
 			$resultado = $datos;
+		}else{
+			$resultado = '';
 		}
 		return $resultado;
 	}
@@ -292,6 +344,8 @@
 		$datos = mysqli_query($conexion, $sql);
 		if($datos && mysqli_num_rows($datos) >=1){
 			$resultado = $datos;
+		}else{			
+			$resultado = '';
 		}
 		return $resultado;
 	}
@@ -311,6 +365,8 @@
 		$datos = mysqli_query($conexion, $sql);
 		if($datos && mysqli_num_rows($datos) >=1){
 			$resultado = $datos;
+		}else{			
+			$resultado = '';
 		}
 		return $resultado;
 	}
@@ -332,6 +388,8 @@
 		$datos = mysqli_query($conexion, $sql);
 		if($datos && mysqli_num_rows($datos) >=1){
 			$resultado = $datos;
+		}else{
+			$resultado = '';
 		}
 		return $resultado;
 	}
@@ -353,6 +411,8 @@
 		$datos = mysqli_query($conexion, $sql);
 		if($datos && mysqli_num_rows($datos) >=1){
 			$resultado = $datos;
+		}else{
+			$resultado = '';
 		}
 		return $resultado;
 	}
@@ -375,6 +435,8 @@
 		$datos = mysqli_query($conexion, $sql);
 		if($datos && mysqli_num_rows($datos) >=1){
 			$resultado = $datos;
+		}else{
+			$resultado = '';
 		}
 		return $resultado;
 	}
@@ -397,6 +459,8 @@
 		$datos = mysqli_query($conexion, $sql);
 		if($datos && mysqli_num_rows($datos) >=1){
 			$resultado = $datos;
+		}else{
+			$resultado = '';
 		}
 		return $resultado;
 	}
@@ -408,6 +472,8 @@
 		$datos = mysqli_query($conexion, $sql);
 		if($datos && mysqli_num_rows($datos) >=1){
 			$resultado = $datos;
+		}else{
+			$resultado = '';
 		}
 		return $resultado;
 	}
@@ -422,6 +488,8 @@
 		$datos = mysqli_query($conexion, $sql);
 		if($datos && mysqli_num_rows($datos) >=1){
 			$resultado = $datos;
+		}else{
+			$resultado = '';
 		}
 		return $resultado;
 	}
@@ -440,6 +508,8 @@
 		$datos = mysqli_query($conexion, $sql);
 		if($datos && mysqli_num_rows($datos) >=1){
 			$resultado = $datos;
+		}else{
+			$resultado = '';
 		}
 		return $resultado;
 	}
@@ -459,6 +529,8 @@
 		$datos = mysqli_query($conexion, $sql);
 		if($datos && mysqli_num_rows($datos) >=1){
 			$resultado = $datos;
+		}else{
+			$resultado = '';
 		}
 		return $resultado;
 	}
@@ -475,6 +547,8 @@
 		$datos = mysqli_query($conexion, $sql);
 		if($datos && mysqli_num_rows($datos) >=1){
 			$resultado = $datos;
+		}else{
+			$resultado = '';
 		}
 		return $resultado;
 	}
@@ -490,6 +564,8 @@
 		$datos = mysqli_query($conexion, $sql);
 		if($datos && mysqli_num_rows($datos) >=1){
 			$resultado = $datos;
+		}else{
+			$resultado = '';
 		}
 		return $resultado;
 	}
@@ -508,6 +584,8 @@
 		$datos = mysqli_query($conexion, $sql);
 		if($datos && mysqli_num_rows($datos) >=1){
 			$resultado = $datos;
+		}else{
+			$resultado = '';
 		}
 		return $resultado;
 	}
@@ -522,6 +600,8 @@
 		$datos = mysqli_query($conexion, $sql);
 		if($datos && mysqli_num_rows($datos) >=1){
 			$resultado = $datos;
+		}else{
+			$resultado = '';
 		}
 		return $resultado;
 	}
@@ -536,43 +616,101 @@
 			$sql .= " where fase_id = $fase_id AND p.estado_id = 1 and p.publicacion LIKE '%$busqueda%'";
 		}else{
 			$sql .= " WHERE fase_id = $fase_id AND p.estado_id = 1";
-		}
+		}		
 		
 		$sql .=" ORDER BY p.idpublicacion DESC";
-
-		//echo $sql;
-		//die();
-
 
 		$datos = mysqli_query($conexion, $sql);
 		if($datos && mysqli_num_rows($datos) >=1){
 			$resultado = $datos;
+		}else{
+			$resultado = '';
+		}
+		return $resultado;
+	}	
+	
+	function mostarplublicacionesxfasespublicacionid($conexion, $tabla, $tabla2, $fase_id, $publicacion_id = null ){
+		$sql = "SELECT *, p.fechacreacion as 'fechapublicacion' FROM $tabla p 
+		INNER JOIN $tabla2 u 
+		on p.usuario_id = u.id";
+
+		if(!empty($publicacion_id)){
+		 	$sql .= " where fase_id = $fase_id AND p.estado_id = 1 and p.idpublicacion = $publicacion_id";		
+		 }else{
+			 $sql .= " WHERE fase_id = $fase_id AND p.estado_id = 1";
+		 }	
+		
+		$sql .=" ORDER BY p.idpublicacion DESC";
+		//echo $sql; die();
+
+		$datos = mysqli_query($conexion, $sql);
+		if($datos && mysqli_num_rows($datos) >=1){
+			$resultado = $datos;
+		}else{
+			$resultado = '';
 		}
 		return $resultado;
 	}	
 
-	// TRAER TODAS LOS COMENTARIOS
-	function mostarcomentariosxpublicacione($conexion, $tabla, $tabla2, $publicacion_id ){
+	// TRAER TODAS LOS COMENTARIOS con LIMIT
+	function mostarcomentariosxpublicacionelimit($conexion, $tabla, $tabla2, $publicacion_id){
 		$sql = "SELECT * FROM $tabla c 
 		INNER JOIN $tabla2 u
 		on c.usuario_id = u.id
 		WHERE publicacion_id = $publicacion_id and c.estado_id = 1
-		ORDER by idcomentario DESC";
+		ORDER by idcomentario DESC Limit 4"; 		
 
 		$datos = mysqli_query($conexion, $sql);
 		if($datos && mysqli_num_rows($datos) >=1){
 			$resultado = $datos;
+		}else{
+			$resultado = '';
+		}
+		return $resultado;
+	}
+
+	// TRAER TODAS LOS COMENTARIOS
+	function mostarcomentariosxpublicacione($conexion, $tabla, $tabla2, $publicacion_id){
+		$sql = "SELECT * FROM $tabla c 
+		INNER JOIN $tabla2 u
+		on c.usuario_id = u.id
+		WHERE publicacion_id = $publicacion_id and c.estado_id = 1
+		ORDER by idcomentario DESC"; 		
+
+		$datos = mysqli_query($conexion, $sql);
+		if($datos && mysqli_num_rows($datos) >=1){
+			$resultado = $datos;
+		}else{
+			$resultado = '';
 		}
 		return $resultado;
 	}	
 
-	// OBTENER DATOS ACTIVO por id
+	// OBTENER Publicacion ACTIVO 
 	function obtenerpublicacionactivo($conexion, $tabla, $id){
 		$sql = "SELECT * FROM $tabla where idpublicacion = $id and estado_id = 1";
 
 		$datos = mysqli_query($conexion, $sql);
 		if($datos && mysqli_num_rows($datos) >=1){
 			$resultado = $datos;
+		}else{
+			$resultado = '';
+		}
+		return $resultado;
+	}
+	
+	// OBTENER Notificciones  
+	function listarNotificacionesNoLeidasporUsuario($conexion, $tabla, $tabla2, $usuario_id){
+		$sql = "SELECT * FROM $tabla n 
+		INNER JOIN $tabla2 u 
+		on n.usuario_comentario = u.id
+		WHERE n.leido_id = 6 and usuario_publicion = $usuario_id";
+
+		$datos = mysqli_query($conexion, $sql);
+		if($datos && mysqli_num_rows($datos) >=1){
+			$resultado = $datos;
+		}else{
+			$resultado = '';
 		}
 		return $resultado;
 	}
