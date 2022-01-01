@@ -136,7 +136,7 @@
                         <?php  else: ?>
                           <img src="assets/img/cursos/example.PNG" alt="">
                         <?php endif; ?>
-                        <a href="clases.php?cu=<?=$curso['curso_id']?>&t=<?=$curso['token']?>" class="btn btn-gris">Entrar al Cursoo</a>
+                        <a href="clases.php?cu=<?=$curso['curso_id']?>&t=<?=$curso['token']?>" class="btn btn-gris">Entrar al Curso</a>
                       </div>
                     <?php endif;             
                       endwhile; endif; 

@@ -14,8 +14,9 @@
 		$apeMaterno = isset($_POST['apematerno']) ? mysqli_real_escape_string($db,$_POST['apematerno']) : false;
 		$descripcion = isset($_POST['descripcion']) ? $_POST['descripcion'] : false; 		
 		$docident= isset($_POST['docident']) ? $_POST['docident'] : false;
-		$edad= isset($_POST['edad']) ? $_POST['edad'] : false;
 		$sexo= isset($_POST['sexo']) ? $_POST['sexo'] : false;
+		$edad= isset($_POST['edad']) ? $_POST['edad'] : false;
+		$nickname= isset($_POST['nickname']) ? $_POST['nickname'] : false;
 		$fecnac = isset($_POST['fecnac']) ? $_POST['fecnac'] : false;
 		$celular = isset($_POST['celular']) ? $_POST['celular'] : false;
 		$clave = isset($_POST['clave']) ? $_POST['clave'] : false;
@@ -114,7 +115,7 @@
 			}
 			
 			
-			$sql="UPDATE usuarios SET institucion_id=$institucion, nombre='$nombre', ape_paterno='$apePaterno', ape_materno='$apeMaterno', doc_identidad=$docident, sexo_id= $sexo, fec_nacimiento='$fecnac', celular='$celular', descripcion='$descripcion', proposito='$proposito', interes='$interes', profesion='$profesion', nivel_profesional='$profesional', nicho_mercado='$nicho', redes_facebook='$redes_facebook', redes_instagran='$redes_instagran', redes_linkedin='$redes_linkedin', pais='$pais', nacionalidad='$nacionalidad', localidad='$localidad', direccion= '$direccion', fechamodificacion=NOW(), usuario='$usuario', carpeta = '$carpeta', archivo='$subir_archivo' WHERE id = $id";
+			$sql="UPDATE usuarios SET institucion_id=$institucion, nombre='$nombre', ape_paterno='$apePaterno', ape_materno='$apeMaterno', nickname='$nickname',doc_identidad=$docident, sexo_id= $sexo, fec_nacimiento='$fecnac', edad=$edad, celular='$celular', descripcion='$descripcion', proposito='$proposito', interes='$interes', profesion='$profesion', nivel_profesional='$profesional', nicho_mercado='$nicho', redes_facebook='$redes_facebook', redes_instagran='$redes_instagran', redes_linkedin='$redes_linkedin', pais='$pais', nacionalidad='$nacionalidad', localidad='$localidad', direccion= '$direccion', fechamodificacion=NOW(), usuario='$usuario', carpeta = '$carpeta', archivo='$subir_archivo' WHERE id = $id";
 
 			$guardar = mysqli_query($db,$sql);	
 					

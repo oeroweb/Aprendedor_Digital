@@ -118,7 +118,7 @@
 					</select>									
 				</div>		
 				<div class="w50 box-input mg-bt20">
-					<label class="" for="email">Correo:</label>
+					<label class="" for="email">Correo: <span class="font-light">(no se permite cambiar)</span></label>
 					<input class="" type="email" name="email" id="email" readonly>		
 				</div>											
 				<div class="w50 box-input">
@@ -262,7 +262,7 @@
 						$("#info").html("<div class='alerta-exito'><i class='ico icon ion-android-done'></i>Se actualizarón los datos con exito!</div>");		
 						$("#info").fadeOut(5000, function(){
 							$(this).html("");
-							$(this).fadeIn(3000);
+							$(this).fadeIn(2000);
 						});						
 						cerrarmodal();
 						refresh();										
@@ -270,7 +270,7 @@
 					$("#info").html("<div class='alerta-error'><i class='ico icon ion-alert'></i>Hubo un error en el proceso por favor volver a probar!!</div>");
 					$("#info").fadeOut(5000, function(){
 						$(this).html("");
-						$(this).fadeIn(3000);
+						$(this).fadeIn(2000);
 						});
 					cerrarmodal();	
 					}							

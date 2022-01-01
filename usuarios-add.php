@@ -8,8 +8,8 @@
 <body>
   <?php include 'layout/aside.php'; ?>
   <section class="home-section">
-    <?php include 'layout/perfil.php';?>
-    
+    <?php include 'layout/perfil.php';?>    
+		
     <div class="home-content">
 			<div class="center ">				
 				<div class="box-titles">
@@ -27,7 +27,7 @@
 						<?=$_SESSION['fallo']?>
 					</div>
 				<?php endif; ?> 
-
+				<div class="box-message" id="info"></div>
 				<div class="container-wrap w100">		
 					<form action="models/add/usuarios-add.php" class="box-formulario" id="" method="post">
 						<?php for($i = 1; $i <= $number; $i++): ?>	
@@ -54,8 +54,8 @@
 								</div>
 								<div class="box-input w25">
 									<label for="email">Correo: </label>										
-									<input class="" type="email" name="email[]" maxlength="80" required>
-									<?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'], 'email') : ''; ?>
+									<input id="email<?=$i?>" type="email" name="email[]" maxlength="80" required>
+									<?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'], 'email') : ''; ?>									
 								</div>
 								<div class="box-input w25">
 									<label for="password">Contraseña:</label>
@@ -125,9 +125,9 @@
 							<hr class="w100">						
 						<?php endfor;	?>
 						<?php if($number > 1 ): ?>      							
-							<input type="submit" value="Añadir Usuarios" class="btn" name="anadirusuarios">
+							<input type="submit" value="Añadir Usuarios" class="btn" name="anadirusuarios" id="anadirusuarios">
 							<?php else : ?>	
-								<input type="submit" value="Añadir Usuario" class="btn" name="anadirusuarios">
+								<input type="submit" value="Añadir Usuario" class="btn" name="anadirusuarios" id="anadirusuarios">
 						<?php endif; ?>
 					</form>	
 										
@@ -143,5 +143,43 @@
 </main>
 
 <script>
-	
+	for(var i = 1; i <= <?=$number?>; i++){		
+		
+		$("#email"+i).on("keyup", function(){			
+			var email = $(this).val();
+			var correolength = $(this).val().length;
+
+			if(correolength >= 6 ){
+				var dataString = 'email='+ email;			
+				$.ajax({
+					url: 'models/searchs/verificarEmail.php',
+					type: "GET",
+					data: dataString,
+					dataType: "JSON",
+					success: function(respuesta){
+						if(respuesta.success == 1){												
+							$("#info").html(respuesta.message);
+							$("#info").fadeOut(10000, function(){
+								$(this).html("");
+								$(this).fadeIn(5000);
+							});							
+							//$("#nickname").css("border-color","red");
+							$("#anadirusuarios").addClass("btn-none");
+							$("#anadirusuarios").attr('disabled',true);
+						}else{							
+							$("#info").html(respuesta.message);							
+							//$("#nickname").css("border-color","rgba(28, 117, 188, 0.5)");
+							$("#anadirusuarios").removeClass("btn-none");
+							$("#anadirusuarios").attr('disabled',false); 
+						}
+					}
+				});
+
+			}
+				
+
+		});
+		
+	}
+
 </script>

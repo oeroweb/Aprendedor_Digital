@@ -226,7 +226,6 @@
                                         $comentarios = mostarcomentariosxpublicacione($db, 'comentarios','usuarios', $publicacion['idpublicacion']);
                                         $cantComentarios = mysqli_num_rows($comentarios);
                                         //echo 'IF -> '. $cantComentarios;
-
                                         if(!empty($comentarios) && $cantComentarios >= 1):
                                           while($comentario = mysqli_fetch_assoc($comentarios)): 
                                         ?>
@@ -326,7 +325,7 @@
     <!-- hom-content -->
   </section>
 
-  
+  Warning: mysqli_num_rows() expects parameter 1 to be mysqli_result, string given in C:\wamp64\www\PAGAprendedor\escuela\foros.php on line 251
   
  
 <!-- ----- MODAL 1 ----- -->

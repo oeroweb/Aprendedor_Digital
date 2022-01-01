@@ -26,7 +26,7 @@
 					</div>				
 				<?php endif; ?> 
 
-				<div class="container-wrap mg-auto w100">
+				<div class="container-wrap mg-auto w80">
 					<div class="inner-content w40">	
 						<?php 
 							$perfiles = obtenerdatos($db, 'usuarios', $_SESSION['sesion_aprenDigital']['id']);        
@@ -35,8 +35,7 @@
 						?>  			
 							<?php if($perfil['imagen'] != null): ?> 
 								<div class="box-image">
-									<img class="img-perfil" src="assets/files/<?php echo $perfil['carpeta_img'].'/'.$perfil['imagen']; ?>" alt="Foto de Perfil">							
-
+									<img class="img-perfil" src="assets/files/<?php echo $perfil['carpeta_img'].'/'.$perfil['imagen']; ?>" alt="Foto de Perfil">
 								</div>
 							<?php else : ?>
 								<div class="box-image">
@@ -74,7 +73,7 @@
 
 					<div class="inner-content mg-bt20 w100">					
 						<?php 
-								$perfiles = obtenerdatos($db, 'usuarios', $_SESSION['sesion_aprenDigital']['id']);        
+								$perfiles = obtenerUsuariosPorId($db, 'usuarios', $_SESSION['sesion_aprenDigital']['id']);        
 								if(!empty($perfiles) && mysqli_num_rows($perfiles) >= 1):
 									while($perfil = mysqli_fetch_assoc($perfiles)):  
 						?> 						
@@ -130,13 +129,14 @@
 										<label for="fecnac">Fecha Nacimiento: </label>	
 										<input class="w100" type="date" name="fecnac" value="<?php echo $perfil['fec_nacimiento'] ?>" required>
 										<?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'], 'fecnac') : ''; ?>
-									</div>	
+										<input class="w100" type="hidden" name="edad" value="<?=$perfil['calculaedad']?>" readonly>
+									</div>
 									<div class="box-input">
 										<label for="">Celular / Whatapp: </label>				
 										<input class="w100" type="text" name="celular" value="<?php echo $perfil['celular']; ?>">
 									</div>
 									<div class="box-input">
-										<label for="email">Correo (No se puede cambiar): </label>			
+										<label for="email">Correo: <span class="font-light">(no se permite cambiar)</span> </label>			
 										<input class="w100" type="email" name="email" value="<?php echo $perfil['email']; ?>" readonly>
 									</div>
 									<div class="box-input">
@@ -154,7 +154,7 @@
 											endwhile;
 										endif;
 										?>																
-										</select>									
+										</select>
 									</div>
 									<div class="box-input">
 										<label for="pais">Pais: </label>								
@@ -174,7 +174,13 @@
 										<input class="w100" type="text" name="direccion" value="<?php echo $perfil['direccion']; ?>">
 									</div>
 								</div>
+
 								<div class="w50">
+									<div class="box-input ">
+										<label for="redes">Usuario: <span class="font-light">(@nombreusuario) </span> </label>			
+										<input class="w100" type="text" name="nickname" id="nickname" placeholder="@usuario" value="<?=$perfil['nickname']; ?>">
+										<div id="info"></div>
+									</div>
 									<div class="box-input ">
 										<label for="redes">URL de tu cuenta de Facebook: </label>			
 										<input class="w100" type="url" name="redes_facebook" value="<?php echo $perfil['redes_facebook']; ?>">
@@ -185,7 +191,7 @@
 									</div>
 									<div class="box-input ">
 										<label for="redes">URL de tu cuenta de Linkedin: </label>			
-										<input class="w100" type="url" name="redes_linkedin" value="<?php echo $perfil['redes_linkedin']; ?>">
+										<input class="w100" type="url" name="redes_linkedin" value="<?php echo $perfil['redes_linkedin']; ?>">										
 									</div>
 									<div class="box-input">
 										<label for="profesion">Profesión: </label>			
@@ -236,7 +242,7 @@
 								?>
 							</div>					
 							<!-- <a href="#" class="btn btn-azul" id="mostrarinput" title="Editar Perfil"><i class='icon ion-edit'></i></a> -->
-							<input type="submit" value="Actualizar Datos" class="btn" name="editarallperfil" id="" >				
+							<input type="submit" value="Actualizar Datos" class="btn" name="editarallperfil" id="editarallperfil" >				
 							
 						</form>						
 					</div>
@@ -253,3 +259,39 @@
 	<?php include 'layout/footer.php'; ?>
 </div>
 </main>
+
+<script>
+	$("#nickname").on("keyup", function(){
+		var nickname = $("#nickname").val();
+		var nicknamelenght = $("#nickname").val().length;
+
+		if(nicknamelenght >= 3 ){
+
+			var dataString = 'nickname='+ nickname;
+
+			$.ajax({
+				url: 'models/searchs/verificarNickname.php',
+				type: "GET",
+				data: dataString,
+				dataType: "JSON",
+				success: function(respuesta){
+					if(respuesta.success == 1){
+						$("#info").html(respuesta.message);						
+						$("#nickname").focus();
+						$("#nickname").css("border-color","red");
+						$("#editarallperfil").addClass("btn-none");
+						$("#editarallperfil").attr('disabled',true);
+					}else{
+						$("#info").html(respuesta.message);
+						$("#nickname").css("border-color","rgba(28, 117, 188, 0.5)");
+						$("#editarallperfil").removeClass("btn-none");
+						$("#editarallperfil").attr('disabled',false); 
+					}
+				}
+
+			});
+
+		}
+	});
+
+</script>

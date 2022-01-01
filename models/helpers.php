@@ -52,6 +52,18 @@
 		}
 		return $resultado;
 	}
+
+	function obtenerUsuariosPorId($conexion, $tabla, $id){		
+		$sql = "SELECT *, year(now()) as Año, year(CURDATE())-YEAR(fec_nacimiento)+ IF(DATE_FORMAT(CURDATE(),'%m-%d') > DATE_FORMAT(fec_nacimiento,'%m-%d'),0,-1) AS calculaedad FROM $tabla where id = $id";
+
+		$usuario = mysqli_query($conexion, $sql);
+		if($usuario && mysqli_num_rows($usuario) >=1){
+			$resultado = $usuario;
+		}else{
+			$resultado = '';
+		}
+		return $resultado;
+	}
 	
 	// OBTENER DATOS por id
 	function obtenerdatos($conexion, $tabla, $id){
@@ -571,13 +583,13 @@
 	}
 
 	// TRAER CURSO COMPLETO
-	function mostarcursoscompleto($conexion, $curso_id, $usuario_id){
-		$sql = "SELECT guc.id as 'grupousuarioscurso_id', guc.usuario_id, guc.curso_id, guc.token, c.nombre as 'nombrecurso', c.imagen as 'imagencurso', cc.nombre as 'nombrecapitulo', cc.descripcion as 'descripcioncapitulo', ccd.id as 'cursoContenidoDetale_id', ccd.* FROM grupos_usuarios_cursos guc
-		INNER JOIN cursos c 
+	function mostarcursoscompleto($conexion, $tabla, $tabla2, $tabla3, $tabla4, $usuario_id, $curso_id){
+		$sql = "SELECT guc.id as 'grupousuarioscurso_id', guc.usuario_id, guc.curso_id, guc.token, c.nombre as 'nombrecurso', c.imagen as 'imagencurso', cc.nombre as 'nombrecapitulo', cc.descripcion as 'descripcioncapitulo', ccd.id as 'cursoContenidoDetale_id', ccd.* FROM $tabla guc
+		INNER JOIN $tabla2 c 
 		ON guc.curso_id = c.id
-		INNER JOIN cursos_contenido cc 
+		INNER JOIN $tabla3 cc 
 		on c.id = cc.curso_id
-		INNER JOIN cursos_contenido_detalle ccd
+		INNER JOIN $tabla4 ccd
 		on cc.id = ccd.cursoContenido_id
 		WHERE guc.usuario_id = $usuario_id and guc.curso_id = $curso_id";
 
@@ -605,6 +617,20 @@
 		}
 		return $resultado;
 	}
+
+	// OBTENER ESTADO DE CURSOS ACTIVOS por usuario_id Y cursos -- clases
+	function obtenerdatosusuariosycurosenproceso($conexion, $tabla, $usuario_id, $curso_id){
+		$sql = "SELECT * FROM $tabla where usuario_id = $usuario_id and curso_id = $curso_id";
+
+		$datos = mysqli_query($conexion, $sql);
+		if($datos && mysqli_num_rows($datos) >=1){
+			$resultado = $datos;
+		}else{
+			$resultado = '';
+		}
+		return $resultado;
+	}
+
 
 	// TRAER TODAS LAS PUBLICACIONES POR FASES
 	function mostarplublicacionesxfases($conexion, $tabla, $tabla2, $fase_id, $busqueda = null ){
@@ -664,7 +690,7 @@
 		if($datos && mysqli_num_rows($datos) >=1){
 			$resultado = $datos;
 		}else{
-			$resultado = '';
+			$resultado = 0;
 		}
 		return $resultado;
 	}
