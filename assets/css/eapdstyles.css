@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /**************************************
 ***            VARIABLES             ****
 ***************************************/
@@ -237,8 +238,16 @@ body {
   margin-bottom: 50px;
 }
 
+.mg-lt5 {
+  margin-left: 5px;
+}
+
 .mg-lt10 {
   margin-left: 10px;
+}
+
+.mg-rg5 {
+  margin-right: 5px;
 }
 
 .mg-auto {
@@ -268,6 +277,11 @@ body {
 
 .mostrar {
   display: block;
+}
+
+.overflowh {
+  overflow: hidden;
+  height: 100vh;
 }
 
 hr {
@@ -309,6 +323,97 @@ hr {
   visibility: visible;
   }
 */
+/**************************************
+***            LOADER             ****
+***************************************/
+.loader {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 100vh;
+  z-index: 150;
+  background: #fff;
+}
+
+.preloader {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, transparent, transparent 40%, #1c75bc);
+  -webkit-animation-name: girar;
+          animation-name: girar;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+}
+
+.preloader:before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  right: 6px;
+  bottom: 6px;
+  background: #fff;
+  border-radius: 50%;
+  z-index: 100;
+}
+
+.preloader:after {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  background: #fff;
+  border-radius: 50%;
+  background: linear-gradient(45deg, transparent, transparent 40%, #0A2558);
+  z-index: 100;
+  z-index: 1;
+  -webkit-filter: blur(10px);
+          filter: blur(10px);
+}
+
+@-webkit-keyframes girar {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+    -webkit-filter: hue-rotate(0deg);
+            filter: hue-rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+    -webkit-filter: hue-rotate(360deg);
+            filter: hue-rotate(360deg);
+  }
+}
+
+@keyframes girar {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+    -webkit-filter: hue-rotate(0deg);
+            filter: hue-rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+    -webkit-filter: hue-rotate(360deg);
+            filter: hue-rotate(360deg);
+  }
+}
+
 /**************************************
 ***            BOTONES             ****
 ***************************************/
@@ -442,13 +547,23 @@ hr {
   text-decoration: underline;
 }
 
-.btn-submit {
-  padding: 24px 34px;
+.btn-submit2 {
+  padding: 16px 20px;
   font-size: 20px;
 }
 
 .btn-none {
   cursor: no-drop;
+}
+
+.isDisabled {
+  background: #5a5a5a;
+  color: #a6a6a6;
+  cursor: no-drop;
+  opacity: 0.5;
+  text-decoration: none;
+  pointer-events: none;
+  border-color: #5a5a5a;
 }
 
 /**************************************
@@ -665,11 +780,6 @@ hr {
 
 .box-formulario hr {
   background-color: #1c75bc;
-}
-
-.box-formulario .btn-submit {
-  padding: 24px 34px;
-  font-size: 24px;
 }
 
 .box-formulario .btn {
@@ -1735,6 +1845,10 @@ hr {
   margin: auto;
 }
 
+.home-content .grupos-content-grupos .box-botones .btn {
+  margin: 5px;
+}
+
 .home-content .grupos-content-grupos .box-tabla {
   padding: 14px 10px;
   border-radius: 20px 20px 0 0;
@@ -2503,12 +2617,14 @@ hr {
 }
 
 .portal-clases .inner-portal-clases .list-cursos .accordion .content-accordion-clases .box-label .title {
-  font-size: 20px;
+  font-size: 17px;
 }
 
 .portal-clases .inner-portal-clases .list-cursos .accordion .content-accordion-clases .inner-content-accordion {
   position: relative;
-  font-size: 16px;
+  font-size: 13px;
+  font-weight: 400;
+  text-transform: uppercase;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -2523,10 +2639,16 @@ hr {
 }
 
 .portal-clases .inner-portal-clases .list-cursos .accordion .content-accordion-clases .inner-content-accordion input {
-  margin-right: 6px;
+  margin-right: 10px;
+  width: 16px;
+  height: 16px;
 }
 
 .portal-clases .inner-portal-clases .list-cursos .accordion .content-accordion-clases .inner-content-accordion:hover {
+  background-color: #8a191d;
+}
+
+.portal-clases .inner-portal-clases .list-cursos .accordion .content-accordion-clases .concluido {
   background-color: #8a191d;
 }
 
@@ -2537,17 +2659,72 @@ hr {
   transition: all .3s ease;
 }
 
-.portal-clases .inner-portal-clases .content-media video {
-  width: 100%;
-}
-
 .portal-clases .inner-portal-clases .content-media .box-video {
   width: 100%;
-  text-align: center;
+  position: relative;
+  overflow: hidden;
+  min-height: 400px;
+  height: auto;
 }
 
 .portal-clases .inner-portal-clases .content-media .box-video video, .portal-clases .inner-portal-clases .content-media .box-video iframe {
-  width: 96%;
+  width: 99.5%;
+  min-height: 440px;
+  height: 100%;
+  position: absolute;
+  top: -60px;
+}
+
+.portal-clases .inner-portal-clases .content-media .box-progreso {
+  width: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.portal-clases .inner-portal-clases .content-media .box-progreso .barra {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid #0A2558;
+  padding: 4px;
+  background: #d3e7f8;
+  margin-right: 5px;
+  height: 18px;
+}
+
+.portal-clases .inner-portal-clases .content-media .box-progreso .barra .inner-barra {
+  width: 0%;
+  background: linear-gradient(45deg, #0A2558, #1c75bc);
+  height: 8px;
+  -webkit-transition: all 0.6s ease;
+  transition: all 0.6s ease;
+  border-radius: 10px;
+}
+
+.portal-clases .inner-portal-clases .content-media .box-botones {
+  padding: 14px 6px;
+}
+
+.portal-clases .inner-portal-clases .content-media .box-botones .btn {
+  border-radius: 4px;
+  padding: 12px 20px;
+  letter-spacing: 0.5px;
+}
+
+.portal-clases .inner-portal-clases .content-media .box-text {
+  padding: 20px;
+  text-align: justify;
+  -webkit-box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+          box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+  margin-bottom: 30px;
+  border-radius: 6px;
+}
+
+.portal-clases .inner-portal-clases .content-media .box-text .font-light {
+  font-weight: 500;
 }
 
 .portal-clases .inner-portal-clases .files-media {
@@ -2631,6 +2808,159 @@ table th, table td {
 
 table th {
   border-bottom: 1px solid #1c75bc;
+}
+
+/**************************************
+***   RECUPERACIÓN DE CUENTA      ****
+***************************************/
+.box-recupera {
+  padding: 50px 0;
+}
+
+.box-recupera .box-image {
+  width: 40%;
+  margin: auto;
+}
+
+.box-recupera .box-inner-recupera {
+  padding-top: 60px;
+}
+
+.box-recupera .box-inner-recupera .box-titles {
+  font-size: 24px;
+  color: #0A2558;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.box-recupera .box-inner-recupera .item-recupera {
+  width: 50%;
+  margin: auto;
+}
+
+.box-recupera .box-inner-recupera .item-recupera .parrafo {
+  color: #0A2558;
+  font-weight: 500;
+  text-align: justify;
+  line-height: 2;
+  margin-bottom: 20px;
+}
+
+.box-recupera .box-inner-recupera .item-recupera .box-input {
+  position: relative;
+  color: lightgrey;
+  height: 50px;
+  margin-bottom: 20px;
+}
+
+.box-recupera .box-inner-recupera .item-recupera .box-input .input {
+  width: 100%;
+  height: 100%;
+  border: 1px solid lightgray;
+  border-bottom-width: 2px;
+  font-size: 17px;
+  padding-left: 40px;
+  border-radius: 5px;
+  outline: none;
+}
+
+.box-recupera .box-inner-recupera .item-recupera .box-input .input::-webkit-input-placeholder {
+  color: lightgrey;
+}
+
+.box-recupera .box-inner-recupera .item-recupera .box-input .input:-ms-input-placeholder {
+  color: lightgrey;
+}
+
+.box-recupera .box-inner-recupera .item-recupera .box-input .input::-ms-input-placeholder {
+  color: lightgrey;
+}
+
+.box-recupera .box-inner-recupera .item-recupera .box-input .input::placeholder {
+  color: lightgrey;
+}
+
+.box-recupera .box-inner-recupera .item-recupera .box-input .input:focus {
+  border-color: #1c75bc;
+}
+
+.box-recupera .box-inner-recupera .item-recupera .box-input .icon {
+  position: absolute;
+  top: 0;
+  left: 10px;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 24px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.box-recupera .box-inner-recupera .item-recupera .box-input .toggle {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  height: 100%;
+  color: #5a5a5a;
+  cursor: pointer;
+  font-size: 24px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: none;
+}
+
+.box-recupera .box-inner-recupera .item-recupera .box-input .active {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.box-recupera .box-inner-recupera .item-recupera .box-input .none {
+  display: none;
+}
+
+.box-recupera .box-inner-recupera .item-recupera .form.invalido .inputEmail .input {
+  border: 1px solid #8a191d;
+}
+
+.box-recupera .box-inner-recupera .item-recupera .form.valido .inputEmail .input {
+  border: 1px solid #45590F;
+}
+
+.box-recupera .box-inner-recupera .item-recupera .inputEmail {
+  margin-bottom: 34px;
+}
+
+.box-recupera .box-inner-recupera .item-recupera .inputEmail .erroremail {
+  font-style: italic;
+  width: 100%;
+  display: block;
+  text-align: center;
+}
+
+.box-recupera .box-inner-recupera .item-recupera .inputEmail #span1 {
+  color: #45590F;
+}
+
+.box-recupera .box-inner-recupera .item-recupera .inputEmail #span2 {
+  color: #8a191d;
+}
+
+.box-recupera .box-inner-recupera .item-recupera .link {
+  color: #0A2558;
+  -webkit-transition: all 0.6s ease;
+  transition: all 0.6s ease;
+}
+
+.box-recupera .box-inner-recupera .item-recupera .link:hover {
+  letter-spacing: 0.5px;
+  text-decoration: underline;
 }
 
 /**************************************

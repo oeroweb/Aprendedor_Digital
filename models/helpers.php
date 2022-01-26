@@ -30,6 +30,11 @@
 			$_SESSSION['errores_usuario'] = null;
 			$borrado = true;
 		}
+		
+		if(isset($_SESSION['recupera_cuenta'])){
+			$_SESSSION['recupera_cuenta'] = null;
+			$borrado = true;
+		}
 
 		return $borrado;
 	}
@@ -591,7 +596,7 @@
 		on c.id = cc.curso_id
 		INNER JOIN $tabla4 ccd
 		on cc.id = ccd.cursoContenido_id
-		WHERE guc.usuario_id = $usuario_id and guc.curso_id = $curso_id";
+		WHERE guc.usuario_id = $usuario_id and guc.curso_id = $curso_id ORDER by cc.orden";
 
 		$datos = mysqli_query($conexion, $sql);
 		if($datos && mysqli_num_rows($datos) >=1){
@@ -631,7 +636,48 @@
 		return $resultado;
 	}
 
+	// OBTENER lista de cursos por usuario - clases
+	function obtenerListaContenidoCursoPorUsuarioId($conexion, $tabla, $usuario_id, $curso_id){
+		$sql = "SELECT * FROM $tabla where usuario_id = $usuario_id and curso_id = $curso_id GROUP by cursocontendido_id";
+		
+		$datos = mysqli_query($conexion, $sql);
+		if($datos && mysqli_num_rows($datos) >=1){
+			$resultado = $datos;
+		}else{
+			$resultado = '';
+		}
+		return $resultado;
+	}
 
+	// OBTENER lista de cursos por usuario - clases
+	function obtenerallDetalleContenidoCursoPorUsuarioId($conexion, $tabla, $usuario_id, $curso_id){
+		$sql = "SELECT * FROM $tabla where usuario_id = $usuario_id and curso_id = $curso_id";
+		
+		$datos = mysqli_query($conexion, $sql);
+		if($datos && mysqli_num_rows($datos) >=1){
+			$resultado = $datos;
+		}else{
+			$resultado = '';
+		}
+		return $resultado;
+	}
+	
+	// OBTENER lista de cursos por usuario - clases
+	function obtenerListaDetalleContenidoCursoPorUsuarioId($conexion, $tabla, $usuario_id, $curso_id, $contenidoId){
+		$sql = "SELECT * FROM $tabla where usuario_id = $usuario_id and curso_id = $curso_id and cursocontendido_id = $contenidoId";
+		
+		$datos = mysqli_query($conexion, $sql);
+		if($datos && mysqli_num_rows($datos) >=1){
+			$resultado = $datos;
+		}else{
+			$resultado = '';
+		}
+		return $resultado;
+	}
+
+  // ********************************************************************
+	// ********************************************************************
+	
 	// TRAER TODAS LAS PUBLICACIONES POR FASES
 	function mostarplublicacionesxfases($conexion, $tabla, $tabla2, $fase_id, $busqueda = null ){
 		$sql = "SELECT *, p.fechacreacion as 'fechapublicacion' FROM $tabla p 

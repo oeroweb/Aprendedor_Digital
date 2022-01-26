@@ -1,4 +1,4 @@
-<div class="sidebar">
+<div class="sidebar active">
     <div class="logo-details">      
       <img src="../assets/img/logo.png" class="img-logo" alt="Logo ">
       <p class="logo_name">AD</p>      

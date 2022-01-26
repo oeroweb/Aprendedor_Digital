@@ -23,8 +23,8 @@
 		if( $imagen_nombre or $archivo_nombre ){
 		
 			$carpeta = $t;
-			$ruta = $_SERVER['DOCUMENT_ROOT'] . '/escuela/assets/eventos/';
-			//$ruta = $_SERVER['DOCUMENT_ROOT'] . '/PAGaprendedor/escuela/assets/eventos/';
+			//$ruta = $_SERVER['DOCUMENT_ROOT'] . '/escuela/assets/eventos/';
+			$ruta = $_SERVER['DOCUMENT_ROOT'] . '/PAGaprendedor/escuela/assets/eventos/';
 
 			if(!is_dir($carpeta)){
 				mkdir($ruta.$carpeta, 0777);
@@ -32,8 +32,8 @@
 
 			if($imagen_nombre){
 				
-				$carpeta_destino = $_SERVER['DOCUMENT_ROOT'] . '/escuela/assets/eventos/'.$carpeta.'/';	
-				//$carpeta_destino = $_SERVER['DOCUMENT_ROOT'] . '/PAGaprendedor/escuela/assets/eventos/'.$carpeta.'/';
+				//$carpeta_destino = $_SERVER['DOCUMENT_ROOT'] . '/escuela/assets/eventos/'.$carpeta.'/';	
+				$carpeta_destino = $_SERVER['DOCUMENT_ROOT'] . '/PAGaprendedor/escuela/assets/eventos/'.$carpeta.'/';
 				move_uploaded_file($_FILES['imagen']['tmp_name'], $carpeta_destino.$imagen_nombre);
 			}
 
