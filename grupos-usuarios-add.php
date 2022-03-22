@@ -71,11 +71,11 @@
 										<td >													
 											<input type="checkbox" name="ids[]" value="<?php echo $data['id']; ?>" <?php  ?> class="users"> 
 										</td>
-										<td><?php echo $data['nombre']; ?> </td>
-										<td><?php echo $data['ape_paterno']; ?></td>
-										<td><?php echo $data['ape_materno']; ?></td>
-										<td><?php echo $data['email']; ?></td>
-										<td><?php echo $data['nombreinstitucion']; ?></td>			
+										<td><?=$data['nombre']; ?> </td>
+										<td><?=$data['ape_paterno']; ?></td>
+										<td><?=$data['ape_materno']; ?></td>
+										<td><?=$data['email']; ?></td>
+										<td><?=$data['nombreinstitucion']; ?></td>			
 									</tr>
 								<?php 
 									endwhile;

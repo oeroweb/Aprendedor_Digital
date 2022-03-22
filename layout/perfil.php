@@ -46,8 +46,9 @@
           <?php endif; ?>	          
         </div>
       </div>
-      <div class="admin_name" id="adminNane">
-        <?php if($perfil['imagen'] != null): ?>          
+      <div class="admin_name" id="adminNane">        
+        <div class="box-estado <?php echo ($perfil['estado_login'] == 'conectado') ? 'conectado': 'desconectado' ?>"> </div>
+        <?php if($perfil['imagen'] != null): ?>
           <img src="assets/files/<?php echo $perfil['carpeta_img'].'/'.$perfil['imagen']; ?>" alt="Foto de Perfil">
         <?php else : ?>
           <img src="assets/img/avatar/male.png" alt="Foto de Perfil">

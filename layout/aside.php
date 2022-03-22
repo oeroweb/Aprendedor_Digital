@@ -1,7 +1,6 @@
-<div class="sidebar active">
+<div class="sidebar">
     <div class="logo-details">      
-      <img src="../assets/img/logo.png" class="img-logo" alt="Logo ">
-      <p class="logo_name">AD</p>      
+      <img src="../assets/img/logo.ico" class="img-logo" alt="Logo ">
     </div>
       <ul class="nav-links">
         <li>
@@ -40,7 +39,15 @@
             <span class="links_name">EVENTOS EN VIVO</span>
           </a>
         </li>
-        <?php if($_SESSION['sesion_aprenDigital']['perfil_id'] <= '2'): ?>       
+        <?php if($_SESSION['sesion_aprenDigital']['perfil_id'] <= '2'): ?>
+
+          <li>
+            <a href="admin-cursos.php" title="Admin Cursos">
+              <i class="fa fas-gears"></i>
+              <!-- <i class="fas fa-book-medical"></i> -->
+              <span class="links_name">ADMIN CURSOS</span>
+            </a>
+          </li>          
           <li>
             <a href="admin-cursos.php" title="Admin Cursos">
               <i class="fas fa-list-ol"></i>
