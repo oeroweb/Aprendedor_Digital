@@ -73,7 +73,9 @@ $fase = $_GET['fase'];
 											$token  = generandoTokenClave();									
 									?> 										
 										<tr>						
-											<td ><?=$contador?>	</td>
+											<td ><?=$contador?>	
+											<input type="hidden" name="idgroup" value="<?=$id?>">
+											</td>
 											<td><?=$grupo['grupo_id']?> 
 												<input type="hidden" name="grupo_id[]" value="<?=$grupo['grupo_id']?>">
 												<input type="hidden" name="grupodetalle_id[]" value="<?=$grupo['grupofase_id']?>">
@@ -125,20 +127,7 @@ $fase = $_GET['fase'];
 
 
 	<script>
-	
-	$(document).ready(function(){
-		
-		$("#btnseleccionar").click(function(){			
-				$("#dt_usuariosCursos input[type=checkbox]").attr("checked", true);
-			});		
-  
-		// $("#btndeseleccionar").click(function(){
-		// 	$("#dt_usuariosGrupo input[type=checkbox]").attr("checked", false);
-		// });
-
-	});
-
-
+	/*
 	$( "#btnguardar" ).click(function() {	
 		$("#dt_usuariosCursos input[type=checkbox]").attr("checked", true);
 		var ids_array = [];		
@@ -180,6 +169,6 @@ $fase = $_GET['fase'];
 			location.reload();
     }, 500);
 	}
-
+ */
 	
 </script>

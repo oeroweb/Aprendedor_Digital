@@ -22,6 +22,7 @@ $id = $_GET['id'];
 					endif;
 					?>
 					<div class="box-botones">
+						<a class="btn" href="amin-grupos.php" title="Ver lista de Grupos">Ir a Grupos</a>
 						<a class="btn" href="javascript:history.back()" title="Atras"><i class="fas fa-arrow-left"></i></a>
 					</div>
 				</div>
@@ -47,20 +48,12 @@ $id = $_GET['id'];
 
 					<div class="box-info">
 							<p class="text"> <i class="fas fa-info-circle"></i> Presione añadir todos los cursos para enlazar los cursos y usuarios.</p>						
-						</div>
+					</div>
 					<div class="box-title mg-tp40">
 						<h2 class="title mg-bt20">Solo estarán visibles las fases añadidas al grupo.</h2>						
 					</div>
 
-					<div class="box-botones mg-tp20">	
-						<?php
-							$datos = selecttogrupoIdlimit($db, 'grupos_fases', $id);
-								if (!empty($datos) && mysqli_num_rows($datos) >= 1) :
-									while ($dato = mysqli_fetch_assoc($datos)) :
-						?>												
-							<a href="listado-cursos-all-add.php?id=<?=$dato['grupo_id']?>" class="btn" id="btnfase1"><i class="fas fa-link"></i> Añadir todos los cursos</a>	<i class="ico fas fa-grip-lines-vertical"></i>				
-						<?php endwhile; endif; ?>
-
+					<div class="box-botones mg-tp20">
 						<?php
 							$datos = selecttogrupoId($db, 'grupos_fases', $id);
 								if (!empty($datos) && mysqli_num_rows($datos) >= 1) :
@@ -75,15 +68,7 @@ $id = $_GET['id'];
 					<div class="box-title mg-tp40">
 						<h2 class="title mg-bt20">Enlazar las clases maestras añadidas al grupo con los Usuarios.</h2>						
 					</div>
-					<div class="box-botones mg-tp20">	
-						<?php
-							$datos = selecttogrupoIdlimit($db, 'grupos_fases', $id);
-								if (!empty($datos) && mysqli_num_rows($datos) >= 1) :
-									while ($dato = mysqli_fetch_assoc($datos)) :
-						?>												
-							<a href="listado-clases-all-add.php?id=<?=$dato['grupo_id']?>" class="btn" id="btnfase1"><i class="fas fa-link"></i> Añadir todas las clases maestras</a>	<i class="ico fas fa-grip-lines-vertical"></i>				
-						<?php endwhile; endif; ?>
-
+					<div class="box-botones mg-tp20">
 						<?php
 							$datos = selecttogrupoId($db, 'grupos_fases', $id);
 								if (!empty($datos) && mysqli_num_rows($datos) >= 1) :
@@ -91,7 +76,7 @@ $id = $_GET['id'];
 						?>												
 							<a href="listado-clases-add.php?id=<?=$dato['grupo_id']?>&fase=<?=$dato['fase_id']?>" class="btn" id="btnfase1"><i class="fas fa-link"></i> Añadir las clases maestras de la fase <?=$dato['fase_id']?></a>						
 						<?php endwhile; else: ?>
-							<p class="parrafo">No hay cursos añadidos al grupo.</p>
+							<p class="parrafo">No hay clases maestras añadidos al grupo.</p>
 						<?php endif; ?>
 					</div>
 					
@@ -145,7 +130,7 @@ $id = $_GET['id'];
 									endwhile;
 								else : ?>
 									<tr>
-										<td colspan="5">No hay cursos añadidos para mostrar.</td>
+										<td colspan="6">No hay cursos añadidos para mostrar.</td>
 									</tr>
 								<?php endif; ?>
 							</tbody>
@@ -186,6 +171,7 @@ $id = $_GET['id'];
 										<td><?=$dato['Clases']?></td>
 										<td>
 											<?php if($dato['acceso_id'] == 4) :?>
+
 												<p class="btn-3" title="No publicado">
 												<img src="assets/fonts/toggle-of.svg" alt="Inactivo">		
 											Bloqueado</p>													
@@ -203,7 +189,7 @@ $id = $_GET['id'];
 									endwhile;
 								else : ?>
 									<tr>
-										<td colspan="5">No hay cursos añadidos para mostrar.</td>
+										<td colspan="6">No hay clases maestras añadidas para mostrar.</td>
 									</tr>
 								<?php endif; ?>
 							</tbody>
@@ -220,6 +206,7 @@ $id = $_GET['id'];
 				<?php borrarErrores(); ?>
 			</div>
 	</section>
+	<span class="ir-arriba hidden" id="btnArriba" title="Subir"><i class="fa fa-chevron-up"></i></span>
 	<?php include 'layout/footer.php'; ?>
 	</div>
 	</main>

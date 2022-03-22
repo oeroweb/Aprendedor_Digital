@@ -39,7 +39,7 @@ $(document).ready(function(){
 
   // CERRAR MODAL
 	$(".fa-times").click(function(){
-		$("#modalBienvenida").slideToggle(2000);
+		$("#modalBienvenida").fadeOut(1000);
 	});
 
 });

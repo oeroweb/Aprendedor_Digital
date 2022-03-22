@@ -55,7 +55,7 @@ btnAccordion.forEach((item, i)  => {
 
 for (let index = 0; index < accordionClases.length; index++) {
   accordionClases[index].addEventListener('click', function(){
-    console.log("click");
+    //console.log("click");
     this.classList.toggle('active');
   }) ;
   
@@ -81,13 +81,14 @@ if(window.location.href.indexOf('clases') > -1){
     //console.log('ruta', location.href);
     const ruta = location.href;
     localStorage.setItem("url", ruta);
-
   })();
 
   (function obtener_url(){
     if(localStorage.getItem("url")){
       const url_guardada = localStorage.getItem("url");
+      //window.location.href = url_guardada;
       console.log("url_guardada -> ", localStorage.getItem("url"));
     }
   })();
+  
 }

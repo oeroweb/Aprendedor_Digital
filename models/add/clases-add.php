@@ -54,9 +54,9 @@
 					}else{
 						$_SESSION['fallo'] = "<i class='far fa-times-circle'></i> No se completo la carga; por favor volver a intentar";	
 					}
-					header("Location: ../../admin-cursos-maestras.php");	
+					header("Location: ../../admin-clases-maestras.php");	
 				
-				header("Location: ../../admin-cursos-maestras.php");	
+				header("Location: ../../admin-clases-maestras.php");	
 				
 			} else {	
 				
@@ -68,13 +68,13 @@
 				}else{
 					$_SESSION['fallo'] = "<i class='far fa-times-circle'></i> No se completo la carga; por favor volver a intentar";	
 				}
-				header("Location: ../../admin-cursos-maestras.php");
+				header("Location: ../../admin-clases-maestras.php");
 								
 			}	
-			header("Location: ../../admin-cursos-maestras.php");					
+			header("Location: ../../admin-clases-maestras.php");					
 	}else{
 		$_SESSION['errores_usuario'] = $errores;
-		header("Location: ../../admin-cursos-maestras.php");	
+		header("Location: ../../admin-clases-maestras.php");	
 			
 	}
 ?>

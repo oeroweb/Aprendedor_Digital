@@ -254,6 +254,18 @@ body {
   margin: 0 auto;
 }
 
+.fsize-12 {
+  font-size: 12px;
+}
+
+.fsize-14 {
+  font-size: 14px;
+}
+
+.fw-light {
+  font-weight: 400;
+}
+
 .ico-navbar {
   font-size: 1.3em;
 }
@@ -313,7 +325,7 @@ hr {
   position: fixed;
   top: 80px;
   right: 10px;
-  z-index: 100;
+  z-index: 200;
 }
 
 /*
@@ -566,6 +578,219 @@ hr {
   border-color: #5a5a5a;
 }
 
+/********************************************
+****               LOGIN               ****
+*********************************************/
+.login-escuela {
+  min-height: 100vh;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: linear-gradient(200deg, #1c75bc, #0A2558 75%);
+}
+
+.login-escuela .box-imagen {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.login-escuela .box-imagen .img-login {
+  width: 80%;
+  margin: auto;
+}
+
+.login-escuela .box-formulario-login .box-title {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #ffffff;
+}
+
+.login-escuela .box-formulario-login .form {
+  -webkit-transition: 0.5s all linear;
+  transition: 0.5s all linear;
+  width: 90%;
+  margin: auto;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 50px 20px;
+  border-radius: 5px;
+}
+
+.login-escuela .box-formulario-login .form.invalido .inputEmail .input {
+  border: 1px solid #8a191d;
+}
+
+.login-escuela .box-formulario-login .form.valido .inputEmail .input {
+  border: 1px solid #45590F;
+}
+
+.login-escuela .box-formulario-login .box-input {
+  position: relative;
+  color: lightgrey;
+  height: 50px;
+  margin-bottom: 20px;
+}
+
+.login-escuela .box-formulario-login .box-input .input {
+  width: 100%;
+  height: 100%;
+  border: 1px solid lightgray;
+  border-bottom-width: 2px;
+  font-size: 17px;
+  padding-left: 40px;
+  border-radius: 5px;
+  outline: none;
+}
+
+.login-escuela .box-formulario-login .box-input .input::-webkit-input-placeholder {
+  color: lightgrey;
+}
+
+.login-escuela .box-formulario-login .box-input .input:-ms-input-placeholder {
+  color: lightgrey;
+}
+
+.login-escuela .box-formulario-login .box-input .input::-ms-input-placeholder {
+  color: lightgrey;
+}
+
+.login-escuela .box-formulario-login .box-input .input::placeholder {
+  color: lightgrey;
+}
+
+.login-escuela .box-formulario-login .box-input .input:focus {
+  border-color: #5a5a5a;
+}
+
+.login-escuela .box-formulario-login .box-input .icon {
+  position: absolute;
+  top: 0;
+  left: 10px;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 24px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.login-escuela .box-formulario-login .box-input .toggle {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  height: 100%;
+  color: #5a5a5a;
+  cursor: pointer;
+  font-size: 24px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: none;
+}
+
+.login-escuela .box-formulario-login .box-input .active {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.login-escuela .box-formulario-login .box-input .none {
+  display: none;
+}
+
+.login-escuela .box-formulario-login .inputEmail {
+  margin-bottom: 34px;
+}
+
+.login-escuela .box-formulario-login .inputEmail .erroremail {
+  font-style: italic;
+  width: 100%;
+  display: block;
+  text-align: center;
+}
+
+.login-escuela .box-formulario-login .inputEmail #span1 {
+  color: #45590F;
+}
+
+.login-escuela .box-formulario-login .inputEmail #span2 {
+  color: #8a191d;
+}
+
+.login-escuela .box-formulario-login .field {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.login-escuela .box-formulario-login .field .link {
+  color: #0A2558;
+  letter-spacing: 0.5px;
+  -webkit-transition: .2s linear;
+  transition: .2s linear;
+}
+
+.login-escuela .box-formulario-login .field .link:hover {
+  text-decoration: underline;
+}
+
+.login-escuela .box-formulario-login .box-buttons {
+  margin-top: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.login-escuela .box-formulario-login .box-buttons .btn {
+  margin: 0 10px;
+  width: 100%;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+  height: 50px;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+.login-escuela .box-formulario-login .box-buttons .link {
+  color: #0A2558;
+  letter-spacing: 0.5px;
+  -webkit-transition: .2s linear;
+  transition: .2s linear;
+  margin-left: 10px;
+}
+
+.login-escuela .box-formulario-login .box-buttons .link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+  .login-escuela .box-imagen, .login-escuela .box-formulario-login {
+    width: 100%;
+    -webkit-transition: all 0.6s ease;
+    transition: all 0.6s ease;
+  }
+  .login-escuela .box-imagen .img-login {
+    width: 60%;
+  }
+  .login-escuela .box-formulario-login .form {
+    padding: 20px 10px;
+  }
+}
+
 /**************************************
 ***          FORMULARIOS          ****
 ***************************************/
@@ -635,6 +860,7 @@ hr {
 
 .box-formulario .box-input textarea {
   height: auto;
+  resize: none;
 }
 
 .box-formulario .box-input label {
@@ -757,7 +983,7 @@ hr {
 }
 
 .box-formulario .box-input-checkbox {
-  margin: 16px 0;
+  margin: 16px 5px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -766,16 +992,26 @@ hr {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  width: calc(25% - 10px);
+  -webkit-transition: all 0.6s ease;
+  transition: all 0.6s ease;
 }
 
 .box-formulario .box-input-checkbox label {
-  width: 100%;
+  width: auto;
 }
 
 .box-formulario .box-input-checkbox input[type="checkbox"] {
   height: 30px;
   width: 30px;
   margin: 10px;
+}
+
+.box-formulario .box-input-checkbox .label-checkbox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-weight: 500;
 }
 
 .box-formulario hr {
@@ -803,9 +1039,27 @@ hr {
   transition: all 0.6s ease;
 }
 
+@media (max-width: 1070px) {
+  .box-formulario .box-input-checkbox {
+    width: calc(33% - 10px);
+  }
+}
+
+@media (max-width: 800px) {
+  .box-formulario .box-input-checkbox {
+    width: calc(50% - 10px);
+  }
+}
+
+@media (max-width: 550px) {
+  .box-formulario .box-input-checkbox {
+    width: calc(100% - 10px);
+  }
+}
+
 @media (max-width: 700px) {
   .box-formulario {
-    padding: 40px 12px;
+    padding: 40px 20px;
   }
 }
 
@@ -987,6 +1241,9 @@ hr {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   color: #1c75bc;
   margin-bottom: 30px;
 }
@@ -994,12 +1251,6 @@ hr {
 .home-content .box-titles .title {
   margin-right: 20px;
   font-size: 26px;
-}
-
-.home-content .box-titles .box-botones {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
 }
 
 @media (max-width: 500px) {
@@ -1061,8 +1312,44 @@ hr {
   color: #0A2558;
 }
 
+.home-content .box-info .text2 {
+  font-family: "Monserrat-Regular";
+  margin: 10px 0;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: justify;
+  font-weight: 400;
+}
+
+.home-content .box-info .text2 strong {
+  margin: 0 5px;
+}
+
+.home-content .box-info .text2 i {
+  font-size: 18px;
+  font-weight: 800;
+  margin-right: 10px;
+  color: #0A2558;
+}
+
 .home-content .box-botones {
   margin: 10px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-transition: all 0.6s ease;
+  transition: all 0.6s ease;
+}
+
+@media (max-width: 800px) {
+  .home-content .box-botones {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
+  .home-content .box-botones .btn {
+    margin: 4px;
+  }
 }
 
 .home-content .box-image {
@@ -1898,6 +2185,19 @@ hr {
   list-style: none;
 }
 
+.home-content .inner-content .inner-content-cursos .item-cursos:first-child {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
 .home-content .inner-content .datos-fases {
   background-color: #ffffff;
   width: 250px;
@@ -2033,7 +2333,7 @@ hr {
   border-bottom: 0;
 }
 
-@media (max-width: 850px) {
+@media (max-width: 1000px) {
   .home-content .inner-content {
     width: 100%;
     -webkit-transition: all 0.6s ease;
@@ -2582,7 +2882,7 @@ hr {
   display: flex;
 }
 
-.portal-clases .inner-portal-clases {
+.portal-clases .inner-portal-clases, .portal-clases .inner-portal-clases-maestras {
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: auto 2fr auto;
@@ -2592,17 +2892,19 @@ hr {
   min-height: 82vh;
 }
 
-.portal-clases .inner-portal-clases .list-cursos {
+.portal-clases .inner-portal-clases .list-cursos, .portal-clases .inner-portal-clases-maestras .list-cursos {
   background-color: #000000;
   color: #ffffff;
   max-width: 320px;
+  -webkit-transition: all 0.6s ease;
+  transition: all 0.6s ease;
 }
 
-.portal-clases .inner-portal-clases .list-cursos .accordion .content-accordion-clases {
+.portal-clases .inner-portal-clases .list-cursos .accordion .content-accordion-clases, .portal-clases .inner-portal-clases-maestras .list-cursos .accordion .content-accordion-clases {
   position: relative;
 }
 
-.portal-clases .inner-portal-clases .list-cursos .accordion .content-accordion-clases .box-label {
+.portal-clases .inner-portal-clases .list-cursos .accordion .content-accordion-clases .box-label, .portal-clases .inner-portal-clases-maestras .list-cursos .accordion .content-accordion-clases .box-label {
   position: relative;
   padding: 20px;
   display: -webkit-box;
@@ -2616,11 +2918,11 @@ hr {
   cursor: pointer;
 }
 
-.portal-clases .inner-portal-clases .list-cursos .accordion .content-accordion-clases .box-label .title {
+.portal-clases .inner-portal-clases .list-cursos .accordion .content-accordion-clases .box-label .title, .portal-clases .inner-portal-clases-maestras .list-cursos .accordion .content-accordion-clases .box-label .title {
   font-size: 17px;
 }
 
-.portal-clases .inner-portal-clases .list-cursos .accordion .content-accordion-clases .inner-content-accordion {
+.portal-clases .inner-portal-clases .list-cursos .accordion .content-accordion-clases .inner-content-accordion, .portal-clases .inner-portal-clases-maestras .list-cursos .accordion .content-accordion-clases .inner-content-accordion {
   position: relative;
   font-size: 13px;
   font-weight: 400;
@@ -2638,28 +2940,33 @@ hr {
   transition: all .3s ease;
 }
 
-.portal-clases .inner-portal-clases .list-cursos .accordion .content-accordion-clases .inner-content-accordion input {
+.portal-clases .inner-portal-clases .list-cursos .accordion .content-accordion-clases .inner-content-accordion input, .portal-clases .inner-portal-clases-maestras .list-cursos .accordion .content-accordion-clases .inner-content-accordion input {
   margin-right: 10px;
   width: 16px;
   height: 16px;
 }
 
-.portal-clases .inner-portal-clases .list-cursos .accordion .content-accordion-clases .inner-content-accordion:hover {
+.portal-clases .inner-portal-clases .list-cursos .accordion .content-accordion-clases .inner-content-accordion:hover, .portal-clases .inner-portal-clases-maestras .list-cursos .accordion .content-accordion-clases .inner-content-accordion:hover {
   background-color: #8a191d;
 }
 
-.portal-clases .inner-portal-clases .list-cursos .accordion .content-accordion-clases .concluido {
+.portal-clases .inner-portal-clases .list-cursos .accordion .content-accordion-clases .concluido, .portal-clases .inner-portal-clases-maestras .list-cursos .accordion .content-accordion-clases .concluido {
   background-color: #8a191d;
 }
 
-.portal-clases .inner-portal-clases .list-cursos .accordion .active .inner-content-accordion {
+.portal-clases .inner-portal-clases .list-cursos .accordion .active .inner-content-accordion, .portal-clases .inner-portal-clases-maestras .list-cursos .accordion .active .inner-content-accordion {
   height: 50px;
   padding-left: 10px;
   -webkit-transition: all .3s ease;
   transition: all .3s ease;
 }
 
-.portal-clases .inner-portal-clases .content-media .box-video {
+.portal-clases .inner-portal-clases .content-media, .portal-clases .inner-portal-clases-maestras .content-media {
+  -webkit-transition: all 0.6s ease;
+  transition: all 0.6s ease;
+}
+
+.portal-clases .inner-portal-clases .content-media .box-video, .portal-clases .inner-portal-clases-maestras .content-media .box-video {
   width: 100%;
   position: relative;
   overflow: hidden;
@@ -2667,7 +2974,7 @@ hr {
   height: auto;
 }
 
-.portal-clases .inner-portal-clases .content-media .box-video video, .portal-clases .inner-portal-clases .content-media .box-video iframe {
+.portal-clases .inner-portal-clases .content-media .box-video video, .portal-clases .inner-portal-clases .content-media .box-video iframe, .portal-clases .inner-portal-clases-maestras .content-media .box-video video, .portal-clases .inner-portal-clases-maestras .content-media .box-video iframe {
   width: 99.5%;
   min-height: 440px;
   height: 100%;
@@ -2675,7 +2982,7 @@ hr {
   top: -60px;
 }
 
-.portal-clases .inner-portal-clases .content-media .box-progreso {
+.portal-clases .inner-portal-clases .content-media .box-progreso, .portal-clases .inner-portal-clases-maestras .content-media .box-progreso {
   width: 50%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2683,9 +2990,10 @@ hr {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  margin-bottom: 10px;
 }
 
-.portal-clases .inner-portal-clases .content-media .box-progreso .barra {
+.portal-clases .inner-portal-clases .content-media .box-progreso .barra, .portal-clases .inner-portal-clases-maestras .content-media .box-progreso .barra {
   width: 100%;
   border-radius: 10px;
   border: 1px solid #0A2558;
@@ -2695,7 +3003,7 @@ hr {
   height: 18px;
 }
 
-.portal-clases .inner-portal-clases .content-media .box-progreso .barra .inner-barra {
+.portal-clases .inner-portal-clases .content-media .box-progreso .barra .inner-barra, .portal-clases .inner-portal-clases-maestras .content-media .box-progreso .barra .inner-barra {
   width: 0%;
   background: linear-gradient(45deg, #0A2558, #1c75bc);
   height: 8px;
@@ -2704,17 +3012,17 @@ hr {
   border-radius: 10px;
 }
 
-.portal-clases .inner-portal-clases .content-media .box-botones {
+.portal-clases .inner-portal-clases .content-media .box-botones, .portal-clases .inner-portal-clases-maestras .content-media .box-botones {
   padding: 14px 6px;
 }
 
-.portal-clases .inner-portal-clases .content-media .box-botones .btn {
+.portal-clases .inner-portal-clases .content-media .box-botones .btn, .portal-clases .inner-portal-clases-maestras .content-media .box-botones .btn {
   border-radius: 4px;
   padding: 12px 20px;
   letter-spacing: 0.5px;
 }
 
-.portal-clases .inner-portal-clases .content-media .box-text {
+.portal-clases .inner-portal-clases .content-media .box-text, .portal-clases .inner-portal-clases-maestras .content-media .box-text {
   padding: 20px;
   text-align: justify;
   -webkit-box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
@@ -2723,15 +3031,51 @@ hr {
   border-radius: 6px;
 }
 
-.portal-clases .inner-portal-clases .content-media .box-text .font-light {
+.portal-clases .inner-portal-clases .content-media .box-text .font-light, .portal-clases .inner-portal-clases-maestras .content-media .box-text .font-light {
   font-weight: 500;
 }
 
-.portal-clases .inner-portal-clases .files-media {
+.portal-clases .inner-portal-clases .files-media, .portal-clases .inner-portal-clases-maestras .files-media {
   padding: 20px 16px;
   background-color: #0A2558;
   color: #ffffff;
   max-width: 250px;
+  -webkit-transition: all 0.6s ease;
+  transition: all 0.6s ease;
+}
+
+@media (max-width: 1050px) {
+  .portal-clases .inner-portal-clases .files-media, .portal-clases .inner-portal-clases-maestras .files-media {
+    grid-column: 1/-1;
+    max-width: 100%;
+  }
+  .portal-clases .inner-portal-clases .content-media .box-text, .portal-clases .inner-portal-clases-maestras .content-media .box-text {
+    margin-bottom: 0px;
+  }
+}
+
+@media (max-width: 850px) {
+  .portal-clases .inner-portal-clases, .portal-clases .inner-portal-clases-maestras {
+    padding: 4px;
+  }
+  .portal-clases .inner-portal-clases .list-cursos, .portal-clases .inner-portal-clases-maestras .list-cursos {
+    grid-column: 1/-1;
+    max-width: 100%;
+  }
+  .portal-clases .inner-portal-clases .content-media, .portal-clases .inner-portal-clases-maestras .content-media {
+    grid-column: 1/-1;
+    max-width: 100%;
+  }
+  .portal-clases .inner-portal-clases .content-media .box-video video, .portal-clases .inner-portal-clases .content-media .box-video iframe, .portal-clases .inner-portal-clases-maestras .content-media .box-video video, .portal-clases .inner-portal-clases-maestras .content-media .box-video iframe {
+    width: 100%;
+    min-height: auto;
+  }
+  .portal-clases .inner-portal-clases .content-media .box-progreso, .portal-clases .inner-portal-clases-maestras .content-media .box-progreso {
+    width: 100%;
+  }
+  .portal-clases .inner-portal-clases .content-media .box-text, .portal-clases .inner-portal-clases-maestras .content-media .box-text {
+    margin-bottom: 0px;
+  }
 }
 
 .portal-clases .inner-portal-clases-maestras {
@@ -2760,6 +3104,7 @@ hr {
 .dataTable {
   margin-bottom: 20px;
   font-size: 14px;
+  z-index: 10;
 }
 
 .dataTables_length {
@@ -2769,6 +3114,21 @@ hr {
 
 .dataTables_length select {
   padding: 6px;
+}
+
+.dt-button {
+  padding: 6px 12px;
+  border: 1px solid #1c75bc;
+  background-color: #1c75bc;
+  border-radius: 8px;
+  color: #ffffff;
+  -webkit-transition: all 1s ease;
+  transition: all 1s ease;
+}
+
+.dt-button:hover {
+  background-color: #0A2558;
+  border-radius: 8px;
 }
 
 .dataTables_filter {
@@ -2836,6 +3196,8 @@ table th {
 .box-recupera .box-inner-recupera .item-recupera {
   width: 50%;
   margin: auto;
+  -webkit-transition: all 0.6s ease;
+  transition: all 0.6s ease;
 }
 
 .box-recupera .box-inner-recupera .item-recupera .parrafo {
@@ -2963,6 +3325,48 @@ table th {
   text-decoration: underline;
 }
 
+@media (max-width: 800px) {
+  .box-recupera .box-inner-recupera .item-recupera {
+    width: 100%;
+    -webkit-transition: all 0.6s ease;
+    transition: all 0.6s ease;
+  }
+}
+
+.ir-arriba {
+  position: fixed;
+  bottom: 0;
+  right: 3px;
+  background-color: #8a191d;
+  color: #ffffff;
+  width: 50px;
+  height: 40px;
+  border-radius: 10px 10px 0 0;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 20;
+  -webkit-transition: all 0.3s linear;
+  transition: all 0.3s linear;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.ir-arriba:hover {
+  -webkit-box-shadow: 0px 0px 3px #1c75bc;
+          box-shadow: 0px 0px 3px #1c75bc;
+}
+
+.ir-arriba:hover .fa-chevron-up {
+  font-weight: bold;
+}
+
 /**************************************
 ***          MODAL          ****
 ***************************************/
@@ -2974,7 +3378,7 @@ table th {
   display: none;
   top: 0;
   left: 0;
-  z-index: 10;
+  z-index: 200;
 }
 
 .modal .body-modal {
@@ -2985,10 +3389,13 @@ table th {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  margin-top: 90px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  min-height: 100vh;
 }
 
-.modal .body-modal #form_eliminar, .modal .body-modal #frm_actualizar,
+.modal .body-modal #form_eliminar, .modal .body-modal #frm_actualizar, .modal .body-modal .form_sendMail,
 .modal .body-modal .frmbody {
   width: 800px;
   max-height: 650px;
@@ -3000,37 +3407,37 @@ table th {
           box-shadow: -1px 1px 10px #000000;
 }
 
-.modal .body-modal #form_eliminar .title, .modal .body-modal #frm_actualizar .title,
+.modal .body-modal #form_eliminar .title, .modal .body-modal #frm_actualizar .title, .modal .body-modal .form_sendMail .title,
 .modal .body-modal .frmbody .title {
   text-align: center;
   color: #0A2558;
 }
 
-.modal .body-modal #form_eliminar .w100, .modal .body-modal #frm_actualizar .w100,
+.modal .body-modal #form_eliminar .w100, .modal .body-modal #frm_actualizar .w100, .modal .body-modal .form_sendMail .w100,
 .modal .body-modal .frmbody .w100 {
   width: calc(100% - 20px);
   margin: 10px;
 }
 
-.modal .body-modal #form_eliminar .w50, .modal .body-modal #frm_actualizar .w50,
+.modal .body-modal #form_eliminar .w50, .modal .body-modal #frm_actualizar .w50, .modal .body-modal .form_sendMail .w50,
 .modal .body-modal .frmbody .w50 {
   width: calc(50% - 20px);
   margin: 0 10px;
 }
 
-.modal .body-modal #form_eliminar .w30-mg, .modal .body-modal #frm_actualizar .w30-mg,
+.modal .body-modal #form_eliminar .w30-mg, .modal .body-modal #frm_actualizar .w30-mg, .modal .body-modal .form_sendMail .w30-mg,
 .modal .body-modal .frmbody .w30-mg {
   width: calc(33% - 20px);
   margin: 0 10px;
 }
 
-.modal .body-modal #form_eliminar .w25-mg, .modal .body-modal #frm_actualizar .w25-mg,
+.modal .body-modal #form_eliminar .w25-mg, .modal .body-modal #frm_actualizar .w25-mg, .modal .body-modal .form_sendMail .w25-mg,
 .modal .body-modal .frmbody .w25-mg {
   width: calc(25% - 10px);
   margin: 0 5px;
 }
 
-.modal .body-modal #form_eliminar hr, .modal .body-modal #frm_actualizar hr,
+.modal .body-modal #form_eliminar hr, .modal .body-modal #frm_actualizar hr, .modal .body-modal .form_sendMail hr,
 .modal .body-modal .frmbody hr {
   width: 100%;
   margin: 3px auto 14px;
@@ -3038,13 +3445,13 @@ table th {
   background-color: #0A2558;
 }
 
-.modal .body-modal #form_eliminar .box-input, .modal .body-modal #frm_actualizar .box-input,
+.modal .body-modal #form_eliminar .box-input, .modal .body-modal #frm_actualizar .box-input, .modal .body-modal .form_sendMail .box-input,
 .modal .body-modal .frmbody .box-input {
   position: relative;
   margin-bottom: 16px;
 }
 
-.modal .body-modal #form_eliminar .box-input input, .modal .body-modal #form_eliminar .box-input select, .modal .body-modal #form_eliminar .box-input textarea, .modal .body-modal #frm_actualizar .box-input input, .modal .body-modal #frm_actualizar .box-input select, .modal .body-modal #frm_actualizar .box-input textarea,
+.modal .body-modal #form_eliminar .box-input input, .modal .body-modal #form_eliminar .box-input select, .modal .body-modal #form_eliminar .box-input textarea, .modal .body-modal #frm_actualizar .box-input input, .modal .body-modal #frm_actualizar .box-input select, .modal .body-modal #frm_actualizar .box-input textarea, .modal .body-modal .form_sendMail .box-input input, .modal .body-modal .form_sendMail .box-input select, .modal .body-modal .form_sendMail .box-input textarea,
 .modal .body-modal .frmbody .box-input input,
 .modal .body-modal .frmbody .box-input select,
 .modal .body-modal .frmbody .box-input textarea {
@@ -3056,7 +3463,7 @@ table th {
   border: 1px solid rgba(28, 117, 188, 0.5);
 }
 
-.modal .body-modal #form_eliminar .box-input input:hover, .modal .body-modal #form_eliminar .box-input input:focus, .modal .body-modal #form_eliminar .box-input select:hover, .modal .body-modal #form_eliminar .box-input select:focus, .modal .body-modal #form_eliminar .box-input textarea:hover, .modal .body-modal #form_eliminar .box-input textarea:focus, .modal .body-modal #frm_actualizar .box-input input:hover, .modal .body-modal #frm_actualizar .box-input input:focus, .modal .body-modal #frm_actualizar .box-input select:hover, .modal .body-modal #frm_actualizar .box-input select:focus, .modal .body-modal #frm_actualizar .box-input textarea:hover, .modal .body-modal #frm_actualizar .box-input textarea:focus,
+.modal .body-modal #form_eliminar .box-input input:hover, .modal .body-modal #form_eliminar .box-input input:focus, .modal .body-modal #form_eliminar .box-input select:hover, .modal .body-modal #form_eliminar .box-input select:focus, .modal .body-modal #form_eliminar .box-input textarea:hover, .modal .body-modal #form_eliminar .box-input textarea:focus, .modal .body-modal #frm_actualizar .box-input input:hover, .modal .body-modal #frm_actualizar .box-input input:focus, .modal .body-modal #frm_actualizar .box-input select:hover, .modal .body-modal #frm_actualizar .box-input select:focus, .modal .body-modal #frm_actualizar .box-input textarea:hover, .modal .body-modal #frm_actualizar .box-input textarea:focus, .modal .body-modal .form_sendMail .box-input input:hover, .modal .body-modal .form_sendMail .box-input input:focus, .modal .body-modal .form_sendMail .box-input select:hover, .modal .body-modal .form_sendMail .box-input select:focus, .modal .body-modal .form_sendMail .box-input textarea:hover, .modal .body-modal .form_sendMail .box-input textarea:focus,
 .modal .body-modal .frmbody .box-input input:hover,
 .modal .body-modal .frmbody .box-input input:focus,
 .modal .body-modal .frmbody .box-input select:hover,
@@ -3066,7 +3473,7 @@ table th {
   border: 1px solid rgba(28, 117, 188, 0.9);
 }
 
-.modal .body-modal #form_eliminar .box-input textarea, .modal .body-modal #frm_actualizar .box-input textarea,
+.modal .body-modal #form_eliminar .box-input textarea, .modal .body-modal #frm_actualizar .box-input textarea, .modal .body-modal .form_sendMail .box-input textarea,
 .modal .body-modal .frmbody .box-input textarea {
   resize: none;
   height: 50px;
@@ -3074,12 +3481,12 @@ table th {
   padding: 10px;
 }
 
-.modal .body-modal #form_eliminar .box-input textarea::-webkit-scrollbar, .modal .body-modal #frm_actualizar .box-input textarea::-webkit-scrollbar,
+.modal .body-modal #form_eliminar .box-input textarea::-webkit-scrollbar, .modal .body-modal #frm_actualizar .box-input textarea::-webkit-scrollbar, .modal .body-modal .form_sendMail .box-input textarea::-webkit-scrollbar,
 .modal .body-modal .frmbody .box-input textarea::-webkit-scrollbar {
   width: 0px;
 }
 
-.modal .body-modal #form_eliminar .box-input .counter, .modal .body-modal #frm_actualizar .box-input .counter,
+.modal .body-modal #form_eliminar .box-input .counter, .modal .body-modal #frm_actualizar .box-input .counter, .modal .body-modal .form_sendMail .box-input .counter,
 .modal .body-modal .frmbody .box-input .counter {
   position: absolute;
   right: 10px;
@@ -3091,7 +3498,7 @@ table th {
   color: #5a5a5a;
 }
 
-.modal .body-modal #form_eliminar .box-input .counter-2, .modal .body-modal #frm_actualizar .box-input .counter-2,
+.modal .body-modal #form_eliminar .box-input .counter-2, .modal .body-modal #frm_actualizar .box-input .counter-2, .modal .body-modal .form_sendMail .box-input .counter-2,
 .modal .body-modal .frmbody .box-input .counter-2 {
   position: absolute;
   left: 245px;
@@ -3100,7 +3507,7 @@ table th {
   font-weight: 400;
 }
 
-.modal .body-modal #form_eliminar .box-input label, .modal .body-modal #frm_actualizar .box-input label,
+.modal .body-modal #form_eliminar .box-input label, .modal .body-modal #frm_actualizar .box-input label, .modal .body-modal .form_sendMail .box-input label,
 .modal .body-modal .frmbody .box-input label {
   font-size: 18px;
   line-height: 18px;
@@ -3111,7 +3518,7 @@ table th {
   font-weight: 900;
 }
 
-.modal .body-modal #form_eliminar .box-input .btn-file, .modal .body-modal #frm_actualizar .box-input .btn-file,
+.modal .body-modal #form_eliminar .box-input .btn-file, .modal .body-modal #frm_actualizar .box-input .btn-file, .modal .body-modal .form_sendMail .box-input .btn-file,
 .modal .body-modal .frmbody .box-input .btn-file {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3126,14 +3533,14 @@ table th {
   margin-bottom: 10px;
 }
 
-.modal .body-modal #form_eliminar .box-input .btn-file i, .modal .body-modal #frm_actualizar .box-input .btn-file i,
+.modal .body-modal #form_eliminar .box-input .btn-file i, .modal .body-modal #frm_actualizar .box-input .btn-file i, .modal .body-modal .form_sendMail .box-input .btn-file i,
 .modal .body-modal .frmbody .box-input .btn-file i {
   font-size: 20px;
   margin-right: 5px;
 }
 
 @media (max-width: 500px) {
-  .modal .body-modal #form_eliminar .w50, .modal .body-modal #frm_actualizar .w50,
+  .modal .body-modal #form_eliminar .w50, .modal .body-modal #frm_actualizar .w50, .modal .body-modal .form_sendMail .w50,
   .modal .body-modal .frmbody .w50 {
     width: calc(100%);
   }
@@ -3159,6 +3566,25 @@ table th {
   letter-spacing: 0.5px;
   font-size: 20px;
   font-weight: 600;
+}
+
+.modal .body-modal .form_sendMail {
+  text-align: center;
+}
+
+.modal .body-modal .form_sendMail .text {
+  font-weight: 500;
+}
+
+.modal .body-modal .form_sendMail .box-nombre, .modal .body-modal .form_sendMail .box-correo {
+  text-transform: uppercase;
+}
+
+.modal .body-modal .form_sendMail .box-nombre span, .modal .body-modal .form_sendMail .box-correo span {
+  font-size: 22px;
+  color: #0A2558;
+  font-weight: 400;
+  text-transform: lowercase;
 }
 
 .modal.is-active {
@@ -3230,6 +3656,17 @@ table th {
 
 .modalBienvenida .box-modal .title {
   text-align: center;
+  margin-bottom: 30px;
+}
+
+.modalBienvenida .box-modal .box-video {
+  width: 100%;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+.modalBienvenida .box-modal .box-video video {
+  width: 100%;
 }
 
 .modalBienvenida .box-modal .box-input {

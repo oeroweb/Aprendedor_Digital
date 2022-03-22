@@ -1,5 +1,12 @@
 <?php 
-  include 'layout/header.php'; 
+  include 'layout/header.php';
+
+	$usuario_id = $_SESSION['sesion_aprenDigital']['id'];
+	$usuario_perfil = $_SESSION['sesion_aprenDigital']['perfil_id'];
+
+	if($usuario_perfil >= 3){
+		header("Location:dashboard.php");
+	}
 ?>
 
 <body>

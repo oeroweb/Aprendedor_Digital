@@ -53,6 +53,7 @@ $id = $_GET['id'];
 						<table id="dt_usuariosGrupo" class="w100">
 							<thead>
 								<tr>						
+									<th class="">Items</th>									
 									<th class="">Selecionar</th>									
 									<th class="">Nombre</th>							
 									<th class="">Apellidos</th>											
@@ -63,11 +64,14 @@ $id = $_GET['id'];
 							<tbody>		
 								<!-- <input type="text" name="grupo_id" value="<?//php echo $id; ?>" id="grupo_user">			-->
 								<?php 
+								$contador = 0;
 								$grupos = selectallusergrupo($db, 'grupos_usuarios','usuarios',  $id);
 								if (!empty($grupos) && mysqli_num_rows($grupos) >= 1) :
 									while ($grupo = mysqli_fetch_assoc($grupos)) :
+										$contador = $contador + 1;
 								?> 
-									<tr id="<?=$grupo['myid']?>">						
+									<tr id="<?=$grupo['myid']?>">
+										<td><?=$contador?></td>
 										<td >													
 											<input type="checkbox" name="ids[]" value="<?=$grupo['myid']?>" class="users"> 
 										</td>

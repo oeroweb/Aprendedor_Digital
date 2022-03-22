@@ -348,7 +348,7 @@
 	
 	//LISTAR todos los usuarios y Cursos por grupo - grupo content / listadocursos-add
 	function listarallusuariosycursosporgrupo($conexion, $grupo_id){
-			$sql = "SELECT guc.id, guc.grupo_id, guc.fase_id, gu.acceso_id, u.nombre, u.ape_paterno, u.ape_materno, c.nombre as 'Curso'
+			$sql = "SELECT guc.id, guc.grupo_id, guc.fase_id, guc.acceso_id, u.nombre, u.ape_paterno, u.ape_materno, c.nombre as 'Curso'
 			FROM grupos_usuarios_cursos guc 
 			INNER JOIN cursos c
 			on guc.curso_id = c.id
@@ -356,7 +356,7 @@
 			on guc.usuario_id = u.id
 			INNER JOIN grupos_cursos gu
 			on guc.grupocurso_id = gu.id
-			WHERE guc.grupo_id = $grupo_id ORDER BY u.ape_paterno ASC";
+			WHERE guc.grupo_id = $grupo_id ORDER BY u.ape_paterno ASC, guc.fase_id ASC";
 
 		$datos = mysqli_query($conexion, $sql);
 		if($datos && mysqli_num_rows($datos) >=1){
@@ -369,7 +369,7 @@
 
 	//LISTAR todos los usuarios y Cursos por grupo - grupo-content / listadocursos-add
 	function listarallusuariosyclasesporgrupo($conexion, $grupo_id){
-			$sql = "SELECT guc.id, guc.grupo_id, guc.fase_id, gu.acceso_id, u.nombre, u.ape_paterno, u.ape_materno, c.nombre as 'Clases'
+			$sql = "SELECT guc.id, guc.grupo_id, guc.fase_id, guc.acceso_id, u.nombre, u.ape_paterno, u.ape_materno, c.nombre as 'Clases'
 			FROM grupos_usuarios_clases guc 
 			INNER JOIN clases c
 			on guc.clase_id = c.id
@@ -377,7 +377,7 @@
 			on guc.usuario_id = u.id
 			INNER JOIN grupos_clases gu
 			on guc.grupoclases_id = gu.id
-			WHERE guc.grupo_id = $grupo_id ORDER BY u.ape_paterno ASC";
+			WHERE guc.grupo_id = $grupo_id ORDER BY u.ape_paterno ASC, guc.fase_id ASC";
 
 		$datos = mysqli_query($conexion, $sql);
 		if($datos && mysqli_num_rows($datos) >=1){
@@ -513,14 +513,14 @@
 
 	// OBTENER los cursos escogidos por fase -- cursos
 	function listarcursosescogidos($conexion, $tabla, $tabla2, $tabla3, $usuario_id, $fase_id){
-		$sql = "SELECT g.estado_id, guc.usuario_id, guc.token, c.fase_id,c.id as curso_id, c.nombre, c.imagen, guc.acceso_id FROM $tabla guc
+		$sql = "SELECT g.estado_id, guc.usuario_id, guc.token, c.fase_id,c.id as curso_id, c.nombre, c.imagen, c.orden, guc.acceso_id FROM $tabla guc
 		INNER JOIN $tabla2 c
 		on guc.curso_id = c.id
     INNER JOIN $tabla3 gc
     on guc.grupocurso_id = gc.id
 		INNER JOIN grupos g 
     on guc.grupo_id = g.id
-		WHERE guc.usuario_id = $usuario_id and c.fase_id = $fase_id and g.estado_id = 1";
+		WHERE guc.usuario_id = $usuario_id and c.fase_id = $fase_id and g.estado_id = 1 ORDER by c.orden";
 
 		$datos = mysqli_query($conexion, $sql);
 		if($datos && mysqli_num_rows($datos) >=1){
@@ -607,6 +607,22 @@
 		return $resultado;
 	}
 
+	// TRAER CLASES MAESTRAS Y Grupo de Clases - clasesm
+	function mostarclasescompleto($conexion, $tabla, $tabla2, $usuario_id){
+		$sql = "SELECT *, guc.id as 'gruposusuariosclases_id' FROM grupos_usuarios_clases guc 
+		INNER JOIN clases c
+		on guc.clase_id = c.id 
+		where guc.usuario_id = $usuario_id
+		 ORDER BY c.orden";
+
+		$datos = mysqli_query($conexion, $sql);
+		if($datos && mysqli_num_rows($datos) >=1){
+			$resultado = $datos;
+		}else{
+			$resultado = '';
+		}
+		return $resultado;
+	}
 	// TRAER CLASES MAESTRAS Y VALIDAR TOKEN
 	function mostarclasescompletasytoken($conexion, $tabla, $tabla2, $clase_id, $usuario_id, $token){
 		$sql = "SELECT * FROM $tabla guc
@@ -636,9 +652,33 @@
 		return $resultado;
 	}
 
+	function obtenerdatosusuariosyclasesenproceso($conexion, $tabla, $usuario_id, $clases_id){
+		$sql = "SELECT * FROM $tabla where usuario_id = $usuario_id and clase_id = $clases_id";
+
+		$datos = mysqli_query($conexion, $sql);
+		if($datos && mysqli_num_rows($datos) >=1){
+			$resultado = $datos;
+		}else{
+			$resultado = '';
+		}
+		return $resultado;
+	}
+
 	// OBTENER lista de cursos por usuario - clases
 	function obtenerListaContenidoCursoPorUsuarioId($conexion, $tabla, $usuario_id, $curso_id){
-		$sql = "SELECT * FROM $tabla where usuario_id = $usuario_id and curso_id = $curso_id GROUP by cursocontendido_id";
+		$sql = "SELECT DISTINCT cursocontendido_id FROM $tabla where usuario_id = $usuario_id and curso_id = $curso_id";		
+		
+		$datos = mysqli_query($conexion, $sql);
+		if($datos && mysqli_num_rows($datos) >=1){
+			$resultado = $datos;
+		}else{
+			$resultado = '';
+		}
+		return $resultado;
+	}
+
+	function obtenerListaClasesPorUsuarioId($conexion, $tabla, $usuario_id, $clase_id){
+		$sql = "SELECT * FROM $tabla WHERE usuario_id = $usuario_id and clase_id = $clase_id";		
 		
 		$datos = mysqli_query($conexion, $sql);
 		if($datos && mysqli_num_rows($datos) >=1){

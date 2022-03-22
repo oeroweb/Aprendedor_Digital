@@ -12,10 +12,10 @@ $resultado = mysqli_query($db, $sql);
 
 if($resultado){
 	$_SESSION['completado'] = "<i class='far fa-check-circle'></i> El registro se elimino de forma exitosa"; 
-	header("Location: ../../admin-cursos-maestras.php");	
+	header("Location: ../../admin-clases-maestras.php");	
 } else{
 	$_SESSION['fallo'] = "<i class='far fa-times-circle'></i> Error al eliminar el registro; por favor volver a intentar";
-	header("Location: ../../admin-cursos-maestras.php");	
+	header("Location: ../../admin-clases-maestras.php");	
 }
 ?>
 			

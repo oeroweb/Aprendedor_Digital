@@ -32,14 +32,14 @@
 							<div class="w100 container-wrap mg-bt10" >
 								<div class="box-input">
 									<label for="nombre">Nombre del Grupo: </label>					
-									<input class="w100" type="text" name="nombre" >	
+									<input class="w100" type="text" name="nombre" required>	
 								</div>
 								<div class="box-input">
 									<label for="descripcion">Descripción: </label>									
 									<textarea name="descripcion" rows="5"></textarea>
 								</div>		
 							</div>						
-							<input type="submit" value="Añadir Grupos" class="btn" name="" id="" >
+							<input type="submit" value="Añadir Grupos" class="btn">
 						</form>						
 					</div>					
 				</div>

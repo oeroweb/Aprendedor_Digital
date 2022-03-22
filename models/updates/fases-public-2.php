@@ -14,10 +14,10 @@
   
     if($resultado){
       $_SESSION['completado'] = "Activado forma exitosa";	
-      header("Location: ../../admin-cursos-maestras.php");
+      header("Location: ../../admin-clasess-maestras.php");
     } else{
       $_SESSION['fallo'] = "Error al activar; por favor volver a intentar";
-      header("Location: ../../admin-cursos-maestras.php");
+      header("Location: ../../admin-clases-maestras.php");
     }
   }
 ?>

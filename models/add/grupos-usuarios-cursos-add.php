@@ -7,6 +7,7 @@
   }
         
  if(isset($_POST['usuariosycursos'])){
+  $idgroup = $_POST['idgroup'];
   $items1 = ($_POST['grupo_id']);
   $items2 = ($_POST['grupodetalle_id']);
   $items3 = ($_POST['grupodetallecurso_id']);		
@@ -41,11 +42,9 @@
     
     $valores_final = substr($valores, 0, -1);
 
-    //var_dump($valores_final); //die();
-
     $sql="INSERT INTO grupos_usuarios_cursos (grupo_id, grupofase_id, grupocurso_id, usuario_id, fase_id, curso_id, acceso_id, token, fechacreacion, usuario, estado_id) VALUES $valores_final";
 
-    var_dump($sql); //die();        
+    //var_dump($sql); //die();        
     $resul = mysqli_query($db,$sql);
 
     $item1 = next($items1);
@@ -64,10 +63,10 @@
     }else{
       $_SESSION['fallo'] = "No se completo la carga; por favor volver a intentar";							
     }
-    header("Location: ../../admin-grupos.php");		
+    header("Location: ../../grupos-content.php?id=$idgroup");		
   }
 
  }
- header("Location: ../../admin-grupos.php");
+ header("Location: ../../grupos-content.php?id=$idgroup");
 
 ?>

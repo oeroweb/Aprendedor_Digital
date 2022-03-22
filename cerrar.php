@@ -1,9 +1,14 @@
 <?php 
 	session_start();
+	require_once	'config/db.php';
 
 	if(isset($_SESSION['sesion_aprenDigital'])){
+		$usuario_id = $_SESSION['sesion_aprenDigital']['id'];
+	
+		$sql ="UPDATE usuarios set estado_login = 'desconectado', fechamodificacion = NOW() WHERE id = $usuario_id";
+		$estadoLogin = mysqli_query($db, $sql);
+
 		session_destroy();
 	}
-	// setcookie("zilsysActiva", "Session generada de forma diaria", time() -1);
-	header('Location: ../index.php');
+	header('Location: index.php');
  ?>

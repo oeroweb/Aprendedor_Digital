@@ -9,13 +9,14 @@
 	$textoerror = '<h2 class="title">El curso que buscas no exite, oh no se encontro. </h2>';	
 	$curso_id = isset($_GET['cu']) ? $_GET['cu'] : '';
 	$token = trim($_GET['t']);
+	$fase = isset($_GET['f']) ? $_GET['f'] : '';
 	$curso_contenido = (isset($_GET['cc']) ? $_GET['cc'] : '');
 	$usuario_id = $_SESSION['sesion_aprenDigital']['id'];
-	// if(!$_GET['pag']){
-	if(!$_GET['pag']){
-		header("Location:clases.php?cu=$curso_id&t=$token&pag=1");
-	}
-	//echo $curso_id .' '. $token .' '.$curso_contenido.' '.$usuario_id;
+
+	if(!$_GET['pag'] || $_GET['pag'] <= 0 ){
+		header("Location:clases.php?cu=$curso_id&t=$token&f=$fase&pag=1");
+	}	
+	
 ?>
 
 <body>
@@ -30,8 +31,7 @@
 			<?php
 				$cursos = mostarcursosytoken($db, 'grupos_usuarios_cursos','cursos', $curso_id, $usuario_id, $token);
 				if (!empty($cursos) && mysqli_num_rows($cursos) >= 1) :
-					$cant = mysqli_num_rows($cursos);
-					//echo $cant;
+					$cant = mysqli_num_rows($cursos);					
 					while ($curso = mysqli_fetch_assoc($cursos)) :
 			?>
 				<div class="box-titles">
@@ -66,25 +66,30 @@
 							<div class="accordion" id="accordion">
 								<?php
 									$contador = 0;
-									$contenidos = obtenerListaContenidoCursoPorUsuarioId($db, 'lista_cursos_usuario', $usuario_id, $curso_id);
+									$contenidos = obtenerListaContenidoCursoPorUsuarioId($db, 'lista_cursos_usuario', $usuario_id, $curso_id);							
 									if (!empty($contenidos) && mysqli_num_rows($contenidos) >= 1) :
-										$cant_capitulos = mysqli_num_rows($contenidos); 
-										//echo $cant_capitulos;
-										while ($contenido = mysqli_fetch_assoc($contenidos)) :
-											$contenidoid =	$contenido['id'];
+										$cant_capitulos = mysqli_num_rows($contenidos);																	
+										while ($contenido = mysqli_fetch_assoc($contenidos)) :											
 											$contador = $contador + 1;
+											$contenidoID = $contenido['cursocontendido_id']
 								?>
 									<div class="content-accordion-clases">
-										<div class="box-label" data-label="<?= $contenido['id'] ?>">
-											<h2 class="title"><i class="mg-rg5 far fa-folder-open"> </i> <?= $contador.'. '.$contenido['nombrecapitulo'] ?></h2>
+										<div class="box-label">
+											<h2 class="title"><?=$contador .' . '?> <i class="mg-rg5 far fa-folder-open"> </i> 
+												<?php  
+													$sql_capitulos = "SELECT * FROM lista_cursos_usuario where usuario_id = $usuario_id and curso_id = $curso_id and cursocontendido_id = $contenidoID ORDER BY id";
+													$capitulos = mysqli_query($db, $sql_capitulos);
+													$capitulo = mysqli_fetch_array($capitulos);
+													echo $capitulo['nombrecapitulo'];	
+												?>
+											</h2>
 										</div>
-										<?php
-											
+										<?php											
 											$detalles = obtenerListaDetalleContenidoCursoPorUsuarioId($db, 'lista_cursos_usuario', $usuario_id, $curso_id, $contenido['cursocontendido_id']);
 											if (!empty($detalles) && mysqli_num_rows($detalles) >= 1) :
-												$cant_videos = mysqli_num_rows($detalles);										
-												while ($detalle = mysqli_fetch_assoc($detalles)) :
-													
+												$cant_videos = mysqli_num_rows($detalles);
+												//echo 'videos -> ' .$cant_videos;										
+												while ($detalle = mysqli_fetch_assoc($detalles)) :													
 										?>
 											<div class="inner-content-accordion <?php echo $detalle['proceso_id'] == 9 ? 'concluido' : '' ?>" data-video="<?=$detalle['id']?>">
 												<a href="clases.php?cu=<?=$curso_id?>&t=<?=$token?>&cc=<?=$detalle['id']?>&<?=$detalle['pagina']?>">
@@ -101,7 +106,6 @@
 														<?php endif; ?>
 													</div>
 												</div>
-
 												</a>
 											</div>
 										<?php endwhile; endif; ?>
@@ -115,8 +119,7 @@
 								<?php endif; ?>
 							</div>		
 						</div>
-
-						<!-- ?enablejsapi=1 -->						
+								
 						<div class="content-media" id="contentMedia">							
 							<?php
 								$cantreg_pag=1;
@@ -126,7 +129,10 @@
 								if (!empty($alldetalles) && mysqli_num_rows($alldetalles) >= 1) :
 									$cant_videos = mysqli_num_rows($alldetalles); 
 									$total_pag=ceil($cant_videos/$cantreg_pag);
-									//echo $total_pag;
+									
+									if($_GET['pag'] > $total_pag ){
+										header("Location:clases.php?cu=$curso_id&t=$token&pag=1");
+									}									
 
 									$sql2 = "SELECT * FROM lista_cursos_usuario where usuario_id = $usuario_id and curso_id = $curso_id Limit $iniciar_pag,$cantreg_pag";
 									$resultado = mysqli_query($db, $sql2);
@@ -163,8 +169,38 @@
 
 								<div class="box-text">
 									<p class="parrafo">Tema : 
-										<span class="font-light"> <?= $detalle['nombrecursodetalle'] ?> </span></p>									
+										<span class="font-light"> <?= $detalle['nombrecursodetalle'] ?> </span>
+									</p>			
 								</div>
+
+								<?php 
+                $sql = "SELECT nombrecursodetalle FROM lista_cursos_usuario WHERE porcentaje >= 90 and usuario_id = $usuario_id";
+                $dataVideosProceso = mysqli_query($db, $sql);
+                $cantDataVideosProceso = mysqli_num_rows($dataVideosProceso);
+                
+								$sql2 = "SELECT nombrecursodetalle FROM lista_cursos_usuario WHERE usuario_id = $usuario_id";
+                $dataVideos = mysqli_query($db, $sql2);
+                $cantDataVideos = mysqli_num_rows($dataVideos);
+								
+								$sql3 = "SELECT * FROM grupos_usuarios_cursos WHERE usuario_id = $usuario_id and proceso_id IS NULL ORDER by fase_id LIMIT 1";
+                $dataNextVideos = mysqli_query($db, $sql3);
+                $cantDataNextVideos = mysqli_num_rows($dataNextVideos);
+								
+								if($cantDataVideos == $cantDataVideosProceso):
+								?>
+								<div class="box-botones">
+									<p class="mg-bt20">Presiona el boton para ir al siguiente curso.. </p> 
+										<?php foreach($dataNextVideos as $video): ?>	
+											<input type="hidden" id="video_id" value="<?=$video['id']?>">
+											<input type="hidden" id="token_id" value="<?=$video['token']?>">
+											<input type="hidden" id="idCurso" value="<?=$curso_id?>">
+											<input type="hidden" id="usuario_id" value="<?=$usuario_id?>">
+										<?php endforeach; ?>
+									<a href="" class="btn" id="btnNextVideo" >Pasar al siguiente Curso <i class="fas fa-redo-alt"></i></a>
+								</div>
+								<?php endif; ?>
+
+
 							<?php endwhile;
 								endif; ?>						
 							
@@ -175,8 +211,7 @@
 							<?php
 								$detalles = obtenerdatos($db, 'cursos_contenido_detalle', $curso_contenido);
 								if (!empty($detalles) && mysqli_num_rows($detalles) >= 1) :
-									$cant_videos = mysqli_num_rows($detalles); 
-									//echo $cant_videos;
+									$cant_videos = mysqli_num_rows($detalles);									
 									while ($detalle = mysqli_fetch_assoc($detalles)) :
 							?>
 								<div class="mg-tp20">
@@ -196,8 +231,7 @@
 					<?php
 						$cursos = mostarcursosytoken($db, 'grupos_usuarios_cursos','cursos', $curso_id, $usuario_id, $token);
 						if (!empty($cursos) && mysqli_num_rows($cursos) >= 1) :
-							$cant = mysqli_num_rows($cursos);
-							//echo $cant;
+							$cant = mysqli_num_rows($cursos);							
 							while ($curso = mysqli_fetch_assoc($cursos)) :
 					?>				
 						<div class="w40 mg-auto">
@@ -262,7 +296,7 @@
 			<?php borrarErrores(); ?>
 		</div>
 	</section>
-	<!-- <script type="text/javascript" src="https://www.youtube.com/iframe_api"></script> -->
+
 	<?php include 'layout/footer.php'; ?>
 	</div>
 	</main>
@@ -290,12 +324,10 @@
 		 nextButton = document.getElementById(".next_video");
 
 		// http://localhost/pagaprendedor/escuela/curso-details-edit.php?id=2
-		// <iframe width="560" height="315" src="https://www.youtube.com/embed/K-3qFfZXsjI?enablejsapi=1&rel=0&controls=2&showinfo=0&modestbranding=1&color=white"></iframe>
 		// <iframe width="560" height="315" src="https://www.youtube.com/embed/UcIxotbHKqQ?enablejsapi=1&rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 		// ?enablejsapi=1&rel=0&showinfo=0&modestbranding=1
 
-		function onYouTubeIframeAPIReady() { 
-			// console.log('listo');
+		function onYouTubeIframeAPIReady() {			
 			player = new YT.Player('player');
 			player.addEventListener('onReady', 'onPlayerReady');
 			player.addEventListener('onStateChange', 'onPlayerStateChange');			
@@ -354,5 +386,25 @@
 				}			
 			});			
 		}
+
+		var btnNextVideo = document.getElementById("btnNextVideo");
+
+		btnNextVideo.addEventListener("click", function(e){
+			e.preventDefault();
+			console.log("next video");
+
+			var videoId = document.getElementById("video_id").value, 
+				cursoId = document.getElementById("idCurso").value,			
+				usuarioId = document.getElementById("usuario_id").value;			
+				
+			$.ajax({
+				type: "POST",
+				url: "models/updates/upestadonextcurso.php",
+				data: {videoId : videoId, cursoId : cursoId, usuarioId : usuarioId },
+				success: function(respuesta){ 					
+					window.location.href = "cursos.php";
+				}			
+			});		
+		});
 
   </script>

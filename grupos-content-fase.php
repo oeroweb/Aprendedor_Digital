@@ -23,17 +23,7 @@ $id = $_GET['id'];
 					<?php 
 						endwhile;	endif; 
 					?>				
-				</div>							
-
-				<?php if (isset($_SESSION['completado'])) : ?>
-					<div class="alerta-exito">
-						<?= $_SESSION['completado'] ?>
-					</div>
-				<?php elseif (isset($_SESSION['fallo'])) : ?>
-					<div class="alerta-error">
-						<?= $_SESSION['fallo'] ?>
-					</div>
-				<?php endif; ?>
+				</div>
 
 				<div id="info"></div>
 				<div class="inner-grupos-content ">					
@@ -47,6 +37,15 @@ $id = $_GET['id'];
 						<!-- TABLA DE CURSOS -->
 						<table id="dt_grupoCursos" class="w100">
 							<h2 class="title">Cursos Añadidos</h2>
+							<?php if(isset($_SESSION['completado'])): ?>
+								<div class="alerta-exito">
+									<?=$_SESSION['completado']?>  
+								</div>
+							<?php elseif(isset($_SESSION['fallo'])): ?>
+								<div class="alerta-error">
+									<?=$_SESSION['fallo']?>
+								</div>
+							<?php endif; ?>
 							<thead>
 								<tr>						
 									<th class="w10">Items</th>
@@ -73,17 +72,17 @@ $id = $_GET['id'];
 										<td><?=$dato['descripcion']?></td>
 										<td>
 											<?php if($dato['acceso_id'] == 4) :?>
-												<a href="models/updates/grupos-curso-public.php?id=<?=$dato['myid']?>" class="btn-3" title="No publicado">
+												<a href="models/updates/grupos-curso-public.php?id=<?=$dato['myid']?>&&idgroup=<?=$id?>" class="btn-3" title="No publicado">
 												<img src="assets/fonts/toggle-of.svg" alt="Inactivo">		
 											Bloqueado</a>													
 											<?php else : ?>
-												<a href="models/updates/grupos-curso-private.php?id=<?=$dato['myid']?>" class="btn-3" title="Activo">			
+												<a href="models/updates/grupos-curso-private.php?id=<?=$dato['myid']?>&&idgroup=<?=$id?>" class="btn-3" title="Activo">			
 												<img src="assets/fonts/toggle-on.svg" alt="activo">	
 											Activo</a>																				
 											<?php endif; ?>	
 										</td>										
 										<td>											
-											<a href="models/deletes/grupo-cursos-delete.php?id=<?=$dato['myid']?>" class=" btn-2" title="Quitar curso" onclick="return confirmDelete()"> <i class="fas fa-trash-alt"></i></a>
+											<a href="models/deletes/grupo-cursos-delete.php?id=<?=$dato['myid']?>&&idgroup=<?=$id?>" class=" btn-2" title="Quitar curso" onclick="return confirmDelete()"> <i class="fas fa-trash-alt"></i></a>
 										</td>			
 									</tr>
 									<?php 
@@ -102,6 +101,15 @@ $id = $_GET['id'];
 						<!-- TABLA DE CLASES -->
 						<table id="dt_grupoCursos" class="w100">
 							<h2 class="title">Clases Maestras Añadidas</h2>
+							<?php if(isset($_SESSION['completado'])): ?>
+								<div class="alerta-exito">
+									<?=$_SESSION['completado']?>  
+								</div>
+							<?php elseif(isset($_SESSION['fallo'])): ?>
+								<div class="alerta-error">
+									<?=$_SESSION['fallo']?>
+								</div>
+							<?php endif; ?>
 							<thead>
 								<tr>						
 									<th class="w10">Items</th>
@@ -134,17 +142,17 @@ $id = $_GET['id'];
 										<td><?=substr($dato['descripcion'],0,80)?></td>
 										<td>
 											<?php if($dato['acceso_id'] == 4) :?>
-												<a href="models/updates/grupos-clases-public.php?id=<?=$dato['myid']?>" class="btn-3" title="No publicado">
+												<a href="models/updates/grupos-clases-public.php?id=<?=$dato['myid']?>&&idgroup=<?=$id?>" class="btn-3" title="No publicado">
 												<img src="assets/fonts/toggle-of.svg" alt="Inactivo">		
 											Bloqueado</a>													
 											<?php else : ?>
-												<a href="models/updates/grupos-clases-private.php?id=<?=$dato['myid']?>" class="btn-3" title="Activo">			
+												<a href="models/updates/grupos-clases-private.php?id=<?=$dato['myid']?>&&idgroup=<?=$id?>" class="btn-3" title="Activo">			
 												<img src="assets/fonts/toggle-on.svg" alt="activo">	
 											Activo</a>																				
 											<?php endif; ?>	
 										</td>										
 										<td>											
-											<a href="models/deletes/grupo-clases-delete.php?id=<?=$dato['myid']?>" class=" btn-2" title="Quitar curso" onclick="return confirmDelete()"> <i class="fas fa-trash-alt"></i></a>
+											<a href="models/deletes/grupo-clases-delete.php?id=<?=$dato['myid']?>&&idgroup=<?=$id?>" class=" btn-2" title="Quitar curso" onclick="return confirmDelete()"> <i class="fas fa-trash-alt"></i></a>
 										</td>			
 									</tr>
 									<?php 

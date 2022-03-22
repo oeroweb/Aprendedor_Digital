@@ -1,5 +1,11 @@
 <?php 
-  include 'layout/header.php'; 
+  include 'layout/header.php';
+	$usuario_id = $_SESSION['sesion_aprenDigital']['id'];
+	$usuario_perfil = $_SESSION['sesion_aprenDigital']['perfil_id'];
+
+	if($usuario_perfil >= 3){
+		header("Location:dashboard.php");
+	}
 ?>
 
 <?php include 'layout/aside.php'; ?>
@@ -12,19 +18,20 @@
           <h1 class="title">Administración de Usuarios / Docentes / Alumnos</h1>
 				</div>
 				<div class="box-botones mg-bt20">						
-				<a href="admin-instituciones.php" class="btn" title="Añadir Curso"><i class="fas fa-plus"></i> Administrar Instituciones</a>
+					<a href="admin-instituciones.php" class="btn" title="Añadir Curso"><i class="fas fa-plus"></i> Administrar Instituciones</a>
+					<a href="admin-solicitudes.php" class="btn" title="Añadir Curso"><i class="fas fa-plus"></i> Administrar Solicitudes Alumnos</a>
 				</div>
 				<!---------------- REGISTROS ---------------->
 				<div id="info"></div>
-				<?php if(isset($_SESSION['completado'])): ?>
-					<div class="alerta-exito">
-						<?=$_SESSION['completado']?>  
+				<!-- <?//php if(isset($_SESSION['completado'])): ?>
+					<div class="box-message alerta-exito">
+						<?//=$_SESSION['completado']?>  
 					</div>
-				<?php elseif(isset($_SESSION['fallo'])): ?>
-					<div class="alerta-error">
-						<?=$_SESSION['fallo']?>
+				<?//php elseif(isset($_SESSION['fallo'])): ?>
+					<div class="box-message alerta-error">
+						<?//=$_SESSION['fallo']?>
 					</div>
-				<?php endif; ?> 
+				<?//php endif; ?>  -->
 				<div class="container-wrap w100">					
 					<form action="usuarios-add.php" class="box-formulario-container " method="post">
 						<div class="box-input-container">
@@ -47,7 +54,7 @@
 						<div class="box-titles">
 							<h1 class="title">Lista de Usuarios</h1>							
 						</div>		
-						<table id="dt_listaUsuarios" class="w100">
+						<table id="dt_listaUsuarios" class="w100 hover">
 							<thead>
 								<tr>						
                   <th class="">ID</th>
@@ -55,9 +62,11 @@
 									<th class="">APE. PATERNO</th>							
 									<th class="">APE. MATERNO</th>							
 									<th class="">EMAIL</th>							
-									<th class="">CELULAR</th>							
-									<th class="">PAÍS</th>							
+									<th class="">NACIONALIDAD</th>							
 									<th class="">PERFIL</th>									
+									<th class="">LOGUEO</th>							
+									<th class="">ULTIMA CONEXION</th>							
+									<th class="">CORREO</th>							
 									<?php if($_SESSION['sesion_aprenDigital']['perfil_id'] <= '2'): ?>	
                     <th class="">Opciones</th>	
 									<?php endif; ?>
@@ -73,12 +82,14 @@
 		<!---- FIN DEL CONTENIDO ---->	
 	
   </section>
+	<span class="ir-arriba hidden" id="btnArriba" title="Subir"><i class="fa fa-chevron-up"></i></span>
 </main>
 
 <?php borrarErrores(); ?>	
 <?php include 'layout/footer.php'; ?>
+<?php include 'layout/footer_datatables.php'; ?>
 
-<!-- ----- MODAL 1 ----- -->
+<!-- ----- MODAL  ----- -->
 <!-- ----- EDITAR  ----- -->
 <div class="modal" id="modal1">
 	<div class="body-modal">
@@ -175,9 +186,7 @@
 	</div>
 </div>
 <!-- FIN EDITAR -->
-<!-- FIN MODAL -->
 
-<!-- ----- MODAL 2 ----- -->
 <!-- ----- ELIMINAR  ----- -->
 <div class="modal" id="modal2">
 	<div class="body-modal">
@@ -194,6 +203,27 @@
 	</div>
 </div>
 <!-- FIN ELIMINAR -->
+
+<!-- ----- ENVIO CORREO CREDENCIALES   ----- -->
+<div class="modal" id="modal3">
+	<div class="body-modal">
+		<form action="" method="post" class="form_sendMail" id="form_sendMail" onsubmit="event.preventDefault();">			
+			<h2 class="title">Envío de Credenciales </h2><hr>
+			<p class="text">Se enviará nuevamente el correo de Bienvenida al usuario con sus credenciales de ingreso, para acceder al sistema.</p>
+			<div class="container3">					
+				<input type="hidden" name="id" id="id">				
+				<input type="hidden" name="email" id="sendemail" >
+				<input type="hidden" name="nombre" id="sendnombre" >
+				<input type="hidden" name="password" value="cambiame123">
+				<div class="box-nombre w100" id="box-nombre"></div>
+				<div class="box-correo w100" id="box-correo"></div>
+			</div>
+			<input type="submit" class="btn" value="Enviar">
+			<a href="#" class="btn" onclick="cerrarmodal()"> Cancelar</a>
+		</form>
+	</div>
+</div>
+
 <!-- FIN MODAL -->
 
 <script>
@@ -201,12 +231,14 @@
 	$(document).ready(function(){
 		listar();
 		actualizar();
-		eliminar();		
+		eliminar();
+		sendMail();	
 	});
 
 	function cerrarmodal(){
 		$("#modal1").fadeOut();		
 		$("#modal2").fadeOut();		
+		$("#modal3").fadeOut();		
 	};
 
 	function refresh() {
@@ -228,7 +260,7 @@
 		var form = new FormData($('#filesForm')[0]);
 
 		if(filesUsuarios == '' || filesUsuarios == null){
-			$("#info").html("<div class='alerta-error'><i class='ico icon ion-alert'></i>No hay archivo..</div>");
+			$("#info").html("<div class='alerta-error'><i class='fas fa-times-circle'></i> No hay archivo..</div>");
 		}else{
 			$.ajax({
 				url: "models/add/usuarios-files-add.php",
@@ -249,17 +281,16 @@
 	var actualizar = function(){
 		$("#frm_actualizar").on("submit", function(){		
 			//e.preventDefault();
-			var frm = $(this).serialize();
-			//console.log(frm);
+			var frm = $(this).serialize();			
 			$.ajax({
 				method: "POST",
 				url: "models/updates/upusuario.php",
 				dataType: 'json',
 				data: frm
-			}).done(function(resultado){			
-					console.log(resultado);																		
+			}).done(function(resultado){
+																								
 					if(!resultado.error){						
-						$("#info").html("<div class='alerta-exito'><i class='ico icon ion-android-done'></i>Se actualizarón los datos con exito!</div>");		
+						$("#info").html("<div class='alerta-exito'><i class='far fa-check-circle'> </i>Se actualizarón los datos con exito!</div>");		
 						$("#info").fadeOut(5000, function(){
 							$(this).html("");
 							$(this).fadeIn(2000);
@@ -267,7 +298,7 @@
 						cerrarmodal();
 						refresh();										
 					}else{
-					$("#info").html("<div class='alerta-error'><i class='ico icon ion-alert'></i>Hubo un error en el proceso por favor volver a probar!!</div>");
+					$("#info").html("<div class='alerta-error'><i class='fas fa-times-circle'></i> Hubo un error en el proceso por favor volver a probar!!</div>");
 					$("#info").fadeOut(5000, function(){
 						$(this).html("");
 						$(this).fadeIn(2000);
@@ -286,10 +317,9 @@
 			dataType:"json",
 			data: $(this).serialize()
 		}).done(function(resultado){
-			console.log(resultado);			
-			//listar();
+								
 			if(!resultado.error){						
-				$("#info").html("<div class='alerta-exito'><i class='ico icon ion-android-done'></i> Se elimino con exito!</div>");	
+				$("#info").html("<div class='alerta-exito'><i class='far fa-check-circle'> </i> Se elimino con exito!</div>");	
 				$("#info").fadeOut(5000, function(){
 					$(this).html("");
 					$(this).fadeIn(3000);
@@ -297,7 +327,36 @@
 				cerrarmodal();
 				refresh();				
 			}else{
-				$("#info").html("<div class='alerta-error'><i class='ico icon ion-alert'></i>Hubo un error en el proceso por favor volver a intentar!!</div>");
+				$("#info").html("<div class='alerta-error'><i class='fas fa-times-circle'></i> Hubo un error en el proceso por favor volver a intentar!!</div>");
+					$("#info").fadeOut(5000, function(){
+						$(this).html("");
+						$(this).fadeIn(3000);
+					});
+					cerrarmodal();
+			}
+			});
+		});
+	}
+
+	var sendMail = function(){
+		$("#form_sendMail").on("submit", function(){		
+		$.ajax({
+			method:"POST",
+			url: "models/sendmail/sendUsuarioCredenciales.php",
+			dataType:"json",
+			data: $(this).serialize()
+		}).done(function(resultado){
+			//console.log(resultado);					
+			if(!resultado.error){						
+				$("#info").html("<div class='box-message alerta-exito'><i class='far fa-check-circle'> </i> Se envío el correo con exito!</div>");	
+				$("#info").fadeOut(5000, function(){
+					$(this).html("");
+					$(this).fadeIn(3000);
+				});						
+				cerrarmodal();
+				refresh();				
+			}else{
+				$("#info").html("<div class='box-message alerta-error'><i class='fas fa-times-circle'></i> Hubo un error en el proceso por favor volver a intentar!!</div>");
 					$("#info").fadeOut(5000, function(){
 						$(this).html("");
 						$(this).fadeIn(3000);
@@ -310,6 +369,11 @@
 	
 	var listar = function(){
 		var table = $("#dt_listaUsuarios").DataTable({
+			"dom": 'Bfrtip',
+      "buttons": [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+      ],
+			"scrollX": true,
 			"destroy":true,
 			"ajax":{
 				'method':'POST',
@@ -321,18 +385,20 @@
 				{"data":"ape_paterno"},
 				{"data":"ape_materno"},
 				{"data":"email"},	
-				{"data":"celular"},
-				{"data":"pais"},					
-				{"data":"nombreperfil"}		
-				// {"data":"fecha"}			
+				{"data":"nacionalidad"},	
+				{"data":"nombreperfil"},		
+				{"data":"estado_login"},
+				{"data":"fechamodificacion"},
+				{"data":"envio_correo"}						
 				<?php if($_SESSION['sesion_aprenDigital']['perfil_id'] <= '2'): ?>
 				,
-				{"defaultContent": "<a class='editar btn-2 btn-azul' title='Editar'><i class='fas fa-pen'></i></a><a class='eliminar btn-2 btn-rojo' title='Borrar'><i class='fas fa-trash-alt'></i></a>"}	
+				{"defaultContent": "<a class='envio btn-2 btn-azul' title='Envío de Credenciales'><i class='fas fa-envelope'></i></a><a class='editar btn-2 btn-azul' title='Editar'><i class='fas fa-pen'></i></a><a class='eliminar btn-2 btn-rojo' title='Borrar'><i class='fas fa-trash-alt'></i></a>"}	
 				<?php endif; ?>		
 			],
 			"language": idioma_espanol,
-			"pageLength":25
+			"pageLength":100
 		});
+		obtener_data_envio("dt_listaUsuarios tbody", table);
 		obtener_data_editar("dt_listaUsuarios tbody", table);
 		obtener_data_eliminar("dt_listaUsuarios tbody", table);
 	}
@@ -341,8 +407,8 @@
 	$(document).on("click",".editar",function(){	
 		var data = table.row( $(this).parents("tr")).data();
 			$("#modal1").fadeIn();
-			$("#frm_actualizar #nombre").focus();				
-			console.log(data);
+			$("#frm_actualizar #nombre").focus();
+				
 			 var id= $("#frm_actualizar #id").val(data.id); 			  
 					nombre = $("#frm_actualizar #nombre").val(data.nombre);
 					apepaterno = $("#frm_actualizar #apepaterno").val(data.ape_paterno);
@@ -351,19 +417,31 @@
 					celular = $("#frm_actualizar #celular").val(data.celular);
 					correo = $("#frm_actualizar #email").val(data.email);			
 					institucion = $("#frm_actualizar #institucion").val(data.institucion_id);			
-					perfil = $("#frm_actualizar #perfil").val(data.perfil_id)		
-					sexo = $("#frm_actualizar #sexo").val(data.sexo_id)		
-					claveActual = $("#frm_actualizar #clave-actual").val(data.clave)		
+					perfil = $("#frm_actualizar #perfil").val(data.perfil_id);
+					sexo = $("#frm_actualizar #sexo").val(data.sexo_id);
+					claveActual = $("#frm_actualizar #clave-actual").val(data.clave);
 		});
 	}
 
 	var obtener_data_eliminar = function(tbody, table){
 	$(document).on("click",".eliminar",function(){	
-		var data = table.row( $(this).parents("tr")).data();
-			$("#modal2").fadeIn();
-			console.log(data);
+		var data = table.row( $(this).parents("tr")).data();		
+			$("#modal2").fadeIn();		
 			 var id = $("#form_eliminar #id").val(data.id);
-			 	nombre = $("#form_eliminar #box-nombre").html('Borrar al usuario : ' +data.nombre + ' ' + data.ape_paterno + ' ' + data.ape_materno);
+			 	nombre = $("#form_eliminar #box-nombre").html('Vas a borrar al usuario  ' +data.nombre + ' ' + data.ape_paterno + ' ' + data.ape_materno);
+		});
+	}
+	
+	var obtener_data_envio = function(tbody, table){
+	$(document).on("click",".envio",function(){	
+		var data = table.row( $(this).parents("tr")).data();
+		//console.log(data);
+			$("#modal3").fadeIn();		
+			 var id = $("#form_sendMail #id").val(data.id);
+			 		sendemail = $("#form_sendMail #sendemail").val(data.email);
+			 	sendnombre = $("#form_sendMail #sendnombre").val(data.nombre + ' ' + data.ape_paterno + ' ' + data.ape_materno );
+			 	nombre = $("#form_sendMail #box-nombre").html('usuario  <br><span>' + data.nombre + ' ' + data.ape_paterno + ' ' + data.ape_materno + '</span>');
+			 	email = $("#form_sendMail #box-correo").html('Correo  <br><span>' + data.email + '</span>');
 		});
 	}
 

@@ -59,9 +59,7 @@
 								</div>
 								<div class="box-input w25">
 									<label for="password">Contraseña:</label>
-									<input type="text" name="password[]" minlength="8" required>
-									<!-- <a class="btn" onclick="getPassword();">Generar Clave</a>	 -->
-									
+									<input type="text" name="password[]" minlength="8" value="cambiame123" readonly>	
 								</div>																		
 								<div class="box-input w25">
 									<label for="sexo">Sexo: </label>										

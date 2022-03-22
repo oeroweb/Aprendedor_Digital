@@ -2,17 +2,6 @@
   include 'layout/header.php'; 
   $usuario_id = $_SESSION['sesion_aprenDigital']['id'];
   //$usuario_perfil = $_SESSION['sesion_aprenDigital']['perfil_id'];
-
-  if($_SESSION['sesion_aprenDigital']['perfil_id'] == 4){
-
-    $cursos = obtenerdatosusuarios($db, 'grupos_usuarios_cursos', $_SESSION['sesion_aprenDigital']['id']);        
-      if(!empty($cursos) && mysqli_num_rows($cursos) >= 1){
-        $cantidad_cursos = mysqli_num_rows($cursos); 
-        //echo $cantidad;
-        //$cantidad_programa = round((($cantidad_cursos * 100)/12),2);									
-        $cantidad_programa = 0;									
-      }
-  }
 ?>
 
 <body>
@@ -31,44 +20,71 @@
         
         <?php if($_SESSION['sesion_aprenDigital']['perfil_id'] == 4) : ?>
 					<div class="inner-content mg-bt20 w70">					 			
-						<div class="inner-content-cursos">	
-								<div class="item-cursos">
-									<h2 class="title">Porcentaje del Programa</h2>
-									<?php if(isset($cantidad_programa)) : ?>
-										<input type="text" value="<?=$cantidad_programa?>" class="porcentaje_programa">
-									<?php else: ?>
-										<input type="text" value="0" class="porcentaje_programa">
-									<?php endif; ?>
-								</div>
-								<div class="item-cursos">
-                  <?php if(isset($cantidad_programa)) : ?>
-									<h2 class="title">Porcentaje <?=$cantidad_programa?>% de avance de Cursos</h2>
-                  <?php endif; ?>
-									<?php 
-										$cursos = obtenerdatosusuarios($db, 'grupos_usuarios_cursos', $_SESSION['sesion_aprenDigital']['id']);										
-											if(!empty($cursos) && mysqli_num_rows($cursos) >= 1):												  
-									?> 
-									<ul class="list-avance">
-										<li>
-											<h3 class="title">Cursos Completados</h3>
-										</li>
-										<li>
-											<h3 class="title">Fases</h3>
-										</li>
-										<li>
-											<h3 class="title">Foros</h3>
-										</li>
-									</ul>
-									<?php 
-										else: ?>
-												<div class="inner-content mg-bt20">
-												<h2 class="title">No tienes cursos registrados aún. </h2>
-											</div>
-									<?php endif; ?>
-								</div>
+						<div class="inner-content-cursos"> 
+              <?php 
+                $sql = "SELECT nombrecursodetalle FROM lista_cursos_usuario WHERE porcentaje = 100 and usuario_id = $usuario_id";
+                $dataCursosProceso = mysqli_query($db, $sql);
+                $cantDataCursosProceso = mysqli_num_rows($dataCursosProceso);
+            
+                $sql2 = "SELECT nombre FROM cursos_contenido_detalle";
+                $dataCursosContenido = mysqli_query($db, $sql2);
+                $cantDataCursosContenido = mysqli_num_rows($dataCursosContenido);
+
+                $sql3 = "SELECT nombre FROM cursos";
+                $dataCursos = mysqli_query($db, $sql3);
+                $cantDataCursos = mysqli_num_rows($dataCursos);
+
+                $sql4 = "SELECT nombre FROM fases";
+                $dataFases = mysqli_query($db, $sql4);
+                $cantDataFases = mysqli_num_rows($dataFases);
+
+                $sql5 = "SELECT * FROM `grupos_usuarios_cursos` WHERE proceso_id = 9 and usuario_id = $usuario_id";
+                $dataCursosCompletados = mysqli_query($db, $sql5);
+                $cantDataCursosCompletados = mysqli_num_rows($dataCursosCompletados);
+
+                $progreso_avance = ($cantDataCursosProceso * 100) / $cantDataCursosContenido;
+                $progreso_avance = round($progreso_avance, 2);
+
+                $cursos_avance = ($cantDataCursosCompletados * 100) / $cantDataCursos;
+                $cursos_avance = round($cursos_avance, 2);
+                //echo $cantDataCursosCompletados;
+              ?>             
+              <div class="item-cursos">
+                <h2 class="title">Porcentaje del Programa</h2>
+                <?php if(isset($progreso_avance)) : ?>
+                  <input type="text" value="<?=$progreso_avance?>" class="porcentaje_programa">
+                <?php else: ?>
+                  <input type="text" value="0" class="porcentaje_programa">
+                <?php endif; ?>
+              </div>
+              <div class="item-cursos">                
+                <h2 class="title">Porcentaje <?=$progreso_avance?>% de avance de Cursos</h2>     
+                <?php 
+                  $cursos = obtenerdatosusuarios($db, 'grupos_usuarios_cursos', $_SESSION['sesion_aprenDigital']['id']);										
+                    if(!empty($cursos) && mysqli_num_rows($cursos) >= 1):												  
+                ?> 
+                <ul class="list-avance">
+                  <li>
+                    <h3 class="title">Cursos Completados : <?= $cursos_avance ?>% </h3>
+                  </li>
+                  <li>
+                    <h3 class="title">Fases : 0% </h3>
+                  </li>
+                  <!-- <li>
+                    <h3 class="title">Foros : </h3>
+                  </li> -->
+                </ul>
+                <?php 
+                  else: ?>
+                      <div class="inner-content mg-bt20">
+                      <h2 class="title">No tienes cursos registrados aún. </h2>
+                    </div>
+                <?php endif; ?>
+              </div>
 						</div>							
 					</div>
 				<?php endif; ?>
+
 				<?php if(isset($_SESSION['completado'])): ?>
 					<div class="alerta-exito">
 						<?=$_SESSION['completado']?>  
@@ -89,7 +105,6 @@
             <input type="radio" name="slider" id="fase6">
 
             <!-- LISTA DE CURSOS DE ALUMNOS - PERFIL 4 -->
-
             <?php if($_SESSION['sesion_aprenDigital']['perfil_id'] == 4) : ?>
               <div class="tabs-nav"> 
                 <?php 
@@ -106,13 +121,38 @@
               <section>
                 <?php for($i = 1; $i <= 6; $i++ ): ?> 
                 <div class="content content-<?=$i?>">
+                <?php 
+                  $_SESSION['fase_actual'] = $i;
+                  $faseID = $_SESSION['fase_actual'];
+                  //echo 'fase actual -> '.$faseID;
+                  
+                  $sql6 ="SELECT * FROM `grupos_usuarios_cursos` WHERE usuario_id = $usuario_id and fase_id = $faseID";
+                  $listarCursos = mysqli_query($db, $sql6);
+                  $cantCursos = mysqli_num_rows($listarCursos);
+
+                  $sql8 ="SELECT * FROM `grupos_usuarios_cursos` WHERE usuario_id = $usuario_id and fase_id = $faseID and proceso_id = 9";
+                  $listarCursosProceso = mysqli_query($db, $sql8);
+                  $cantCursosProceso = mysqli_num_rows($listarCursosProceso);
+
+                  // $sql7 ="SELECT * FROM `grupos_usuarios_clases` WHERE usuario_id = 27 and fase_id = $faseID";
+                  // $listarClases = mysqli_query($db, $sql7);
+                  // $cantClases = mysqli_num_rows($listarClases);                  
+
+                  if( $cantCursos == $cantCursosProceso){
+                    $accesoClase = true;
+                    //echo $accesoClase;
+                  }else{
+                    $accesoClase = false;
+                    //echo $accesoClase;
+                  }
+
+                ?>
                   <div class="container-wrap">
                     <!-- LISTADO DE CURSOS -->
                     <?php   
                       // CURSO SELECCIONADOS                    
                       $cursos = listarcursosescogidos($db, 'grupos_usuarios_cursos', 'cursos', 'grupos_cursos', $usuario_id ,$i);        
-                      if(!empty($cursos) && mysqli_num_rows($cursos) >= 1):
-                        //echo  'cantidad' . mysqli_num_rows($cursos);
+                      if(!empty($cursos) && mysqli_num_rows($cursos) >= 1):                        
                         while($curso = mysqli_fetch_assoc($cursos)):  
                     ?>                  
                     <?php if($curso['acceso_id'] == 3): ?>
@@ -123,7 +163,7 @@
                         <?php  else: ?>
                           <img src="assets/img/cursos/example.PNG" alt="">
                         <?php  endif; ?>
-                        <a href="clases.php?cu=<?=$curso['curso_id']?>&t=<?=$curso['token']?>" class="btn">Entrar al Curso</a>
+                        <a href="clases.php?cu=<?=$curso['curso_id']?>&t=<?=$curso['token']?>&f=<?=$faseID?>" class="btn">Entrar al Curso</a>
                       </div>
                       <?php else : ?>
                       <div class="item-clases bloqueado">
@@ -136,11 +176,13 @@
                         <?php  else: ?>
                           <img src="assets/img/cursos/example.PNG" alt="">
                         <?php endif; ?>
-                        <a href="clases.php?cu=<?=$curso['curso_id']?>&t=<?=$curso['token']?>" class="btn btn-gris">Entrar al Curso</a>
+                        <a href="clases.php?cu=<?=$curso['curso_id']?>&t=<?=$curso['token']?>&f=<?=$faseID?>" class="btn btn-gris">Entrar al Curso</a>
                       </div>
                     <?php endif;             
-                      endwhile; endif; 
+                      endwhile;  else:
                     ?>
+                      <h2>Aún no tienes cursos asignados, por favor espera...!</h2>
+                    <?php endif; ?>
                     
                     <!-- LISTADO DE CLASES -->
                     <?php   
@@ -160,6 +202,16 @@
                         <?php endif ?>	
                         <a href="clasesm.php?cl=<?=$clase['clase_id']?>&t=<?=$clase['token']?>" class="btn">Entrar a la Clase</a>
                       </div>                    
+                      <?php elseif($accesoClase == 1) : ?>
+                        <div class="item-clases">
+                        <h2 class="title">Clase Maestra : <?php echo $clase['nombre'] ?> </h2>
+                        <?php if($clase['imagen'] != null) : ?>
+                          <img src="assets/clases/<?=$clase['carpeta'].'/'.$clase['imagen']?>" alt="Imagen de la Clases <?=$clase['nombre']?>">
+                        <?php else : ?>
+                          <img src="assets/img/example_clases.jpg" alt="Imagen de la Clase <?=$clase['nombre']?>">
+                        <?php endif ?>	
+                        <a href="clasesm.php?cl=<?=$clase['clase_id']?>&t=<?=$clase['token']?>" class="btn">Entrar a la Clase</a>
+                      </div> 
                       <?php else : ?> 
                         <div class="item-clases bloqueado">
                           <div class="box-overlay">

@@ -9,6 +9,13 @@
     
     <div class="home-content">
       <div class="center">
+        <?php $fecha = date('d-m-Y'); 
+          //$tiempo =  timestamp(); 
+          echo $fecha;
+          echo '<br>';
+          //echo $tiempo;
+
+        ?>
         <?php if(isset($_SESSION['completado'])): ?>
           <div class="alerta-exito">
             <?=$_SESSION['completado']?>  
@@ -95,7 +102,10 @@ $configs = obtenerConfigGlobal($db, 'config_global', $usuario_id);
   <div class="modalBienvenida" id="modalBienvenida">
     <span class="closed-modal"><i class="fas fa-times"></i></span>
     <div class="box-modal">
-      <h2 class="title">Mensaje de Bienvenida</h2>							
+      <h2 class="title">Mensaje de Bienvenida</h2>      
+      <div class="box-video">
+        <video src="assets/videos/TUTORIAL_APRENDEDOR_DIGITAL.mp4"></video>
+      </div>
       <div class="box-input">				
         <input type="hidden" name="usuarioId" id="usuarioId" value="<?=$usuario_id;?>">	
         <input type="checkbox" name="inputmodal" class="inputmodal" id="inputModal">No volver a mostrar
@@ -111,7 +121,11 @@ $configs = obtenerConfigGlobal($db, 'config_global', $usuario_id);
 <div class="modalBienvenida" id="modalBienvenida">
   <span class="closed-modal"><i class="fas fa-times"></i></span>
   <div class="box-modal">
-    <h2 class="title">Mensaje de Bienvenida</h2>							
+    <h2 class="title">Mensaje de Bienvenida</h2>
+    <div class="box-video">
+      <video src="assets/videos/TUTORIAL_APRENDEDOR_DIGITAL.mp4"></video>
+    </div>
+    
     <div class="box-input">				
       <input type="hidden" name="usuarioId" id="usuarioId" value="<?=$usuario_id;?>">	
       <input type="checkbox" name="inputmodal" class="inputmodal" id="inputModal">No volver a mostrar

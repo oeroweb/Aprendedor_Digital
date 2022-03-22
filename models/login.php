@@ -1,14 +1,16 @@
 <?php 
+	session_set_cookie_params(60*60*24*2);
+	session_start();
 	// recoger datos del formulario
 	if(isset($_POST['submit'])){	
-		require_once '../config/db.php';
-		if(!isset($_SESSION)){
-			session_start();
-		}	
+		require_once '../config/db.php';		
 
-		// recoger datos del formulario
-		$email = trim($_POST['email']); 
-		$password = $_POST['password'];
+		if(isset($_SESSION['error_login'])){
+			session_unset($_SESSION['error_login']);
+		}
+
+		$email = trim(mysqli_real_escape_string($db, $_POST['email'])); 
+		$password = mysqli_real_escape_string($db, $_POST['password']);
 		
 		//consultar las credenciales del usuarios
 		$sql ="SELECT * FROM usuarios WHERE email = '$email'";
@@ -18,23 +20,21 @@
 			$usuario = mysqli_fetch_assoc($login);
 			
 			// comprobar la contaseña
-			$verify = password_verify($password, $usuario['password']);
+			$verify = password_verify($password, $usuario['clave']);
 
 			if($verify){
-				$_SESSION['usuario'] = $usuario;				
-				header('Location:../contenedor.php');
-			}else{
-				//si algo falla enviar session de fallo
-				//echo "clave incorrecta";
-				$_SESSION['error_login'] = "La contraseña es incorrecta!";
-				
+				$_SESSION['sesion_aprenDigital'] = $usuario;
+				$usuario_id = $usuario['id'];				
+				$sql2 ="UPDATE usuarios set estado_login = 'conectado', fechamodificacion = NOW() WHERE id = $usuario_id";
+				$estadoLogin = mysqli_query($db, $sql2);
+				header("Location: ../dashboard.php");				
+			}else{								
+				$_SESSION['error_login'] = "La contraseña es incorrecta!";		
 				header('Location:../index.php');    
 			}
 		}else{
 			//mensaje de error
-			$_SESSION['error_login'] = "El correo ingresado no esta regristrado!, solicita tu cuenta en el enlace inferior o <a href='solicitar-cuenta.php'>Solicitar Cuenta</a>";
-			// var_dump($_SESSION['error_login']);
-			// die();
+			$_SESSION['error_login'] = "El correo ingresado no está regristrado!";		
 			header('Location:../index.php');
 		}	
 	}

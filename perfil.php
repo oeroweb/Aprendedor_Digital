@@ -1,17 +1,6 @@
 <?php 
   include 'layout/header.php'; 
-	
-	if($_SESSION['sesion_aprenDigital']['perfil_id'] == 4){
-
-    $cursos = obtenerdatosusuarios($db, 'grupos_usuarios_cursos', $_SESSION['sesion_aprenDigital']['id']);        
-      if(!empty($cursos) && mysqli_num_rows($cursos) >= 1){
-        $cantidad_cursos = mysqli_num_rows($cursos); 
-        //echo $cantidad;
-        //$cantidad_programa = round((($cantidad_cursos * 100)/12),2);									
-        $cantidad_programa = 0;									
-      }
-  }
-								
+	$usuario_id = $_SESSION['sesion_aprenDigital']['id'];								
 ?>
 
 <body>
@@ -70,40 +59,68 @@
 					</div>
 					
 					<?php if($_SESSION['sesion_aprenDigital']['perfil_id'] == 4) : ?>
-					<div class="inner-content mg-bt20 w70">					 			
-						<div class="inner-content-cursos">	
-								<div class="item-cursos">
-									<h2 class="title">Porcentaje del Programa</h2>
-									<?php if(isset($cantidad_programa)) : ?>
-										<input type="text" value="<?=$cantidad_programa?>" class="porcentaje_programa">
-									<?php else: ?>
-										<input type="text" value="0" class="porcentaje_programa">
-									<?php endif; ?>
-								</div>
-								<div class="item-cursos">
-									<h2 class="title">Porcentaje <?=$cantidad_programa?>% de avance de Cursos</h2>
-									<?php 
-										$cursos = obtenerdatosusuarios($db, 'grupos_usuarios_cursos', $_SESSION['sesion_aprenDigital']['id']);										
-											if(!empty($cursos) && mysqli_num_rows($cursos) >= 1):												  
-									?> 
-									<ul class="list-avance">
-										<li>
-											<h3 class="title">Cursos Completados</h3>
-										</li>
-										<li>
-											<h3 class="title">Fases</h3>
-										</li>
-										<li>
-											<h3 class="title">Foros</h3>
-										</li>
-									</ul>
-									<?php 
-										else: ?>
-												<div class="inner-content mg-bt20">
-												<h2 class="title">No tienes cursos registrados aún. </h2>
-											</div>
-									<?php endif; ?>
-								</div>
+						<div class="inner-content mg-bt20 w70">					 			
+						<div class="inner-content-cursos"> 
+              <?php 
+                $sql = "SELECT nombrecursodetalle FROM lista_cursos_usuario WHERE porcentaje = 100 and usuario_id = $usuario_id";
+                $dataCursosProceso = mysqli_query($db, $sql);
+                $cantDataCursosProceso = mysqli_num_rows($dataCursosProceso);
+            
+                $sql2 = "SELECT nombre FROM cursos_contenido_detalle";
+                $dataCursosContenido = mysqli_query($db, $sql2);
+                $cantDataCursosContenido = mysqli_num_rows($dataCursosContenido);
+
+                $sql3 = "SELECT nombre FROM cursos";
+                $dataCursos = mysqli_query($db, $sql3);
+                $cantDataCursos = mysqli_num_rows($dataCursos);
+
+                $sql4 = "SELECT nombre FROM fases";
+                $dataFases = mysqli_query($db, $sql4);
+                $cantDataFases = mysqli_num_rows($dataFases);
+
+                $sql5 = "SELECT * FROM `grupos_usuarios_cursos` WHERE proceso_id = 9 and usuario_id = $usuario_id";
+                $dataCursosCompletados = mysqli_query($db, $sql5);
+                $cantDataCursosCompletados = mysqli_num_rows($dataCursosCompletados);
+
+                $progreso_avance = ($cantDataCursosProceso * 100) / $cantDataCursosContenido;
+                $progreso_avance = round($progreso_avance, 2);
+
+                $cursos_avance = ($cantDataCursosCompletados * 100) / $cantDataCursos;
+                $cursos_avance = round($cursos_avance, 2);
+                //echo $cantDataCursosCompletados;
+              ?>             
+              <div class="item-cursos">
+                <h2 class="title">Porcentaje del Programa</h2>
+                <?php if(isset($progreso_avance)) : ?>
+                  <input type="text" value="<?=$progreso_avance?>" class="porcentaje_programa">
+                <?php else: ?>
+                  <input type="text" value="0" class="porcentaje_programa">
+                <?php endif; ?>
+              </div>
+              <div class="item-cursos">                
+                <h2 class="title">Porcentaje <?=$progreso_avance?>% de avance de Cursos</h2>     
+                <?php 
+                  $cursos = obtenerdatosusuarios($db, 'grupos_usuarios_cursos', $_SESSION['sesion_aprenDigital']['id']);										
+                    if(!empty($cursos) && mysqli_num_rows($cursos) >= 1):												  
+                ?> 
+                <ul class="list-avance">
+                  <li>
+                    <h3 class="title">Cursos Completados : <?= $cursos_avance ?>% </h3>
+                  </li>
+                  <li>
+                    <h3 class="title">Fases : 0% </h3>
+                  </li>
+                  <!-- <li>
+                    <h3 class="title">Foros : </h3>
+                  </li> -->
+                </ul>
+                <?php 
+                  else: ?>
+                      <div class="inner-content mg-bt20">
+                      <h2 class="title">No tienes cursos registrados aún. </h2>
+                    </div>
+                <?php endif; ?>
+              </div>
 						</div>							
 					</div>
 					<?php endif; ?>

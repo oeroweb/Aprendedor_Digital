@@ -22,22 +22,12 @@
 							while($grupo = mysqli_fetch_assoc($grupos)):  
 					?> 
 				<div class="box-titles">
-					<h1 class="title">Añadir Cursos y Clases Maestras a está fase</h1>					
+					<h1 class="title">Añadir Cursos y Clases Maestras </h1>
+					<h2></h2>				
 					<div class="box-botones">						
 						<a class="btn" href="javascript:history.back()" title="Atras"><i class="fas fa-arrow-left"></i></a>
 					</div>
 				</div>
-
-				<?php if(isset($_SESSION['completado'])): ?>
-					<div class="alerta-exito">
-						<?=$_SESSION['completado']?>  
-					</div>
-				<?php elseif(isset($_SESSION['fallo'])): ?>
-					<div class="alerta-error">
-						<?=$_SESSION['fallo']?>
-					</div>
-				<?php endif; ?>
-				<div id="info"></div>
 
 				<div class="grupos-content-grupos">
 					<div class="tabs-content-grupos">
@@ -53,6 +43,16 @@
 									<div class="box-titles">
 										<h1 class="title">Lista de curso por fase</h1>					
 									</div>
+									<?php if(isset($_SESSION['completado'])): ?>
+										<div class="alerta-exito">
+											<?=$_SESSION['completado']?>  
+										</div>
+									<?php elseif(isset($_SESSION['fallo'])): ?>
+										<div class="alerta-error">
+											<?=$_SESSION['fallo']?>
+										</div>
+									<?php endif; ?>
+									<div id="info"></div>
 									<div class="box-info">
 										<p class="text"> <i class="fas fa-info-circle"></i> Puede seleccionar todo los cursos o los que se desean para esta fase.</p>
 									</div>
@@ -116,6 +116,16 @@
 									<div class="box-titles">
 										<h1 class="title">Lista de clases maestras por fase</h1>				
 									</div>
+									<?php if(isset($_SESSION['completado'])): ?>
+										<div class="alerta-exito">
+											<?=$_SESSION['completado']?>  
+										</div>
+									<?php elseif(isset($_SESSION['fallo'])): ?>
+										<div class="alerta-error">
+											<?=$_SESSION['fallo']?>
+										</div>
+									<?php endif; ?>
+									<div id="info"></div>
 									<div class="box-info">
 										<p class="text"> <i class="fas fa-info-circle"></i> Puede seleccionar todas las clases o los que se desean para esta fase.</p>
 									</div>

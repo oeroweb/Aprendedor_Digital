@@ -14,10 +14,10 @@
   
     if($resultado){
       $_SESSION['completado'] = "Inactivado forma exitosa";	
-      header("Location: ../../admin-cursos-maestras.php");
+      header("Location: ../../admin-clases-maestras.php");
     } else{
       $_SESSION['fallo'] = "Error al inactivar; por favor volver a intentar";
-      header("Location: ../../admin-cursos-maestras.php");
+      header("Location: ../../admin-clases-maestras.php");
     }
   }
 ?>
