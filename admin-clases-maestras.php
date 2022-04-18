@@ -19,7 +19,7 @@
 				<div class="box-titles">
 					<h1 class="title">Administración Clases Maestras</h1>
 					<div class="box-botones">
-						<a class="btn" href="admin-cursos.php" title="Atras"><i class="fas fa-arrow-left"></i></a>	 
+						<a class="btn" href="javascript:history.back()" title="Atras"><i 	class="fa fa-undo"></i> Regresar</a>	
 					</div>
 				</div>
 				<div class="box-botones">						
@@ -151,7 +151,7 @@
 			<?php borrarErrores(); ?>		
 		</div>
 	</section>
-
+	<span class="ir-arriba hidden" id="btnArriba" title="Subir"><i class="fa fa-chevron-up"></i></span>
 	<?php include 'layout/footer.php'; ?>
   </body>
 </html>

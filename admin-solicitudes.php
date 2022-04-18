@@ -17,10 +17,15 @@
 			<div class="center ">				
 				<div class="box-titles">
           <h1 class="title">Administración de Solicitudes de Usuarios</h1>
+					<div class="box-botones">
+						<a class="btn" href="javascript:history.back()" title="Atras"><i 	class="fa fa-undo"></i> Regresar</a>	
+					</div>
 				</div>
-				<!-- <div class="box-botones mg-bt20">						
-					<a href="admin-instituciones.php" class="btn" title="Añadir Curso"><i class="fas fa-plus"></i> Administrar Instituciones</a>
-				</div> -->
+				<div class="box-botones mg-bt20">						
+					<a href="admin-usuarios.php" class="btn" title="Administrar usuarios Alumnos"><i class="far fa-eye"></i> Administrar Usuarios Alumnos</a>
+					<a href="admin-usuarios-administradores.php" class="btn" title="Administrar usuarios Administradores"><i class="far fa-eye"></i> Administrar Usuarios Administradores</a>
+					<a href="admin-instituciones.php" class="btn" title="Ver listado de Instituciones"><i class="far fa-eye"></i> Administrar Instituciones</a>
+				</div>
 				<!---------------- REGISTROS ---------------->
 				<div id="info"></div>
 				<?php if(isset($_SESSION['completado'])): ?>
@@ -47,7 +52,7 @@
 									<th class=""># WHATSAPP</th>														
 									<th class="">FECHA NACIMIENTO</th>							
 									<th class="">FECHA SOLICITUD</th>							
-									<th class="">SOLICITUD LEIDA</th>							
+									<th class="">ALTA SOLICITUD</th>							
 									<?php if($_SESSION['sesion_aprenDigital']['perfil_id'] <= '2'): ?>	
                     <th class="">Opciones</th>	
 									<?php endif; ?>
@@ -63,6 +68,7 @@
 		<!---- FIN DEL CONTENIDO ---->	
 	
   </section>
+	<span class="ir-arriba hidden" id="btnArriba" title="Subir"><i class="fa fa-chevron-up"></i></span>
 </main>
 
 <?php borrarErrores(); ?>	
@@ -186,8 +192,8 @@
 <div class="modal" id="modal3">
 	<div class="body-modal">
 		<form action="" method="post" class="form_sendMail" id="form_sendMail" onsubmit="event.preventDefault();">			
-			<h2 class="title">Confirmar solicitud como recibida </h2><hr>
-			<p class="text">Se cambiará el estado de la solicitud como recibida y leida.</p>
+			<h2 class="title">Confirmar Alta de Solicitud</h2><hr>
+			<p class="text">Se cambiará el estado de la solicitud como alta realizada</p>
 			<div class="container3">					
 				<input type="hidden" name="idEstado" id="id">			
 				<div class="box-nombre w100" id="box-nombre"></div>
@@ -345,7 +351,7 @@
 				//{"data":"estadocivil.toUpperCase()"},					
 				<?php if($_SESSION['sesion_aprenDigital']['perfil_id'] <= '2'): ?>
 				,
-				{"defaultContent": "<a class='envio btn-2 btn-azul' title='Soliciud Leida'><i class='fa fa-check'></i></a><a class='editar btn-2 btn-azul' title='Editar'><i class='fas fa-pen'></i></a><a class='eliminar btn-2 btn-rojo' title='Borrar'><i class='fas fa-trash-alt'></i></a>"}	
+				{"defaultContent": "<a class='envio btn-2 btn-azul' title='Soliciud Leida'><i class='fa fa-check'></i></a><a class='eliminar btn-2 btn-rojo' title='Borrar'><i class='fas fa-trash-alt'></i></a>"}	
 				<?php endif; ?>		
 			],
 			

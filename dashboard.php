@@ -9,12 +9,9 @@
     
     <div class="home-content">
       <div class="center">
-        <?php $fecha = date('d-m-Y'); 
-          //$tiempo =  timestamp(); 
-          echo $fecha;
-          echo '<br>';
-          //echo $tiempo;
-
+        <?php 
+          date_default_timezone_set('America/Lima');
+          $ahora = date('d-m-Y h:i:s a');                    
         ?>
         <?php if(isset($_SESSION['completado'])): ?>
           <div class="alerta-exito">

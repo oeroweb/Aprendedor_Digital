@@ -22,7 +22,7 @@ $id = $_GET['id'];
 					endif;
 					?>
 					<div class="box-botones">
-						<a class="btn" href="amin-grupos.php" title="Ver lista de Grupos">Ir a Grupos</a>
+						<a class="btn" href="admin-grupos.php" title="Ver lista de Grupos">Ir a Grupos</a>
 						<a class="btn" href="javascript:history.back()" title="Atras"><i class="fas fa-arrow-left"></i></a>
 					</div>
 				</div>
@@ -50,7 +50,7 @@ $id = $_GET['id'];
 							<p class="text"> <i class="fas fa-info-circle"></i> Presione añadir todos los cursos para enlazar los cursos y usuarios.</p>						
 					</div>
 					<div class="box-title mg-tp40">
-						<h2 class="title mg-bt20">Solo estarán visibles las fases añadidas al grupo.</h2>						
+						<h2 class="title mg-bt20">Solo estarán visibles las fases añadidas al grupo.</h2>			
 					</div>
 
 					<div class="box-botones mg-tp20">

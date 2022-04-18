@@ -1,9 +1,9 @@
 <?php
 	session_start();
-	// if(!isset($_SESSION['sesion_aprenDigital'])){
-	// 	header("Location: dashboard.php");
-	// }
 
+	if(isset($_SESSION['sesion_aprenDigital'])){
+		header("Location: dashboard.php");
+	}
   require_once 'controllers/controller.php'; 
 	require_once 'config/db.php'; 
   require_once 'models/helpers.php';

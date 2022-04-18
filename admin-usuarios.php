@@ -15,11 +15,15 @@
     <div class="home-content">
 			<div class="center ">				
 				<div class="box-titles">
-          <h1 class="title">Administración de Usuarios / Docentes / Alumnos</h1>
+          <h1 class="title">Administración de Usuarios Alumnos</h1>
+					<div class="box-botones">
+						<a class="btn" href="javascript:history.back()" title="Atras"><i 	class="fa fa-undo"></i> Regresar</a>	
+					</div>
 				</div>
 				<div class="box-botones mg-bt20">						
-					<a href="admin-instituciones.php" class="btn" title="Añadir Curso"><i class="fas fa-plus"></i> Administrar Instituciones</a>
-					<a href="admin-solicitudes.php" class="btn" title="Añadir Curso"><i class="fas fa-plus"></i> Administrar Solicitudes Alumnos</a>
+					<a href="admin-usuarios-administradores.php" class="btn" title="Administrar usuarios Administradores"><i class="far fa-eye"></i> Administrar Usuarios Administradores</a>
+					<a href="admin-solicitudes.php" class="btn" title="Ver listado de Solicitudes Recibidas"><i class="far fa-eye"></i> Administrar Solicitudes Alumnos</a>
+					<a href="admin-instituciones.php" class="btn" title="Ver listado de Instituciones"><i class="far fa-eye"></i> Administrar Instituciones</a>
 				</div>
 				<!---------------- REGISTROS ---------------->
 				<div id="info"></div>
@@ -52,21 +56,20 @@
 					<hr class="w100">
 					<div class="box-tabla mg-bt50 w100">
 						<div class="box-titles">
-							<h1 class="title">Lista de Usuarios</h1>							
+							<h1 class="title">Lista de Alumnos</h1>							
 						</div>		
 						<table id="dt_listaUsuarios" class="w100 hover">
 							<thead>
 								<tr>						
-                  <th class="">ID</th>
-									<th class="">NOMBRES</th>							
-									<th class="">APE. PATERNO</th>							
-									<th class="">APE. MATERNO</th>							
+                  <th class="">INSTITUCIÓN</th>
+									<th class="">GRUPO</th>							
 									<th class="">EMAIL</th>							
-									<th class="">NACIONALIDAD</th>							
+									<th class="">NOMBRES</th>							
+									<th class="">APE. PATERNO</th>															
 									<th class="">PERFIL</th>									
 									<th class="">LOGUEO</th>							
 									<th class="">ULTIMA CONEXION</th>							
-									<th class="">CORREO</th>							
+									<th class="">CORREO ENVIADO</th>							
 									<?php if($_SESSION['sesion_aprenDigital']['perfil_id'] <= '2'): ?>	
                     <th class="">Opciones</th>	
 									<?php endif; ?>
@@ -377,26 +380,25 @@
 			"destroy":true,
 			"ajax":{
 				'method':'POST',
-				'url':'models/searchs/usuarios.php'
+				'url':'models/searchs/usuariosAlumnos.php',
 			},
 			"columns":[
-				{"data":"id"},
-				{"data":"nombre"},
-				{"data":"ape_paterno"},
-				{"data":"ape_materno"},
+				{"data":"nombreInstitucion"},
+				{"data":"nombreGrupo"},	
 				{"data":"email"},	
-				{"data":"nacionalidad"},	
+				{"data":"nombre"},
+				{"data":"ape_paterno"},		
 				{"data":"nombreperfil"},		
 				{"data":"estado_login"},
-				{"data":"fechamodificacion"},
-				{"data":"envio_correo"}						
+				{"data":"ultimasesion"},
+				{"data":"envio_correo"}					
 				<?php if($_SESSION['sesion_aprenDigital']['perfil_id'] <= '2'): ?>
 				,
 				{"defaultContent": "<a class='envio btn-2 btn-azul' title='Envío de Credenciales'><i class='fas fa-envelope'></i></a><a class='editar btn-2 btn-azul' title='Editar'><i class='fas fa-pen'></i></a><a class='eliminar btn-2 btn-rojo' title='Borrar'><i class='fas fa-trash-alt'></i></a>"}	
 				<?php endif; ?>		
 			],
 			"language": idioma_espanol,
-			"pageLength":100
+			"pageLength":50
 		});
 		obtener_data_envio("dt_listaUsuarios tbody", table);
 		obtener_data_editar("dt_listaUsuarios tbody", table);

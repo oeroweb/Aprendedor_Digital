@@ -12,7 +12,7 @@
   $usuario = $_SESSION['sesion_aprenDigital']['nombre'] .' '.$_SESSION['sesion_aprenDigital']['ape_paterno'];
 
   foreach($clases as $clase){
-    $sql="INSERT INTO grupos_clases (grupofase_id, clase_id, acceso_id, fechacreacion, usuario, estado_id) VALUES ($grupodetalle, $clase, 4, CURDATE(), '$usuario',1);";
+    $sql="INSERT INTO grupos_clases (grupofase_id, clase_id, acceso_id, fechacreacion, usuario, estado_id) VALUES ($grupodetalle, $clase, 3, CURDATE(), '$usuario',1);";
 
     $resultado = mysqli_query($db,$sql);
           

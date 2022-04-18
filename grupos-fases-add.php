@@ -30,10 +30,6 @@
 						<a class="btn" href="javascript:history.back()" title="Atras"><i class="fas fa-arrow-left"></i></a>
 					</div>
 				</div>
-
-				<div class="box-info">
-					<p class="text"> <i class="fas fa-info-circle"></i> Puede añadir 1 o más fases a la vez presionando el botón de Guardar.</p>								
-				</div>
 				
 				<?php if(isset($_SESSION['completado'])): ?>
 					<div class="alerta-exito">
@@ -53,7 +49,8 @@
 							<div class="w100 container-wrap mg-bt10">	
 								<input type="hidden" name="grupo" id="grupo" value="<?=$id?>">
 								<div class="box-info">
-									<p class="text2"> <i class="fas fa-info-circle"></i> Las fases seleccionadas son las fases existentes de esté grupo, antes de añadir nueva(s) fases <input type="checkbox" > <strong> deseleccione </strong> las fases existentes  y <input type="checkbox" checked><strong> seleccione </strong> las nuevas fases que necesite.</p>
+									<p class="text"> <i class="fas fa-info-circle"></i> Puede añadir 1 o más fases a la vez presionando el botón Guardar.</p>
+									<p class="text2"> <i class="fas fa-info-circle"></i>Las fases existentes de esté grupo figurarán como bloqueadas <input type="checkbox" > , <strong> seleccione </strong> <input type="checkbox" checked> nuevas fases para añadir las restantes.</p>
 								</div>		
 								<div class="w100">
 									<label for="">Seleccionar fase(s) : </label>
@@ -68,11 +65,11 @@
 									?>											
 									<div class="box-input-checkbox ">
 										<input type="checkbox" name="fases" class="fases" value="<?=$fase['id']?>" 		
-											<?php foreach($faseExistentes as $faseExistente) :										
-												echo $faseExistente['fase_id'] == $fase['id'] ? 'checked' : '' ?>
+											<?php foreach($faseExistentes as $faseExistente) :	?>
+											<?php echo $faseExistente['fase_id'] == $fase['id'] ? 'disabled' : '';?>
 											<?php endforeach; ?>
 										>
-										<span class="label-checkbox"><?=$fase['nombre']?>	</span>
+										<span class="label-checkbox"><?=$fase['nombre']?>	</span>										
 									</div>							
 								<?php endwhile; endif; ?>
 								<div class="w100"></div>
@@ -106,7 +103,7 @@
 
 							</div>
 							<input type="button" value="Guardar" class="btn" id="guardar-fases" >
-							<a class="btn" href="javascript:history.back()" title="Atras"><i class="fas fa-arrow-left"></i>Ir Atras</a>
+							<a class="btn" href="javascript:history.back()" title="Atras"><i class="fa fa-undo"></i> Ir Atras</a>
 						</form>
 						
 						<?php if(isset($_SESSION['completado'])): ?>
@@ -155,16 +152,16 @@
 						console.log(respuesta);
 						var info = $("#info");
 						if(respuesta == "true"){
-							info.html("<div class='alerta-exito'>El registro se creo de forma exitosa</div>");
+							info.html("<div class='alerta-exito box-message'>El registro se creo de forma exitosa</div>");
 						}else{
-							info.html("<div class='alerta-error'>Error al registrar; por favor volver a intentar</div>");
+							info.html("<div class='alerta-error box-message'>Error al registrar; por favor volver a intentar</div>");
 						}
-						//refresh();
+						refresh();
 					}			
 				}); 
 			}else{
 				var info = $("#info");
-				info.html("<div class='alerta-error'>Debe seleccionar una fase</div>");
+				info.html("<div class='alerta-error box-message'>Debe seleccionar una fase! </div>");
 			}
 		});
 	});
@@ -172,7 +169,7 @@
 	function refresh() {
     setTimeout(function () {
 			location.reload();
-    }, 2000);
+    }, 3000);
 	}
 
 </script>

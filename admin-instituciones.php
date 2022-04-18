@@ -18,9 +18,9 @@
 			<div class="center ">				
 				<div class="box-titles">
 					<h1 class="title">Administración Instituciones</h1>
-					<!-- <div class="box-botones">
-						 <a href="curso-add.php" class="btn" title="Añadir Nuevo Curso"><i class="fas fa-pen"></i></a>	 
-					</div> -->
+					<div class="box-botones">
+						<a class="btn" href="javascript:history.back()" title="Atras"><i 	class="fa fa-undo"></i> Regresar</a>	
+					</div>
 				</div>
 				<div class="box-botones">						
 					<a href="instituciones-add.php" class="btn" title="Añadir Curso"><i class="fas fa-plus"></i> Añadir Nueva Institución</a>							 
@@ -104,6 +104,7 @@
 			<?php borrarErrores(); ?>		
 		</div>
 	</section>
+	<span class="ir-arriba hidden" id="btnArriba" title="Subir"><i class="fa fa-chevron-up"></i></span>
 
 	<?php include 'layout/footer.php'; ?>
   </body>

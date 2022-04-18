@@ -18,14 +18,15 @@
 			<div class="center ">				
 				<div class="box-titles">
 					<h1 class="title">Administración de Fases / Cursos / Modulos </h1>
-					<!-- <div class="box-botones">
-						 <a href="curso-add.php" class="btn" title="Añadir Nuevo Curso"><i class="fas fa-pen"></i></a>	 
-					</div> -->
+					<div class="box-botones">
+						<a class="btn" href="javascript:history.back()" title="Atras"><i 	class="fa fa-undo"></i> Regresar</a>	
+					</div>
 				</div>
 				<div class="box-botones">						
 					<a href="curso-add.php" class="btn" title="Añadir Curso"><i class="fas fa-plus"></i> Añadir Nuevo Curso</a>						 
 					<a href="admin-clases-maestras.php" class="btn" title="Clases Maestras"><i class="far fa-eye"></i> Administrar Clases Maestras</a>						 
-				</div>	
+				</div>
+				
 				<?php if(isset($_SESSION['completado'])): ?>
 					<div class="alerta-exito">
 						<?=$_SESSION['completado']?>  

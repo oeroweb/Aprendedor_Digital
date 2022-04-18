@@ -40,52 +40,30 @@
           </a>
         </li>
         <?php if($_SESSION['sesion_aprenDigital']['perfil_id'] <= '2'): ?>
-
           <li>
-            <a href="admin-cursos.php" title="Admin Cursos">
-              <i class="fa fas-gears"></i>
-              <!-- <i class="fas fa-book-medical"></i> -->
-              <span class="links_name">ADMIN CURSOS</span>
+            <a href="admin-multi-accesos.php" title="Accesos Rapidos">
+            <i class="fa fa-th" aria-hidden="true"></i>              
+              <span class="links_name">MULTI ACCESOS</span>
             </a>
-          </li>          
-          <li>
-            <a href="admin-cursos.php" title="Admin Cursos">
-              <i class="fas fa-list-ol"></i>
-              <!-- <i class="fas fa-book-medical"></i> -->
-              <span class="links_name">ADMIN CURSOS</span>
-            </a>
-          </li>          
-          <li>
-            <a href="admin-clases-maestras.php" title="Admin Clases">
-              <i class="fas fa-list-alt"></i>
-              <span class="links_name">AD. CLASES MAESTRAS</span>
-            </a>
-          </li>          
+          </li>                  
           <li>
             <a href="admin-grupos.php" title="Admin Grupos">
-              <i class="fas fa-boxes"></i>
-              <!-- <i class="fas fa-object-ungroup"></i> -->
+              <i class="fas fa-boxes"></i>              
               <span class="links_name">ADMIN GRUPOS</span>
             </a>
-          </li> 
+          </li>          
           <li>
-            <a href="admin-instituciones.php" title="Admin Instituciones">
-              <i class="fas fa-hotel"></i>
-              <span class="links_name">ADMIN INSTITUCIONES</span>
+            <a href="admin-usuarios.php" title="Admin Usuarios Alumnos">
+            <i class="fa fa-user-graduate"></i>
+              <span class="links_name">ADMIN ALUMNOS</span>
             </a>
           </li> 
           <li>
-            <a href="admin-usuarios.php" title="Admin Usuarios">
-              <i class="fas fa-users-cog"></i>
-              <span class="links_name">ADMIN USUARIOS</span>
+            <a href="admin-correos.php" title="Admin Correos">
+              <i class="fa fa-envelope"></i>              
+              <span class="links_name">ADMIN CORREOS</span>
             </a>
           </li> 
-          <li>
-            <a href="setting.php" title="Ajustes">
-              <i class="fas fa-tools"></i>
-              <span class="links_name">AJUSTES</span>
-            </a>
-          </li>
         <?php endif; ?>	     
         <li class="log_out" title="Salir">
           <a href="cerrar.php">

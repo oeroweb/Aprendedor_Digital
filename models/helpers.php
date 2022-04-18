@@ -552,6 +552,19 @@
 		return $resultado;
 	}
 
+	// OBTENER los cursos no escogidos por fase 
+	function listargrupousuarioscursos($conexion, $tabla, $grupo_id, $fase_id){
+		$sql = "SELECT * FROM $tabla WHERE grupo_id = $grupo_id and fase_id = $fase_id";
+
+		$datos = mysqli_query($conexion, $sql);
+		if($datos && mysqli_num_rows($datos) >=1){
+			$resultado = $datos;
+		}else{
+			$resultado = '';
+		}
+		return $resultado;
+	}
+
 	//REPRODUCION DE VIDEO
 	// TRAER CURSO Y VALIDAR TOKEN
 	function mostarcursosytoken($conexion, $tabla, $tabla2, $curso_id, $usuario_id, $token){

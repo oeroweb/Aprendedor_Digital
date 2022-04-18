@@ -17,13 +17,15 @@
     <div class="home-content">
 			<div class="center ">				
 				<div class="box-titles">
-				<h1 class="title">Administración de Grupos / Estados de Grupo</h1>
-				
+					<h1 class="title">Administración de Grupos / Estados de Grupo</h1>
+					<div class="box-botones">
+						<a class="btn" href="javascript:history.back()" title="Atras"><i 	class="fa fa-undo"></i> Regresar</a>	
+					</div>
 				</div>
 				<div class="box-botones">						
-					<a href="grupos-add.php" class="btn" title="Añadir Grupo"><i class="fas fa-plus"></i> Crear Nuevo Grupo</a>					 
-										 
-				</div>	
+					<a href="grupos-add.php" class="btn" title="Añadir Grupo"><i class="fas fa-plus"></i> Crear Nuevo Grupo</a>										 
+				</div>
+
 				<?php if(isset($_SESSION['completado'])): ?>
 					<div class="alerta-exito">
 						<?=$_SESSION['completado']?>  
@@ -34,13 +36,12 @@
 					</div>
 				<?php endif; ?> 
 				
-				<div class="admin-cursos-content container-wrap w100">												
-					<div class="container-wrap w100">								
+				<div class="admin-cursos-content container-wrap w100">								
+					<div class="container-wrap header-admin-label w100">								
 						<div class="w10 al-ct ">Items</div>
-						<div class="w20 al-ct ">Nombre de Grupo</div>						
-											
-						<div class="w10 al-ct ">Op. Grupo</div>							
-						<div class="w20 al-ct ">Op. Usuarios</div>							
+						<div class="w20 al-ct ">Nombre de Grupo</div>											
+						<div class="w15 al-ct ">Op. Grupo</div>							
+						<div class="w15 al-ct ">Op. Usuarios</div>							
 						<div class="w20 al-ct ">Estado</div>							
 						<div class="w20 al-ct ">Opciones</div>							
 					</div>	
@@ -57,11 +58,11 @@
 								<div class="box-label">
 									<div class="w10 al-ct"><?=$contador?></div>
 									<div class="w20 al-ct"><?php echo $dato['nombre']?></div>															
-									<div class="w10 al-ct">
+									<div class="w15 al-ct">
 										<a href="grupos-content.php?id=<?=$dato['id']?>" class="btn-2 btn-azul" title="Ver grupo"><i class="far fa-eye"></i></a>
 										<a href="grupos-fases-add.php?id=<?=$dato['id']?>" class="btn-2 btn-azul" title="Añadir Fases"><i class="fas fa-plus"></i></a>
 									</div>
-									<div class="w20 al-ct">
+									<div class="w15 al-ct">
 										<a href="grupos-content-usuarios.php?id=<?=$dato['id']?>" class="btn-2 btn-azul" title="Ver usuarios del grupo"><i class="fas fa-users"></i></a>
 										<a href="grupos-usuarios-add.php?id=<?=$dato['id']?>" class="btn-2 btn-azul" title="Añadir Usuarios al grupo"> <i class="fas fa-user-plus"></i></a>
 										

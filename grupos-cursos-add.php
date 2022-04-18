@@ -19,12 +19,13 @@
 				<?php 
 					$grupos = obtenerdatos($db, 'grupos_fases', $id);        
 						if(!empty($grupos) && mysqli_num_rows($grupos) >= 1):
-							while($grupo = mysqli_fetch_assoc($grupos)):  
-					?> 
+							while($grupo = mysqli_fetch_assoc($grupos)): 								
+				?> 
 				<div class="box-titles">
 					<h1 class="title">Añadir Cursos y Clases Maestras </h1>
 					<h2></h2>				
-					<div class="box-botones">						
+					<div class="box-botones">
+						<a class="btn" href="admin-grupos.php" title="Ver lista de Grupos">Ir a Grupos</a>
 						<a class="btn" href="javascript:history.back()" title="Atras"><i class="fas fa-arrow-left"></i></a>
 					</div>
 				</div>
@@ -54,11 +55,12 @@
 									<?php endif; ?>
 									<div id="info"></div>
 									<div class="box-info">
-										<p class="text"> <i class="fas fa-info-circle"></i> Puede seleccionar todo los cursos o los que se desean para esta fase.</p>
+										<p class="text"> <i class="fas fa-info-circle"></i>Puede seleccionar uno o todos los cursos para esta fase <i class="fas fa-check-square"></i>.</p>
+										<p class="text2"> <i class="fas fa-info-circle"></i>Las cursos añadidos en esté grupo figurarán como bloqueados <i class="far fa-square"></i>.</p>
 									</div>
-									<div class="box-botones">
-										<input type="button" class="btn-1" id="btnseleccionar" value="Seleccionar Todos">
-										<input type="button" class="btn-1" id="btndeseleccionar" value="Deseleccionar Todos">
+									<div class="box-botones">										
+										<button type="button" class="btn-1" id="btnseleccionar" ><i class="fas fa-check-square"></i> Seleccionar Todos</button>
+										<button type="button" class="btn-1" id="btndeseleccionar" ><i class="far fa-square"></i> Deseleccionar Todos</button>							
 										<a class="btn" id="anadir-cursos"><i class="fas fa-plus"></i> Añadir Cursos</a>
 									</div>											
 									<table id="dt_cursos" class="w100">
@@ -72,18 +74,24 @@
 											</tr>
 										</thead>
 										<tbody>		
-											<input type="hidden" name="grupofase_id" value="<?=$id?>" id="grupofase_id">						
+											<input type="hidden" name="grupofase_id" value="<?=$id?>" id="grupofase_id">					
 											<?php 
-												$datos = obtenerallcursosporgrupoyfase($db, 'grupos_fases','cursos', $grupo['fase_id'], $grupo['grupo_id']);        
+												$datos = obtenerallcursosporgrupoyfase($db, 'grupos_fases','cursos', $grupo['fase_id'], $grupo['grupo_id']);												
 												if(!empty($datos) && mysqli_num_rows($datos) >= 1):
-													while($data = mysqli_fetch_assoc($datos)):									
+													$sql = "SELECT * FROM grupos_cursos WHERE grupofase_id = $id";													
+													$cursoExistentes = mysqli_query($db, $sql);								
+													while($data = mysqli_fetch_assoc($datos)):
 											?> 												
 												<tr id="<?php echo $data['id']; ?>">						
 													<td >													
-														<input type="checkbox" name="ids[]" value="<?php echo $data['id']; ?>" <?php  ?> class="users"> 
+														<input type="checkbox" name="ids[]" value="<?=$data['id']?>" class="users" 																
+															<?php foreach($cursoExistentes as $cursoExistente) : ?>
+																<?php echo $cursoExistente['curso_id'] == $data['id'] ? 'disabled' : '';?>
+															<?php	endforeach; ?>														
+														>															
 													</td>
-													<td>Fase <?php echo $data['fase_id']; ?> </td>
-													<td><?php echo $data['nombre']; ?> </td>
+													<td>Fase <?=$data['fase_id']?> </td>
+													<td><?=$data['nombre']?> </td>
 													<td>
 														<?php if(strlen($data['descripcion']) > 60) : ?>
 															<?=substr($data['descripcion'],0,100)."..."?>
@@ -110,7 +118,8 @@
 									<!-- FIN TABLA -->					
 								</div>										
 							</div>
-
+							
+							<!-- CLASES MAESTRAS -->
 							<div class="content content-2">															
 								<div class="box-tabla mg-bt50 w100">
 									<div class="box-titles">
@@ -125,15 +134,18 @@
 											<?=$_SESSION['fallo']?>
 										</div>
 									<?php endif; ?>
-									<div id="info"></div>
+									
 									<div class="box-info">
 										<p class="text"> <i class="fas fa-info-circle"></i> Puede seleccionar todas las clases o los que se desean para esta fase.</p>
+										<p class="text2"> <i class="fas fa-info-circle"></i>Las clases maestras añadidas en esté grupo figurarán como bloqueadas <i class="far fa-square"></i>.
 									</div>
+									<div id="info2"></div>
 									<div class="box-botones">
-										<input type="button" class="btn-1" id="btnseleccionar-2" value="Seleccionar Todos">
-										<input type="button" class="btn-1" id="btndeseleccionar-2" value="Deseleccionar Todos">
+										<button type="button" class="btn-1" id="btnseleccionar" ><i class="fas fa-check-square"></i> Seleccionar Todos</button>
+										<button type="button" class="btn-1" id="btndeseleccionar" ><i class="far fa-square"></i> Deseleccionar Todos</button>
 										<a class="btn" id="anadir-clases"><i class="fas fa-plus"></i> Añadir Clase</a>
-									</div>									
+									</div>
+																
 									<table id="dt_clases" class="w100">
 										<thead>
 											<tr>						
@@ -149,12 +161,18 @@
 											<?php 
 											$clases = obtenerallcursosporgrupoyfase($db, 'grupos_fases','clases', $grupo['fase_id'], $grupo['grupo_id']);        
 												if(!empty($clases) && mysqli_num_rows($clases) >= 1):
-													while($clase = mysqli_fetch_assoc($clases)):								
+													$sql2 = "SELECT * FROM grupos_clases WHERE grupofase_id = $id";													
+													$clasesExistentes = mysqli_query($db, $sql2);
+													while($clase = mysqli_fetch_assoc($clases)):													
 											?> 
 											
 												<tr id="<?php echo $clase['id']; ?>">						
 													<td >													
-														<input type="checkbox" name="ids[]" value="<?php echo $clase['id']; ?>" <?php  ?> class="users"> 
+														<input type="checkbox" name="ids[]" value="<?php echo $clase['id']; ?>" class="users"
+															<?php foreach($clasesExistentes as $clasesExistente) : ?>
+																<?php echo $clasesExistente['clase_id'] == $clase['id'] ? 'disabled' : '';?>
+															<?php	endforeach; ?>
+														> 
 													</td>
 													<td>Fase <?= $clase['fase_id'] ?> </td>
 													<td><?=$clase['nombre']?> </td>
@@ -184,9 +202,9 @@
 									<!-- FIN TABLA -->					
 								</div>										
 							</div>
+							
 						</section>
 					</div>
-					<div id="info2"></div>
 				</div>				
 				<?php endwhile; endif; ?>
 			</div>	
@@ -239,12 +257,12 @@
 					console.log(respuesta);
 					refresh();
 					var info = $("#info");
-					info.html("<div class='alerta-exito'>Se añadieron los curso</div>");
+					info.html("<div class='alerta-exito box-message'>Se añadieron los curso</div>");
 				}			
 			});
 		}else{
 			var info = $("#info");
-			info.html("<div class='alerta-error'>Debe seleccionar un curso</div>");
+			info.html("<div class='alerta-error box-message'>Debe seleccionar un curso</div>");
 		}
 
 	}); 
@@ -266,17 +284,13 @@
 				success: function(resultado){
 					console.log(resultado);
 					refresh();
-					var info = $("#info"), 
-						info2 = $("#info2");
-					info.html("<div class='alerta-exito'>Se añadieron las clases maestras</div>");
-					info2.html("<div class='alerta-exito'>Se añadieron las clases maestras</div>");
+					var info2 = $("#info2");					
+					info2.html("<div class='alerta-exito box-message'>Se añadieron las clases maestras</div>");
 				}			
 			}); 
 		}else{
-			var info = $("#info"), 
-						info2 = $("#info2");
-			info.html("<div class='alerta-error'>Debe seleccionar una clase</div>");
-			info2.html("<div class='alerta-error'>Debe seleccionar una clase</div>");
+			var info2 = $("#info2");			
+			info2.html("<div class='alerta-error box-message'>Debe seleccionar una clase</div>");
 		}
 
 	}); 

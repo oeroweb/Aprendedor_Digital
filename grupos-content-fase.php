@@ -18,8 +18,9 @@ $id = $_GET['id'];
 						?> 						
 							<h1 class="title">Lista de cursos y clases añadidos a está fase # <?=$grupo['fase_id']?></h1>
 							<div class="box-botones">
-								<a class="btn" href="javascript:history.back()" title="Atras"><i class="fas fa-arrow-left"></i></a>
-							</div>
+							<a class="btn" href="admin-grupos.php" title="Ver lista de Grupos">Ir a Grupos</a>
+						<a class="btn" href="javascript:history.back()" title="Atras"><i class="fas fa-arrow-left"></i></a>
+					</div>
 					<?php 
 						endwhile;	endif; 
 					?>				

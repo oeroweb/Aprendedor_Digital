@@ -45,8 +45,8 @@
 							<h1 class="title">Lista de usuarios sin Grupo</h1>						
 						</div>
 						<div class="box-botones">
-							<input type="button" class="btn-1" id="btnseleccionar" value="Seleccionar Todos">
-							<input type="button" class="btn-1" id="btndeseleccionar" value="Deseleccionar Todos">
+							<button type="button" class="btn-1" id="btnseleccionar" ><i class="fas fa-check-square"></i> Seleccionar Todos</button>
+							<button type="button" class="btn-1" id="btndeseleccionar" ><i class="far fa-square"></i> Deseleccionar Todos</button>
 							<a class="btn" id="anadir-usuarios"><i class="fas fa-plus"></i> Añadir Usuarios</a>
 						</div>								
 						<table id="dt_usuariosAddGrupo" class="w100">
@@ -133,7 +133,7 @@
 			}); 
 		}else{
 			var info = $("#info");
-			info.html("<div class='alerta-error'>Debe seleccionar un usuario</div>");
+			info.html("<div class='alerta-error box-message'>Debe seleccionar un usuario</div>");
 		}
 
 	}); 

@@ -1,6 +1,9 @@
 <?php 
 	session_set_cookie_params(60*60*24*2);
 	session_start();
+	date_default_timezone_set('America/Lima');
+	$ahora = date('d-m-Y h:i:s a');
+
 	// recoger datos del formulario
 	if(isset($_POST['submit'])){	
 		require_once '../config/db.php';		
@@ -25,7 +28,7 @@
 			if($verify){
 				$_SESSION['sesion_aprenDigital'] = $usuario;
 				$usuario_id = $usuario['id'];				
-				$sql2 ="UPDATE usuarios set estado_login = 'conectado', fechamodificacion = NOW() WHERE id = $usuario_id";
+				$sql2 ="UPDATE usuarios set estado_login = 'conectado', fechamodificacion = NOW(), ultimasesion = '$ahora' WHERE id = $usuario_id";
 				$estadoLogin = mysqli_query($db, $sql2);
 				header("Location: ../dashboard.php");				
 			}else{								
