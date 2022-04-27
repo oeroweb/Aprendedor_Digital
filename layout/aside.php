@@ -59,9 +59,9 @@
             </a>
           </li> 
           <li>
-            <a href="admin-correos.php" title="Admin Correos">
+            <a href="envio-correos.php" title="Admin Correos">
               <i class="fa fa-envelope"></i>              
-              <span class="links_name">ADMIN CORREOS</span>
+              <span class="links_name">ENVIAR CORREOS</span>
             </a>
           </li> 
         <?php endif; ?>	     

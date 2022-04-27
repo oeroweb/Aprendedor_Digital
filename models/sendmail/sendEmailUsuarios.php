@@ -2,7 +2,7 @@
 		session_start();
 		require_once '../../config/db.php';
 				
-		$id= isset($_POST['id']) ? $_POST['id'] : false;
+		$id = isset($_POST['id']) ? $_POST['id'] : false;
 		$email = isset($_POST['email']) ? $_POST['email'] : false;
 		$nombre = isset($_POST['nombre']) ? $_POST['nombre'] : false;
 		$clave = isset($_POST['password']) ? $_POST['password'] : false;

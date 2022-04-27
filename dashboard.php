@@ -99,10 +99,13 @@ $configs = obtenerConfigGlobal($db, 'config_global', $usuario_id);
   <div class="modalBienvenida" id="modalBienvenida">
     <span class="closed-modal"><i class="fas fa-times"></i></span>
     <div class="box-modal">
-      <h2 class="title">Mensaje de Bienvenida</h2>      
+      <h2 class="title">Bienvenido a nuestra Escuela Aprendedor Digital</h2>
+      <p class="text">Te dejamos un video tutorial que te puede servir sobre cómo usar la plataforma.</p>   
       <div class="box-video">
-        <video src="assets/videos/TUTORIAL_APRENDEDOR_DIGITAL.mp4"></video>
+        <!-- <video src="assets/videos/TUTORIAL_APRENDEDOR_DIGITAL.mp4" controls></video> -->
+        <iframe src="https://www.youtube.com/embed/HTSoPTpoJ-U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
+      
       <div class="box-input">				
         <input type="hidden" name="usuarioId" id="usuarioId" value="<?=$usuario_id;?>">	
         <input type="checkbox" name="inputmodal" class="inputmodal" id="inputModal">No volver a mostrar
@@ -118,11 +121,11 @@ $configs = obtenerConfigGlobal($db, 'config_global', $usuario_id);
 <div class="modalBienvenida" id="modalBienvenida">
   <span class="closed-modal"><i class="fas fa-times"></i></span>
   <div class="box-modal">
-    <h2 class="title">Mensaje de Bienvenida</h2>
+    <h2 class="title">Bienvenido a nuestra Escuela Aprendedor Digital</h2>
+    <p class="text">Te dejamos un video tutorial que te puede servir sobre cómo usar la plataforma.</p>
     <div class="box-video">
-      <video src="assets/videos/TUTORIAL_APRENDEDOR_DIGITAL.mp4"></video>
+      <iframe src="https://www.youtube.com/embed/HTSoPTpoJ-U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
-    
     <div class="box-input">				
       <input type="hidden" name="usuarioId" id="usuarioId" value="<?=$usuario_id;?>">	
       <input type="checkbox" name="inputmodal" class="inputmodal" id="inputModal">No volver a mostrar

@@ -51,7 +51,8 @@
 								<div class="box-info">
 									<p class="text"> <i class="fas fa-info-circle"></i> Puede añadir 1 o más fases a la vez presionando el botón Guardar.</p>
 									<p class="text2"> <i class="fas fa-info-circle"></i>Las fases existentes de esté grupo figurarán como bloqueadas <input type="checkbox" > , <strong> seleccione </strong> <input type="checkbox" checked> nuevas fases para añadir las restantes.</p>
-								</div>		
+								</div>
+										
 								<div class="w100">
 									<label for="">Seleccionar fase(s) : </label>
 								</div>
@@ -63,13 +64,14 @@
 													$sql = "SELECT * FROM grupos_fases WHERE fase_id = $idfase and grupo_id = $id";
 													$faseExistentes = mysqli_query($db, $sql);						
 									?>											
-									<div class="box-input-checkbox ">
-										<input type="checkbox" name="fases" class="fases" value="<?=$fase['id']?>" 		
+									<div class="box-input-checkbox " id="box-input-checkbox">
+										<label>
+											<input type="checkbox" name="fases" class="fases" value="<?=$fase['id']?>" 		
 											<?php foreach($faseExistentes as $faseExistente) :	?>
 											<?php echo $faseExistente['fase_id'] == $fase['id'] ? 'disabled' : '';?>
 											<?php endforeach; ?>
-										>
-										<span class="label-checkbox"><?=$fase['nombre']?>	</span>										
+											><span><?=$fase['nombre']?></span>
+										</label>		
 									</div>							
 								<?php endwhile; endif; ?>
 								<div class="w100"></div>
@@ -102,8 +104,11 @@
 								</div>
 
 							</div>
-							<input type="button" value="Guardar" class="btn" id="guardar-fases" >
-							<a class="btn" href="javascript:history.back()" title="Atras"><i class="fa fa-undo"></i> Ir Atras</a>
+							<div class="box-botones">
+								<input type="button" value="Guardar" class="btn" id="guardar-fases" >
+								<a class="btn" href="javascript:history.back()" title="Atras"><i class="fa fa-undo"></i> Ir Atras</a>
+
+							</div>
 						</form>
 						
 						<?php if(isset($_SESSION['completado'])): ?>
@@ -129,6 +134,8 @@
 <script>
 
 	$(document).ready(function(){
+
+		
 
 		$("#guardar-fases").click(function(){
 			var ids_array = [];

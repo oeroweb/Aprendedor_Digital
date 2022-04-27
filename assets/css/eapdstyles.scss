@@ -204,8 +204,7 @@ hr { height: 2px; border: none; background: $crrojo; margin:10px 0;}
   background: #fff;
   border-radius: 50%;
   background: linear-gradient(45deg, transparent, transparent 40%, $crazul-2);
-  z-index: 100;
-  z-index: 1;
+  z-index: 110;
   filter: blur(10px);
 }
 
@@ -329,13 +328,12 @@ hr { height: 2px; border: none; background: $crrojo; margin:10px 0;}
 /**************************************
 ***          FORMULARIOS          ****
 ***************************************/
-.box-tabla{
+.box-tabla{ font-weight: 500;
   input[type="checkbox"]{width: 20px; height: 20px;}
   table{ thead { background-color: #1c75bc; color: $crblanco;}}
 }
 
 .box-formulario{ margin-bottom: 50px; padding:50px; background-color: $crblanco; box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3%); border-radius: 3px;
-
   .title{margin-bottom: 20px; font-size: 20px;} 
   .w50{width:calc(50% - 20px); margin:0 10px;}
   
@@ -368,10 +366,9 @@ hr { height: 2px; border: none; background: $crrojo; margin:10px 0;}
     input[type="checkbox"]{width:auto; padding-right: 16px;  border: 1px solid rgba(28, 117, 188, 0.5); }
   }
 
-  .box-input-checkbox{ margin: 16px 5px; display: flex; flex-wrap: wrap; align-items: center; width: calc(25% - 10px); transition: $trst2;
-    label{width: auto;}
+  .box-input-checkbox{ margin: 16px 5px; display: flex; flex-wrap: wrap; align-items: center; width: calc(25% - 10px); transition: $trst2; font-weight: 500;
+    label{display: flex; align-items: center; }
     input[type="checkbox"]{ height: 30px; width: 30px; margin: 10px;}
-    .label-checkbox{display: flex; font-weight: 500;}
   }
 
   hr{background-color: $crazul;}
@@ -514,7 +511,6 @@ hr { height: 2px; border: none; background: $crrojo; margin:10px 0;}
         }
       }
     }
-
   }
 
   .cursos-content-home{ 
@@ -580,14 +576,12 @@ hr { height: 2px; border: none; background: $crrojo; margin:10px 0;}
         }
         &:hover{transform: scale(1.03); }   
         img, video, iframe{filter:grayscale(1);} 
-      }
-      
+      }      
       
       section .content .text{ text-align: justify; line-height: 2; letter-spacing: 0.5px; }
       section .content ul {padding-left: 10px; list-style: none;}
       section .content ul li{ line-height: 2; text-align: justify; margin-bottom: 20px;}
-      section .content ul li .subtitle{font-size: 2rem; color:$crazul; text-align: center; width:100%;}
-    
+      section .content ul li .subtitle{font-size: 2rem; color:$crazul; text-align: center; width:100%;}    
     }
 
     @media (max-width: 1000px){
@@ -685,7 +679,6 @@ hr { height: 2px; border: none; background: $crrojo; margin:10px 0;}
                 }
               }
             }
-
           }
         }  
       }
@@ -700,9 +693,7 @@ hr { height: 2px; border: none; background: $crrojo; margin:10px 0;}
         section .content{width: 100%; margin: 10px 0;}
         section .content .item-foros{ width: 100%; transition: $trst2; margin: 0; }
       }
-    }
-    
-    
+    }    
   }
 
   .grupos-content-grupos{ 
@@ -720,28 +711,60 @@ hr { height: 2px; border: none; background: $crrojo; margin:10px 0;}
       
       section .content{ display: none; }
       #cursos:checked ~ section .content-1,
-      #clases:checked ~ section .content-2{ 
-        display: block;}
+      #clases:checked ~ section .content-2{ display: block; }
       
       section .content .box-tabla{ margin-top: 20px; text-align: center; background-color: $crblanco; border-radius: $radius; box-shadow: 0px 0px 5px rgba(0, 0, 0, .5); padding: 20px;
         .box-titles{
           .title{ letter-spacing: 1px; text-transform: uppercase; font-size: 1.5rem; color: $crazul; } 
         }
         img{width: 90%; margin: auto;}
+
         .box-envio-correos{ text-align: left; display: flex; flex-wrap: wrap;
-          .item-col{width: calc(50% - 20px); margin: 10px;}
-          .box-listado-usuarios{
-            .title{margin-bottom: 20px; color: $crazul;}
-            .box-input{ margin-bottom: 20px; box-shadow: 0px 5px 5px rgba(0, 0, 0, .3); padding:10px 20px; border-radius: 8px;
-              label{margin-right: 8px; width: 100%; color:$crazul}
-              select, input, textarea{padding: 10px 12px; width: 100%; border-radius: 8px; outline: none;}
-            }
-            ul li{list-style: none; width: 25%;
-              .fullname{margin-left: 8px; font-weight: 500;}
+          
+          .box-filtros{ width: 100%;
+            .title{color: $crazul; font-size: 20px;}
+            .list-filtro{ width: calc(25% - 20px); margin: 10px; display: flex; flex-direction: column;
+              h3{font-weight: 900; font-size: 16px; margin-bottom: 8px;}
+              .item-list{ font-weight: 400; margin-bottom: 4px;
+                label{display: flex; align-items: center;}
+                input{margin-right: 8px;}
+              }
             }
           }
 
-          .box-model-email{width: 100%; box-shadow: 0px 0px 5px rgba(0, 0, 0, .3);}
+          .box-listado-usuarios{ width: 100%; 
+            .box-title{ display:flex; align-items: center; margin-bottom: 20px;
+              .title{ color: $crazul; font-size: 20px; margin-right: 100px;}
+            }
+            .box-input{ margin-bottom: 20px; box-shadow: 0px 5px 5px rgba(0, 0, 0, .3); padding:10px 20px; border-radius: 8px;
+              label{ margin-bottom: 8px; width: 100%; color:$crazul; display: flex;}
+              select, input, textarea{padding: 12px 16px; width: 100%; border-radius: 8px; outline: none; border: 1px solid rgba(28, 117, 188, 0.5); background-color: $crblanco; }
+            }
+            ul li{list-style: none; width: 25%; display: flex; align-items: center;
+              .fullname{margin-left: 8px; font-weight: 500;}
+            }
+            .box-tabla{ font-weight: 400; border-spacing: 0;
+              th, td{text-align: left; }
+              td{ border: 0.5px solid #ccc; }
+            }
+            .box-mensaje{
+              label{color: $crazul; font-size: 20px;}
+              .btn{i{margin-left: 6px;}}
+            }
+          }
+
+          @media (max-width: 900px){
+            .box-filtros{ .list-filtro{ width: calc(50% - 20px); margin: 10px;}}
+          }
+          
+          @media (max-width: 750px){
+            .box-listado-usuarios{ 
+              .box-title{flex-wrap: wrap; transition: $trst2; .box-botones{ width: 100%;}}
+            }
+          }
+          @media (max-width: 650px){
+            .box-filtros{ .list-filtro{ width: 100%;}}
+          }
         }   
       }    
     }
@@ -1101,11 +1124,8 @@ table {  margin-bottom: 20px;
 
 // ============= BOTON SUBIR =============
 .ir-arriba { position: fixed; bottom: 0; right: 3px; background-color: $crrojo; color: $crblanco;  width: 50px; height: 40px;  border-radius: 10px 10px 0 0; font-size: 20px; cursor: pointer; z-index: 20; transition: $trst3; display: flex; justify-content: center; align-items: center;   
-  &:hover {
-      box-shadow: 0px 0px 3px $crazul;
-      .fa-chevron-up{
-        font-weight: bold;
-    }
+  &:hover { box-shadow: 0px 0px 3px $crazul;
+    .fa-chevron-up{ font-weight: bold; }
   }
 }
 /**************************************
@@ -1135,8 +1155,12 @@ table {  margin-bottom: 20px;
         
         label{ font-size: 18px; line-height: 18px; color:$crgris; margin-bottom: 10px; display: block; color: $crazul; font-weight: 900;}
         .btn-file{display: flex; align-items: center; padding:12px 20px; border-radius:$radius; background-color: $crazul; color: $crazullight; margin-bottom: 10px; 
-          i{font-size: 20px; margin-right: 5px;}}
+          i{font-size: 20px; margin-right: 5px;}
+        }
       }      
+      .box-botones{ display: flex; justify-content: center;
+        .btn{width: 100%; max-width: 220px;}
+      }
       @media (max-width:500px) {
           .w50 {width :calc(100%);}                
       }
@@ -1168,15 +1192,17 @@ table {  margin-bottom: 20px;
   animation-fill-mode:forwards;	
   visibility: hidden;
   opacity: 0; z-index:300;
-  .closed-modal{position: absolute; right: 10px; top:10px;width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center;  background-color: $crazul-2; font-size:20px; color:$crblanco; cursor: pointer;}
+  .closed-modal{position: absolute; right: 10px; top:10px; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center;  background-color: $crazul-2; font-size:20px; color:$crblanco; cursor: pointer; z-index:350;}
   .box-modal{ position: relative; background-color:$crazul-2; border-radius: $radius; width: 70%; padding: 30px 50px; transition: $trst2;
-    .title{text-align: center; margin-bottom: 30px;}
-    .box-video{ width: 100%;  margin: auto; margin-bottom: 20px;
+    .title{text-align: center; margin-bottom: 20px;}
+    .text{margin-bottom: 30px; font-weight: 400;}
+    .box-video{ width: 100%; display:flex; margin: auto; margin-bottom: 20px;
       video{width: 100%;}
+      iframe{width: 80%; margin: auto; height: 350px;}
     }
     .box-input{ display: flex; align-items: center;
       input[type="checkbox"]{width: 16px; height: 16px; margin-right: 6px;}
-    }
+    }  
     
   }
 }
@@ -1188,13 +1214,13 @@ table {  margin-bottom: 20px;
 .modalBienvenida.is-inactive{  
   opacity: 0;
   visibility: hidden;
-}
-
+} 
 
 @media screen and(max-width:700px){
-  .modalBienvenida{ 
-    .box-modal{ width:96%; transition: $trst2;
-      // .video{height:400px; transition: $trst2;}
+  .modalBienvenida{
+    .closed-modal{ background-color: transparent; font-size: 30px; top: 2px; box-shadow: 0px 0px 5px rgba(255, 255, 255, .5); width: 36px; height: 36px;}
+    .box-modal{ width:96%; transition: $trst2; padding: 30px 20px;
+      .box-video{iframe{width: 100%;}}
     }
   }
 }

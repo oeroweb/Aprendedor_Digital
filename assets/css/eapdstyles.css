@@ -394,8 +394,7 @@ hr {
   background: #fff;
   border-radius: 50%;
   background: linear-gradient(45deg, transparent, transparent 40%, #0A2558);
-  z-index: 100;
-  z-index: 1;
+  z-index: 110;
   -webkit-filter: blur(10px);
           filter: blur(10px);
 }
@@ -820,6 +819,10 @@ hr {
 /**************************************
 ***          FORMULARIOS          ****
 ***************************************/
+.box-tabla {
+  font-weight: 500;
+}
+
 .box-tabla input[type="checkbox"] {
   width: 20px;
   height: 20px;
@@ -1026,23 +1029,22 @@ hr {
   width: calc(25% - 10px);
   -webkit-transition: all 0.6s ease;
   transition: all 0.6s ease;
+  font-weight: 500;
 }
 
 .box-formulario .box-input-checkbox label {
-  width: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .box-formulario .box-input-checkbox input[type="checkbox"] {
   height: 30px;
   width: 30px;
   margin: 10px;
-}
-
-.box-formulario .box-input-checkbox .label-checkbox {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  font-weight: 500;
 }
 
 .box-formulario hr {
@@ -2257,14 +2259,69 @@ hr {
       flex-wrap: wrap;
 }
 
-.home-content .grupos-content-grupos .tabs-content-grupos section .content .box-tabla .box-envio-correos .item-col {
-  width: calc(50% - 20px);
-  margin: 10px;
+.home-content .grupos-content-grupos .tabs-content-grupos section .content .box-tabla .box-envio-correos .box-filtros {
+  width: 100%;
 }
 
-.home-content .grupos-content-grupos .tabs-content-grupos section .content .box-tabla .box-envio-correos .box-listado-usuarios .title {
-  margin-bottom: 20px;
+.home-content .grupos-content-grupos .tabs-content-grupos section .content .box-tabla .box-envio-correos .box-filtros .title {
   color: #1c75bc;
+  font-size: 20px;
+}
+
+.home-content .grupos-content-grupos .tabs-content-grupos section .content .box-tabla .box-envio-correos .box-filtros .list-filtro {
+  width: calc(25% - 20px);
+  margin: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.home-content .grupos-content-grupos .tabs-content-grupos section .content .box-tabla .box-envio-correos .box-filtros .list-filtro h3 {
+  font-weight: 900;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.home-content .grupos-content-grupos .tabs-content-grupos section .content .box-tabla .box-envio-correos .box-filtros .list-filtro .item-list {
+  font-weight: 400;
+  margin-bottom: 4px;
+}
+
+.home-content .grupos-content-grupos .tabs-content-grupos section .content .box-tabla .box-envio-correos .box-filtros .list-filtro .item-list label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.home-content .grupos-content-grupos .tabs-content-grupos section .content .box-tabla .box-envio-correos .box-filtros .list-filtro .item-list input {
+  margin-right: 8px;
+}
+
+.home-content .grupos-content-grupos .tabs-content-grupos section .content .box-tabla .box-envio-correos .box-listado-usuarios {
+  width: 100%;
+}
+
+.home-content .grupos-content-grupos .tabs-content-grupos section .content .box-tabla .box-envio-correos .box-listado-usuarios .box-title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 20px;
+}
+
+.home-content .grupos-content-grupos .tabs-content-grupos section .content .box-tabla .box-envio-correos .box-listado-usuarios .box-title .title {
+  color: #1c75bc;
+  font-size: 20px;
+  margin-right: 100px;
 }
 
 .home-content .grupos-content-grupos .tabs-content-grupos section .content .box-tabla .box-envio-correos .box-listado-usuarios .box-input {
@@ -2276,21 +2333,32 @@ hr {
 }
 
 .home-content .grupos-content-grupos .tabs-content-grupos section .content .box-tabla .box-envio-correos .box-listado-usuarios .box-input label {
-  margin-right: 8px;
+  margin-bottom: 8px;
   width: 100%;
   color: #1c75bc;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .home-content .grupos-content-grupos .tabs-content-grupos section .content .box-tabla .box-envio-correos .box-listado-usuarios .box-input select, .home-content .grupos-content-grupos .tabs-content-grupos section .content .box-tabla .box-envio-correos .box-listado-usuarios .box-input input, .home-content .grupos-content-grupos .tabs-content-grupos section .content .box-tabla .box-envio-correos .box-listado-usuarios .box-input textarea {
-  padding: 10px 12px;
+  padding: 12px 16px;
   width: 100%;
   border-radius: 8px;
   outline: none;
+  border: 1px solid rgba(28, 117, 188, 0.5);
+  background-color: #ffffff;
 }
 
 .home-content .grupos-content-grupos .tabs-content-grupos section .content .box-tabla .box-envio-correos .box-listado-usuarios ul li {
   list-style: none;
   width: 25%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .home-content .grupos-content-grupos .tabs-content-grupos section .content .box-tabla .box-envio-correos .box-listado-usuarios ul li .fullname {
@@ -2298,10 +2366,51 @@ hr {
   font-weight: 500;
 }
 
-.home-content .grupos-content-grupos .tabs-content-grupos section .content .box-tabla .box-envio-correos .box-model-email {
-  width: 100%;
-  -webkit-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
-          box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+.home-content .grupos-content-grupos .tabs-content-grupos section .content .box-tabla .box-envio-correos .box-listado-usuarios .box-tabla {
+  font-weight: 400;
+  border-spacing: 0;
+}
+
+.home-content .grupos-content-grupos .tabs-content-grupos section .content .box-tabla .box-envio-correos .box-listado-usuarios .box-tabla th, .home-content .grupos-content-grupos .tabs-content-grupos section .content .box-tabla .box-envio-correos .box-listado-usuarios .box-tabla td {
+  text-align: left;
+}
+
+.home-content .grupos-content-grupos .tabs-content-grupos section .content .box-tabla .box-envio-correos .box-listado-usuarios .box-tabla td {
+  border: 0.5px solid #ccc;
+}
+
+.home-content .grupos-content-grupos .tabs-content-grupos section .content .box-tabla .box-envio-correos .box-listado-usuarios .box-mensaje label {
+  color: #1c75bc;
+  font-size: 20px;
+}
+
+.home-content .grupos-content-grupos .tabs-content-grupos section .content .box-tabla .box-envio-correos .box-listado-usuarios .box-mensaje .btn i {
+  margin-left: 6px;
+}
+
+@media (max-width: 900px) {
+  .home-content .grupos-content-grupos .tabs-content-grupos section .content .box-tabla .box-envio-correos .box-filtros .list-filtro {
+    width: calc(50% - 20px);
+    margin: 10px;
+  }
+}
+
+@media (max-width: 750px) {
+  .home-content .grupos-content-grupos .tabs-content-grupos section .content .box-tabla .box-envio-correos .box-listado-usuarios .box-title {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-transition: all 0.6s ease;
+    transition: all 0.6s ease;
+  }
+  .home-content .grupos-content-grupos .tabs-content-grupos section .content .box-tabla .box-envio-correos .box-listado-usuarios .box-title .box-botones {
+    width: 100%;
+  }
+}
+
+@media (max-width: 650px) {
+  .home-content .grupos-content-grupos .tabs-content-grupos section .content .box-tabla .box-envio-correos .box-filtros .list-filtro {
+    width: 100%;
+  }
 }
 
 @media (max-width: 1100px) {
@@ -3771,6 +3880,22 @@ table th {
   margin-right: 5px;
 }
 
+.modal .body-modal #form_eliminar .box-botones, .modal .body-modal #frm_actualizar .box-botones, .modal .body-modal .form_sendMail .box-botones,
+.modal .body-modal .frmbody .box-botones {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.modal .body-modal #form_eliminar .box-botones .btn, .modal .body-modal #frm_actualizar .box-botones .btn, .modal .body-modal .form_sendMail .box-botones .btn,
+.modal .body-modal .frmbody .box-botones .btn {
+  width: 100%;
+  max-width: 220px;
+}
+
 @media (max-width: 500px) {
   .modal .body-modal #form_eliminar .w50, .modal .body-modal #frm_actualizar .w50, .modal .body-modal .form_sendMail .w50,
   .modal .body-modal .frmbody .w50 {
@@ -3874,6 +3999,7 @@ table th {
   font-size: 20px;
   color: #ffffff;
   cursor: pointer;
+  z-index: 350;
 }
 
 .modalBienvenida .box-modal {
@@ -3888,17 +4014,31 @@ table th {
 
 .modalBienvenida .box-modal .title {
   text-align: center;
+  margin-bottom: 20px;
+}
+
+.modalBienvenida .box-modal .text {
   margin-bottom: 30px;
+  font-weight: 400;
 }
 
 .modalBienvenida .box-modal .box-video {
   width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   margin: auto;
   margin-bottom: 20px;
 }
 
 .modalBienvenida .box-modal .box-video video {
   width: 100%;
+}
+
+.modalBienvenida .box-modal .box-video iframe {
+  width: 80%;
+  margin: auto;
+  height: 350px;
 }
 
 .modalBienvenida .box-modal .box-input {
@@ -3936,10 +4076,23 @@ table th {
 }
 
 @media screen and (max-width: 700px) {
+  .modalBienvenida .closed-modal {
+    background-color: transparent;
+    font-size: 30px;
+    top: 2px;
+    -webkit-box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5);
+            box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5);
+    width: 36px;
+    height: 36px;
+  }
   .modalBienvenida .box-modal {
     width: 96%;
     -webkit-transition: all 0.6s ease;
     transition: all 0.6s ease;
+    padding: 30px 20px;
+  }
+  .modalBienvenida .box-modal .box-video iframe {
+    width: 100%;
   }
 }
 /*# sourceMappingURL=eapdstyles.css.map */

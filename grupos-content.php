@@ -41,32 +41,31 @@ $id = $_GET['id'];
 				
 				<div class="grupos-content-grupos">	
 					<div class="box-info">
-						<p class="text"> <i class="fas fa-info-circle"></i> Presione añadir todos los cursos para enlazar los cursos y usuarios.</p>
-						<p class="text"> <i class="fas fa-info-circle"></i> También puede añadir los cursos por fase, presionando en añadir los cursos de la fase para enlazar los cursos y usuarios.</p>
-						<p class="text"> <i class="fas fa-info-circle"></i> Caso contrario los usuarios no podrán acceder a los cursos asignados anteriormente.</p>
-					</div>
-
-					<div class="box-info">
-							<p class="text"> <i class="fas fa-info-circle"></i> Presione añadir todos los cursos para enlazar los cursos y usuarios.</p>						
-					</div>
+						<p class="text"> <i class="fas fa-info-circle"></i> Una vez añadidas las clases y cursos presione enlazar los cursos y clases por fase.</p>						
+						<p class="text"> <i class="fas fa-info-circle"></i> Caso contrario los usuarios no podrán acceder a los cursos y clases asignadas anteriormente.</p>
+					</div>				
 					<div class="box-title mg-tp40">
-						<h2 class="title mg-bt20">Solo estarán visibles las fases añadidas al grupo.</h2>			
+						<h2 class="title mg-bt20">Enlazar los cursos y las clases maestras con los usuarios de este grupo.</h2>			
 					</div>
 
+					<div class="box-title mg-tp40">
+						<h3 class="title mg-bt20">Enlazar Cursos :</h3>			
+					</div>
 					<div class="box-botones mg-tp20">
+
 						<?php
 							$datos = selecttogrupoId($db, 'grupos_fases', $id);
 								if (!empty($datos) && mysqli_num_rows($datos) >= 1) :
 									while ($dato = mysqli_fetch_assoc($datos)) :
 						?>												
-							<a href="listado-cursos-add.php?id=<?=$dato['grupo_id']?>&fase=<?=$dato['fase_id']?>" class="btn" id="btnfase1"><i class="fas fa-link"></i> Añadir los cursos de la fase <?=$dato['fase_id']?></a>						
+							<a href="listado-cursos-add.php?id=<?=$dato['grupo_id']?>&fase=<?=$dato['fase_id']?>" class="btn" id="btnfase1"><i class="fas fa-link"></i> Enlazar cursos por fase <?=$dato['fase_id']?></a>						
 						<?php endwhile; else: ?>
 							<p class="parrafo">No hay cursos añadidos al grupo.</p>
 						<?php endif; ?>
 					</div>
 					<hr>
 					<div class="box-title mg-tp40">
-						<h2 class="title mg-bt20">Enlazar las clases maestras añadidas al grupo con los Usuarios.</h2>						
+						<h3 class="title mg-bt20">Enlazar Clases :</h3>						
 					</div>
 					<div class="box-botones mg-tp20">
 						<?php
@@ -74,7 +73,7 @@ $id = $_GET['id'];
 								if (!empty($datos) && mysqli_num_rows($datos) >= 1) :
 									while ($dato = mysqli_fetch_assoc($datos)) :
 						?>												
-							<a href="listado-clases-add.php?id=<?=$dato['grupo_id']?>&fase=<?=$dato['fase_id']?>" class="btn" id="btnfase1"><i class="fas fa-link"></i> Añadir las clases maestras de la fase <?=$dato['fase_id']?></a>						
+							<a href="listado-clases-add.php?id=<?=$dato['grupo_id']?>&fase=<?=$dato['fase_id']?>" class="btn" id="btnfase1"><i class="fas fa-link"></i> Enlazar clases maestras por fase <?=$dato['fase_id']?></a>						
 						<?php endwhile; else: ?>
 							<p class="parrafo">No hay clases maestras añadidos al grupo.</p>
 						<?php endif; ?>

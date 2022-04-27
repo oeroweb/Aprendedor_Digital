@@ -15,7 +15,7 @@
     <div class="home-content">
 			<div class="center ">				
 				<div class="box-titles">
-          <h1 class="title">Administración de Usuarios / Docentes</h1>
+          <h1 class="title">Administración de Administradores</h1>
 					<div class="box-botones">
 						<a class="btn" href="javascript:history.back()" title="Atras"><i 	class="fa fa-undo"></i> Regresar</a>	
 					</div>
@@ -183,9 +183,10 @@
 					<input type='text' name="celular" id="celular"><br><br>				
 				</div>
 			</div>
-			<hr>
-			<input type="submit" class="btn" value="Actualizar Datos">
-			<a href="#" class="btn" onclick="cerrarmodal()"> Cancelar</a>
+			<div class="box-botones">
+				<input type="submit" class="btn" value="Actualizar Datos">
+				<a href="#" class="btn" onclick="cerrarmodal()"> Cancelar</a>
+			</div>
 		</form>
 	</div>
 </div>
@@ -201,8 +202,10 @@
 				<input type="hidden" name="id" id="id" >				
 				<div class="box-nombre w100" id="box-nombre"></div>
 			</div>
-			<input type="submit" class="btn" value="Borrar">
-			<a href="#" class="btn" onclick="cerrarmodal()"> Cancelar</a>
+			<div class="box-botones">
+				<input type="submit" class="btn" value="Borrar">
+				<a href="#" class="btn" onclick="cerrarmodal()"> Cancelar</a>
+			</div>
 		</form>
 	</div>
 </div>
@@ -222,8 +225,10 @@
 				<div class="box-nombre w100" id="box-nombre"></div>
 				<div class="box-correo w100" id="box-correo"></div>
 			</div>
-			<input type="submit" class="btn" value="Enviar">
-			<a href="#" class="btn" onclick="cerrarmodal()"> Cancelar</a>
+			<div class="box-botones">
+				<input type="submit" class="btn" value="Enviar">
+				<a href="#" class="btn" onclick="cerrarmodal()"> Cancelar</a>
+			</div>
 		</form>
 	</div>
 </div>

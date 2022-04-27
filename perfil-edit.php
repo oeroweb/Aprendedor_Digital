@@ -110,7 +110,7 @@
 								<div class="w50">
 									<div class="box-input">
 										<label for="">Sexo: </label>
-										<select class="w70" name="sexo">
+										<select class="w70" name="sexo" required>
 										<?php 
 											$sexos = selectalldatos($db, 'sexo');
 											if(!empty($sexos) && mysqli_num_rows($sexos) >= 1):
@@ -139,7 +139,7 @@
 										<label for="email">Correo: <span class="font-light">(no se permite cambiar)</span> </label>			
 										<input class="w100" type="email" name="email" value="<?php echo $perfil['email']; ?>" readonly>
 									</div>
-									<div class="box-input">
+									<div class="box-input hidden">
 										<label for="">Institución: </label>
 										<select class="w70" name="institucion">
 										<?php 
@@ -155,6 +155,10 @@
 										endif;
 										?>																
 										</select>
+									</div>
+									<div class="box-input">
+										<label for="cargo">Cargo : </label>								
+										<input class="w100" type="text" name="cargo" id="cargo" value="<?php echo $perfil['cargo']; ?>">										
 									</div>
 									<div class="box-input">
 										<label for="pais">Pais: </label>								
@@ -211,7 +215,7 @@
 									</div>
 									<div class="box-input">
 										<label for="interes">Intereses (Separado por comas): </label>			
-										<input class="w100" type="text" name="interes" value="<?php echo $perfil['interes']; ?>">
+										<input class="w100" type="text" name="interes" placeholder="Ej: Deporte, musica,tegnología" value="<?php echo $perfil['interes']; ?>">
 									</div>									
 								</div>
 								<div class="box-input">	
